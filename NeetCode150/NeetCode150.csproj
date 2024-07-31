@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Topics\T13_1dDynamicProgramming\P02_MinCostClimbingStairs_LC746\" />
+      <Folder Include="Topics\T13_1dDynamicProgramming\P03_HouseRobber_LC198\" />
+      <Folder Include="Topics\T13_1dDynamicProgramming\P04_HouseRobber2_LC213\" />
+      <Folder Include="Topics\T13_1dDynamicProgramming\P05_LongestPalindromicSubstring_LC5\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Topics\T13_1dDynamicProgramming\P05_LongestPalindromicSubstring_LC5\README.md" />
+    </ItemGroup>
+
+</Project>
