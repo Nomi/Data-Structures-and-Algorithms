@@ -19,14 +19,15 @@ public class Solution {
     }
 
     public List<string> Decode(string s) {
-        if(s.Length<3)
+        // Console.WriteLine($">{s}");
+        if(s.Length<2)
             return new();
         List<string> res = new();
         int numStart = -1;
         int shrp = -1;
         for(int i=0;i< s.Length;i++) //s.Substring has a complexity of O(N) WHERE N is length of the substr???
         {
-        Console.WriteLine($"{i},{numStart},{shrp}");
+        // Console.WriteLine($"{i},{numStart},{shrp}");
             if(numStart==-1&&char.IsNumber(s[i]))
                 numStart = i;
             else if(s[i]=='#'&&numStart!=-1)
