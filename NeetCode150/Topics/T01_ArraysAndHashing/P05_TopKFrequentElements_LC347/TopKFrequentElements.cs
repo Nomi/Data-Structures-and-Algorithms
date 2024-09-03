@@ -12,11 +12,13 @@ public class Solution {
     //Bruteforce: TC = O(nlog(n))
     //
     //MaxHeap: TC = O(n+klog(n)) (at the end you just pop k times after heapifying in linear time using heapify)
-    //         SC = O(n+n)=O(n)
+    //         SC = O(n)=O(n)
     //
-    //MinHeap: TC = O(nlog(k)), where n is the number of elements in nums 
-    //         SC = O(n + k)
-    //BucketSort:  TC= O(n)
+    //MinHeap(best SC): 
+    //         TC = O(nlog(k)), where n is the number of elements in nums 
+    //         SC = O(k)
+    //BucketSort(best TC):  
+    //             TC= O(n)
     //             SC = O(n) 
     //FUCK QUICKSELECT, BUCKETSORT BETTER
     public int[] TopKFrequent(int[] nums, int k) {
@@ -30,7 +32,7 @@ public class Solution {
 
     public int[] BucketSort(int[] nums, int k)
     {
-        List<int>[] freqToNums = new List<int>[nums.Count()+1]; //+1 for 0 (because possible frequencies are IN [0,nums.Count()])!
+        List<int>[] freqToNums = new List<int>[nums.Count()+1]; //+1 as the biggest frequency is nums.Count() itself (because possible frequencies are IN [0,nums.Count()])!
         var freqMap = new Dictionary<int,int>();
         foreach(var num in nums)
         {
