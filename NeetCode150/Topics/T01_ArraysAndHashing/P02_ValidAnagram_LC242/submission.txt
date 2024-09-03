@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-09-03T17:31:06.962Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {\n    public bool IsAnagram(string s, string t) {\n        if(s.Length!=t.Length)\n            return false;\n        Dictionary<char, int> sMap = new();\n        Dictionary<char, int> tMap = new();\n        foreach(char c in s)\n        {\n            if(!sMap.TryAdd(c,1))\n                sMap[c]++;\n        }\n        foreach(char c in t)\n        {\n            if(!tMap.TryAdd(c,1))\n                tMap[c]++;\n        }\n        if(tMap.Count!=sMap.Count)\n            return false;\n        foreach(char key in tMap.Keys)\n        {\n            if(!sMap.ContainsKey(key)||sMap[key]!=tMap[key])\n                return false;\n        }\n        return true;\n    }\n}\n",
+    "memory": 55024,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.769",
+    "problemId": "is-anagram",
+    "stderr": ""
+}
