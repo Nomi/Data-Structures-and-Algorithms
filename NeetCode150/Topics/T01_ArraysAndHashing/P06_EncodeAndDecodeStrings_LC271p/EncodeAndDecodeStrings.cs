@@ -15,8 +15,6 @@ public class Solution {
         {
             res.Append($"{s.Length}#{s}");
         }
-        Console.WriteLine(res);
-
         return res.ToString();
     }
 
@@ -32,6 +30,7 @@ public class Solution {
                 numStart = i;
             else if(s[i]=='#'&&numStart!=-1)
                 shrp = i;
+        Console.WriteLine($"{i},{numStart},{shrp}");
             if(shrp==-1)
                 continue;
             // int wLen;
