@@ -7,38 +7,87 @@ using System.Text;
 namespace DSA.NeetCode150.Topics.T01_ArraysAndHashing.P05_TopKFrequentElements_LC347;
 
 public class Solution {
+    //WHERE MY BUCKET SORT (frequency based buckets) AT????
+
+    //Bruteforce: TC = O(nlog(n))
+    //
+    //MaxHeap: TC = O(n+klog(n)) (at the end you just pop k times after heapifying in linear time using heapify)
+    //         SC = O(n+n)=O(n)
+    //
+    //MinHeap: TC = O(nlog(k)), where n is the number of elements in nums 
+    //         SC = O(n + k)
+    //BucketSort:  TC= O(n)
+    //             SC = O(n) 
+    //FUCK QUICKSELECT, BUCKETSORT BETTER
     public int[] TopKFrequent(int[] nums, int k) {
-        return MinHeapAttempt(nums, k);
+        //INSTEAD OF MINHEAP WE USE BUCKETSORT (not even LeetCode's stupid quickselect can beat it)
+
+        return BucketSort(nums, k);
+        // return MinHeapAttempt(nums, k);
+        ///* can also do maxheap, which will decrease time complexity when used with heapify (heapify is O(N) when we the data is pre-existing) so we can just pop k elements. */
+        ///* minheap decreases the spacecomplexity by making sure there's only at most k elements in the heap at any given time. */
     }
 
-    public int[] MinHeapAttempt(int[] nums, int k)
+    public int[] BucketSort(int[] nums, int k)
     {
-        // var minHeap = new PriorityQueue<Tuple<int,int>>(Comparer<Tuple<int,int>>.Create((a,b)=>b.Item2-a.Item2)); 
-        var minHeap = new PriorityQueue<Tuple<int,int>,int>(Comparer<int>.Create((a,b)=>a-b));
+        List<int>[] freqToNums = new List<int>[nums.Count()+1]; //+1 for 0 (because possible frequencies are IN [0,nums.Count()])!
         var freqMap = new Dictionary<int,int>();
         foreach(var num in nums)
         {
             freqMap.TryAdd(num,0);
             freqMap[num]++;
         }
-        foreach(var key in freqMap.Keys)
+        foreach(var key in freqMap.Keys) //key is the value
         {
-            if(minHeap.Count==k)
-            {
-                if(minHeap.Peek().Item2<freqMap[key])
-                    minHeap.Dequeue();
-                else
-                    continue;
-            }
-            minHeap.Enqueue(Tuple.Create(key,freqMap[key]), freqMap[key]);
+            if(freqToNums[freqMap[key]]==null)
+                freqToNums[freqMap[key]]=new();
+            freqToNums[freqMap[key]].Add(key);
         }
-        var res = new int[minHeap.Count];
-        int i=0;
-        while(minHeap.Count>0)
+        int countAdded = 0;
+        int[] res = new int[k];
+        for(int i=freqToNums.Count()-1;i>=0&&countAdded<k;i--)
         {
-            res[i]=minHeap.Dequeue().Item1;
-            i++;
+            for(int j=0;freqToNums[i]!=null&&j<freqToNums[i].Count&&countAdded<k;j++)
+            {
+                res[countAdded]=(freqToNums[i][j]);
+                countAdded++;
+            }
         }
         return res;
     }
+    // public int[] QuickSelect(int[] nums, int k)
+    // {
+
+    // }
+
+    // public int[] MinHeapAttempt(int[] nums, int k)
+    // {
+    //     // var minHeap = new PriorityQueue<Tuple<int,int>>(Comparer<Tuple<int,int>>.Create((a,b)=>b.Item2-a.Item2)); 
+    //     var minHeap = new PriorityQueue<Tuple<int,int>,int>(Comparer<int>.Create((a,b)=>a-b));
+    //     var freqMap = new Dictionary<int,int>();
+    //     foreach(var num in nums)
+    //     {
+    //         freqMap.TryAdd(num,0);
+    //         freqMap[num]++;
+    //     }
+    //     foreach(var key in freqMap.Keys)
+    //     {
+    //         if(minHeap.Count==k)
+    //         {
+    //             if(minHeap.Peek().Item2<freqMap[key])
+    //                 minHeap.Dequeue();
+    //             else
+    //                 continue;
+    //         }
+    //         minHeap.Enqueue(Tuple.Create(key,freqMap[key]), freqMap[key]);
+    //     }
+    //     var res = new int[minHeap.Count];
+    //     int i=0;
+    //     while(minHeap.Count>0)
+    //     {
+    //         res[i]=minHeap.Dequeue().Item1;
+    //         i++;
+    //     }
+    //     return res;
+    // }
 }
