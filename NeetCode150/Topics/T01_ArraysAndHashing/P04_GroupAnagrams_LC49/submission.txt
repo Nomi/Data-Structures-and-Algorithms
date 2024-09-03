@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-09-03T17:46:01.196Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {\n    public List<List<string>> GroupAnagrams(string[] strs) {\n        Dictionary<string, List<string>> map = new(); //we try to store sorted string as the key and the list stores that specific anagram instance\n        foreach(var str in strs)\n        {\n            var srtdStr = String.Concat(str.OrderBy(c => c));\n            map.TryAdd(srtdStr, new List<string>());\n            map[srtdStr].Add(str);\n        }\n        return map.Values.ToList();\n    }\n}\n",
+    "memory": 55120,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.777",
+    "problemId": "anagram-groups",
+    "stderr": ""
+}
