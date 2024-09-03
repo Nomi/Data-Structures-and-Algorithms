@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-09-03T23:10:12.967Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {\n    public bool IsPalindrome(string s) {\n        s=s.ToLower();\n        int matched=0;\n       for(int i=0, j=s.Length-1;i<=j;)\n       {\n            if(!Char.IsLetterOrDigit(s[i]))\n            {\n                i++;\n                continue;\n            }\n            if(!Char.IsLetterOrDigit(s[j]))\n            {\n                j--;\n                continue;\n            }\n            if(s[i]!=s[j])\n                return false;\n            i++; \n            j--;\n       } \n       return true;\n    }\n}\n",
+    "memory": 54872,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.767",
+    "problemId": "is-palindrome",
+    "stderr": ""
+}
