@@ -38,8 +38,6 @@ public class Solution {
             int.TryParse(s.Substring(numStart, shrp-numStart),out var wLen); //shrp-numStart gives the length from first digit of num to the last digit 
             i=shrp+wLen;
             res.Add(s.Substring(shrp+1,wLen));
-            if(wLen==0)
-                res.Add("");
             numStart=-1;
             shrp=-1;
         }
