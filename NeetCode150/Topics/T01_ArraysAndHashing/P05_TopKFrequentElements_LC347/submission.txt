@@ -1,12 +1,12 @@
-1, Accepted
+2, Accepted
 {
-    "date": "2024-09-03T18:27:03.724Z",
+    "date": "2024-09-03T18:33:26.190Z",
     "statusDescription": "Accepted",
-    "code": "public class Solution {\n    public int[] TopKFrequent(int[] nums, int k) {\n        // var minHeap = new PriorityQueue<Tuple<int,int>>(Comparer<Tuple<int,int>>.Create((a,b)=>b.Item2-a.Item2)); \n        var minHeap = new PriorityQueue<Tuple<int,int>,int>(Comparer<int>.Create((a,b)=>a-b));\n        var freqMap = new Dictionary<int,int>();\n        foreach(var num in nums)\n        {\n            freqMap.TryAdd(num,0);\n            freqMap[num]++;\n        }\n        foreach(var key in freqMap.Keys)\n        {\n            if(minHeap.Count==k)\n            {\n                if(minHeap.Peek().Item2<freqMap[key])\n                    minHeap.Dequeue();\n                else\n                    continue;\n            }\n            minHeap.Enqueue(Tuple.Create(key,freqMap[key]), freqMap[key]);\n        }\n        var res = new int[minHeap.Count];\n        int i=0;\n        while(minHeap.Count>0)\n        {\n            res[i]=minHeap.Dequeue().Item1;\n            i++;\n        }\n        return res;\n    }\n}\n",
-    "memory": 54708,
+    "code": "public class Solution {\n    public int[] TopKFrequent(int[] nums, int k) {\n        return MinHeapAttempt(nums, k);\n    }\n\n    public int[] MinHeapAttempt(int[] nums, int k)\n    {\n        // var minHeap = new PriorityQueue<Tuple<int,int>>(Comparer<Tuple<int,int>>.Create((a,b)=>b.Item2-a.Item2)); \n        var minHeap = new PriorityQueue<Tuple<int,int>,int>(Comparer<int>.Create((a,b)=>a-b));\n        var freqMap = new Dictionary<int,int>();\n        foreach(var num in nums)\n        {\n            freqMap.TryAdd(num,0);\n            freqMap[num]++;\n        }\n        foreach(var key in freqMap.Keys)\n        {\n            if(minHeap.Count==k)\n            {\n                if(minHeap.Peek().Item2<freqMap[key])\n                    minHeap.Dequeue();\n                else\n                    continue;\n            }\n            minHeap.Enqueue(Tuple.Create(key,freqMap[key]), freqMap[key]);\n        }\n        var res = new int[minHeap.Count];\n        int i=0;\n        while(minHeap.Count>0)\n        {\n            res[i]=minHeap.Dequeue().Item1;\n            i++;\n        }\n        return res;\n    }\n}\n",
+    "memory": 81056,
     "stdout": "",
     "language": "csharp",
-    "time": "0.898",
+    "time": "0.781",
     "problemId": "top-k-elements-in-list",
     "stderr": ""
 }

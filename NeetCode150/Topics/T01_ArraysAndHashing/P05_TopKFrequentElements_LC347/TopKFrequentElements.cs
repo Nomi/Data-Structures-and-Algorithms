@@ -8,6 +8,11 @@ namespace DSA.NeetCode150.Topics.T01_ArraysAndHashing.P05_TopKFrequentElements_L
 
 public class Solution {
     public int[] TopKFrequent(int[] nums, int k) {
+        return MinHeapAttempt(nums, k);
+    }
+
+    public int[] MinHeapAttempt(int[] nums, int k)
+    {
         // var minHeap = new PriorityQueue<Tuple<int,int>>(Comparer<Tuple<int,int>>.Create((a,b)=>b.Item2-a.Item2)); 
         var minHeap = new PriorityQueue<Tuple<int,int>,int>(Comparer<int>.Create((a,b)=>a-b));
         var freqMap = new Dictionary<int,int>();
