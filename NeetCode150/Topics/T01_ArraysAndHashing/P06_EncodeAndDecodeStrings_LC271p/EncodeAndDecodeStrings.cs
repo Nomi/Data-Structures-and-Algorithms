@@ -7,6 +7,7 @@ using System.Text;
 namespace DSA.NeetCode150.Topics.T01_ArraysAndHashing.P06_EncodeAndDecodeStrings_LC271p;
 
 public class Solution {
+    //This encoding is interesting! (also, use while loops like they did?)
 
     public string Encode(IList<string> strs) {
         StringBuilder res = new();

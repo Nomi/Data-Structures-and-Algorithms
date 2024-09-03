@@ -1,12 +1,12 @@
-9, Accepted
+10, Accepted
 {
-    "date": "2024-09-03T22:39:42.824Z",
+    "date": "2024-09-03T22:40:37.983Z",
     "statusDescription": "Accepted",
-    "code": "public class Solution {\n\n    public string Encode(IList<string> strs) {\n        StringBuilder res = new();\n\n        foreach(var s in strs)\n        {\n            res.Append($\"{s.Length}#{s}\");\n        }\n        return res.ToString();\n    }\n\n    public List<string> Decode(string s) {\n        if(s.Length<2)\n            return new();\n        List<string> res = new();\n        int numStart = -1;\n        int shrp = -1;\n        for(int i=0;i< s.Length;i++) //s.Substring has a complexity of O(N) WHERE N is length of the substr???\n        {\n            if(numStart==-1&&char.IsNumber(s[i]))\n                numStart = i;\n            else if(s[i]=='#'&&numStart!=-1)\n                shrp = i;\n            if(shrp==-1)\n                continue;\n            // int wLen;\n            int.TryParse(s.Substring(numStart, shrp-numStart),out var wLen); //shrp-numStart gives the length from first digit of num to the last digit \n            i=shrp+wLen;\n            res.Add(s.Substring(shrp+1,wLen));\n            numStart=-1;\n            shrp=-1;\n        }\n        return res;\n   }\n}\n",
-    "memory": 54044,
+    "code": "public class Solution {\n    //This encoding is interesting! (also, use while loops like they did?)\n\n    public string Encode(IList<string> strs) {\n        StringBuilder res = new();\n\n        foreach(var s in strs)\n        {\n            res.Append($\"{s.Length}#{s}\");\n        }\n        return res.ToString();\n    }\n\n    public List<string> Decode(string s) {\n        if(s.Length<2)\n            return new();\n        List<string> res = new();\n        int numStart = -1;\n        int shrp = -1;\n        for(int i=0;i< s.Length;i++) //s.Substring has a complexity of O(N) WHERE N is length of the substr???\n        {\n            if(numStart==-1&&char.IsNumber(s[i]))\n                numStart = i;\n            else if(s[i]=='#'&&numStart!=-1)\n                shrp = i;\n            if(shrp==-1)\n                continue;\n            // int wLen;\n            int.TryParse(s.Substring(numStart, shrp-numStart),out var wLen); //shrp-numStart gives the length from first digit of num to the last digit \n            i=shrp+wLen;\n            res.Add(s.Substring(shrp+1,wLen));\n            numStart=-1;\n            shrp=-1;\n        }\n        return res;\n   }\n}\n",
+    "memory": 53912,
     "stdout": "",
     "language": "csharp",
-    "time": "0.709",
+    "time": "0.726",
     "problemId": "string-encode-and-decode",
     "stderr": ""
 }
