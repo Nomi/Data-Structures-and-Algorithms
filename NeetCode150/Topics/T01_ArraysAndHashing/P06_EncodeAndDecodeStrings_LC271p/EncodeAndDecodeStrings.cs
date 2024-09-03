@@ -15,6 +15,7 @@ public class Solution {
         {
             res.Append($"{s.Length}#{s}");
         }
+        Console.WriteLine(res);
 
         return res.ToString();
     }
