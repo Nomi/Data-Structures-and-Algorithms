@@ -26,11 +26,11 @@ public class Solution {
         int shrp = -1;
         for(int i=0;i< s.Length;i++) //s.Substring has a complexity of O(N) WHERE N is length of the substr???
         {
+        Console.WriteLine($"{i},{numStart},{shrp}");
             if(numStart==-1&&char.IsNumber(s[i]))
                 numStart = i;
             else if(s[i]=='#'&&numStart!=-1)
                 shrp = i;
-        Console.WriteLine($"{i},{numStart},{shrp}");
             if(shrp==-1)
                 continue;
             // int wLen;
