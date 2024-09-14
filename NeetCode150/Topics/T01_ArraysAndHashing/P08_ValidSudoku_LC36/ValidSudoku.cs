@@ -8,6 +8,12 @@ namespace DSA.NeetCode150.Topics.T01_ArraysAndHashing.P08_ValidSudoku_LC36;
 
 public class Solution {
     public bool IsValidSudoku(char[][] board) {
+        //Note after attempt1:
+        // THIS IS WHY YOU MAKE SURE YOU READ THE QUESTION PROPERLY!
+        // I HAD MISTAKEN THAT I NEEDED TO CHECK ALL POSSIBLE 3x3 SUB-GRIDS,
+        // BUT IT IS ONLY THE 9 TOTAL 3x3 SUBGRIDS AS SHOWN IN THE DIAGRAM!
+        // THAT'S WHY YOU DO r+=3 and c+3, instead of the r++ and c++
+        // I HAD BEEN DOING!
         return attempt1(board);
     }
     public bool attempt1(char[][] board) 
