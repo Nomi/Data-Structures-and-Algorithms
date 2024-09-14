@@ -1,12 +1,12 @@
-2, Accepted
+3, Accepted
 {
-    "date": "2024-09-03T23:15:06.363Z",
+    "date": "2024-09-14T18:24:48.194Z",
     "statusDescription": "Accepted",
-    "code": "public class Solution {\n    public int[] TwoSum(int[] numbers, int target) {\n        int l=0;\n        int r=numbers.Count()-1;\n        while(true)\n        {\n            var sum = numbers[l]+numbers[r];\n            if(target>sum)\n                l++;\n            else if(target<sum)\n                r--;\n            else //==\n                return new int[2]{1+l,1+r}; //1-indexed\n        }\n        //GIVEN: There will always be exactly one valid solution.\n        //So we don't need to bother considering quitting out of the loop and stuff.\n    }\n}\n",
-    "memory": 54116,
+    "code": "public class Solution {\n    public int[] TwoSum(int[] numbers, int target) {\n        // return attempt1(numbers, target);\n        return attempt2(numbers, target);\n    }\n\n    public int[] attempt1(int[] numbers, int target)\n    {\n        int l=0;\n        int r=numbers.Count()-1;\n        while(true)\n        {\n            var sum = numbers[l]+numbers[r];\n            if(target>sum)\n                l++;\n            else if(target<sum)\n                r--;\n            else //==\n                return new int[2]{1+l,1+r}; //1-indexed\n        }\n        //GIVEN: There will always be exactly one valid solution.\n        //So we don't need to bother considering quitting out of the loop and stuff.\n    }\n\n    public int[] attempt2(int[] numbers, int target)\n    {\n        int l=0, r=numbers.Count()-1;\n        while(true)\n        {\n            if(l>r)\n                return new int[]{-1,-1};\n            int sum = numbers[l] + numbers[r];\n            if(sum>target)\n            {\n                r--;\n            }\n            else if(sum<target)\n            {\n                l++;\n            }\n            else //==\n            {\n                return new int[]{l+1,r+1};\n            }\n        }\n    }\n}\n",
+    "memory": 54556,
     "stdout": "",
     "language": "csharp",
-    "time": "0.71",
+    "time": "0.67",
     "problemId": "two-integer-sum-ii",
     "stderr": ""
 }
