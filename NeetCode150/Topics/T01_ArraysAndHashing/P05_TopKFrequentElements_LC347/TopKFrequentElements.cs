@@ -31,7 +31,9 @@ public class Solution {
 
 
         // ===== PRACTICE FROM HERE: =====
-        return bs2(nums,k);
+        // return bs2(nums,k);
+        return mh2(nums,k); //THIS one doesnt need tuples (as compared to other minheap version!) //but might be a tiny bit slower because of adding 1 more element than the other version?
+
     }
 
     // public int[] BucketSort(int[] nums, int k)
@@ -98,7 +100,7 @@ public class Solution {
     // }
 
 
-    public int[] bs2(int[] nums, int k)
+    public int[] bs2(int[] nums, int k) 
     {
         int maxFreq = nums.Count(); //max possible frequency (when array only has 1 element)
         List<int>[] freqBuckets = new List<int>[maxFreq+1]; //+1 is for 0 frequency, which technically isn't needed, but makes indexing easier.
@@ -127,6 +129,34 @@ public class Solution {
                 if(count==k)
                     break;
             }
+        }
+        return result;
+    }
+
+    public int[] mh2(int[] nums, int k) //This one doesn't need tuples!! //but might be a tiny bit slower because of adding 1 more element than the other version?
+    {
+        var minHeap = new PriorityQueue<int,int>(Comparer<int>.Create((a,b)=>a-b));
+       
+        var freqMap = new Dictionary<int,int>();
+        for(int i = 0; i<nums.Count();i++)
+        {
+            freqMap.TryAdd(nums[i],0);
+            freqMap[nums[i]]++;
+        }
+        
+        foreach(var elem in freqMap)
+        {
+            minHeap.Enqueue(elem.Key,elem.Value);
+            if(minHeap.Count>k)
+                minHeap.Dequeue();
+        }
+
+        var result = new int[k];
+        int count = 0;
+        while(minHeap.Count>0)
+        {
+            result[count] = minHeap.Dequeue();
+            count++;
         }
         return result;
     }
