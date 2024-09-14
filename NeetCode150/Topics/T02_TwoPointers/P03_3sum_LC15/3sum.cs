@@ -17,7 +17,7 @@ public class Solution {
     {
         List<List<int>> res = new();
         Array.Sort(nums);//TC: O(nlog(n))
-        for(int i=0; i< nums.Count(); i++)//TC:(O(nlog(n)))
+        for(int i=0; i< nums.Count(); i++)//TC:(O(n^2))
         {
             if(i>0&&nums[i]==nums[i-1])
             {
