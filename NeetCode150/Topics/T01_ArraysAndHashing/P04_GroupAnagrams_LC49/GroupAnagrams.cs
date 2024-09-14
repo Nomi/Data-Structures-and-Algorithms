@@ -19,7 +19,7 @@ public class Solution {
         foreach(var str in strs)
         {
             //------------ NO SORT VERSION -------
-            int[] count = new int[26]; //because there are 26 letters in the English alphabet!
+            int[] count = new int[26]; //because there are 26 letters in the English alphabet! (and we only need the lowercase versions according to the requirement)
             foreach(char c in str)
             {
                 count[c-'a']++;
@@ -41,10 +41,10 @@ public class Solution {
         Dictionary<string,List<string>> map = new();
         foreach(var str in strs)
         {
-            int[] charCount = new[26];//cuz 26 lowerchase alphabet chars
+            int[] charCount = new int[26];//cuz 26 lowerchase alphabet chars
             for(int i=0;i<str.Count();i++)
-                charCount[str[i]]++; //by default all values initialized to 0.
-            string key = string.Join(charCount,",");
+                charCount[str[i]-'a']++; //by default all values initialized to 0.
+            string key = string.Join(',', charCount);
             map.TryAdd(key,new List<string>());
             map[key].Add(str);
         }
