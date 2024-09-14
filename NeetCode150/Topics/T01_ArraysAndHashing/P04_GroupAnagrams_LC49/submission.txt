@@ -1,12 +1,12 @@
-2, Accepted
+3, Compilation Error
 {
-    "date": "2024-09-03T17:52:13.254Z",
-    "statusDescription": "Accepted",
-    "code": "public class Solution {\n    // FOR LOWER COMPLEXITY, WE AVOID SORT AND STORE COUNT OF EACH LETTER (joined by ',') AS THE KEY!\n    public List<List<string>> GroupAnagrams(string[] strs) {\n        Dictionary<string, List<string>> map = new(); //we try to store sorted string as the key and the list stores that specific anagram instance\n        foreach(var str in strs)\n        {\n            //------------ NO SORT VERSION -------\n            int[] count = new int[26]; //because there are 26 letters in the English alphabet!\n            foreach(char c in str)\n            {\n                count[c-'a']++;\n            }\n            var key = string.Join(',',count);\n            map.TryAdd(key,new());\n            map[key].Add(str);\n\n            //------- SORT VERSION: --------\n            // var srtdStr = String.Concat(str.OrderBy(c => c)); //nlog(n) where n is AVERAGE length of the strings.\n            // map.TryAdd(srtdStr, new List<string>());\n            // map[srtdStr].Add(str);\n        }\n        return map.Values.ToList();\n    }\n}\n",
-    "memory": 54660,
+    "date": "2024-09-14T16:43:47.431Z",
+    "statusDescription": "Compilation Error",
+    "code": "public class Solution {\n    public List<List<string>> GroupAnagrams(string[] strs) {\n        // return attempt1(strs); //READ COMMENTS FROM THIS!!\n        return attempt2(strs);\n    }\n\n    // FOR LOWER COMPLEXITY, WE AVOID SORT AND STORE COUNT OF EACH LETTER (joined by ',') AS THE KEY!\n    public List<List<string>> attempt1(string[] strs)\n    {\n        Dictionary<string, List<string>> map = new(); //we try to store sorted string as the key and the list stores that specific anagram instance\n        foreach(var str in strs)\n        {\n            //------------ NO SORT VERSION -------\n            int[] count = new int[26]; //because there are 26 letters in the English alphabet!\n            foreach(char c in str)\n            {\n                count[c-'a']++;\n            }\n            var key = string.Join(',',count);\n            map.TryAdd(key,new());\n            map[key].Add(str);\n\n            //------- SORT VERSION: --------\n            // var srtdStr = String.Concat(str.OrderBy(c => c)); //nlog(n) where n is AVERAGE length of the strings.\n            // map.TryAdd(srtdStr, new List<string>());\n            // map[srtdStr].Add(str);\n        }\n        return map.Values.ToList();\n    }\n\n    public List<List<string>> attempt2(string[] strs)\n    {\n        Dictionary<string,List<string>> map = new();\n        foreach(var str in strs)\n        {\n            int[] charCount = new[26];//cuz 26 lowerchase alphabet chars\n            for(int i=0;i<str.Count();i++)\n                charCount[str[i]]++; //by default all values initialized to 0.\n            string key = string.Join(charCount,\",\");\n            map.TryAdd(key,new List<string>());\n            map[key].Add(str);\n        }\n        return map.Values.ToList();\n    }\n}\n",
+    "memory": "",
     "stdout": "",
     "language": "csharp",
-    "time": "1.008",
+    "time": "0.0",
     "problemId": "anagram-groups",
     "stderr": ""
 }
