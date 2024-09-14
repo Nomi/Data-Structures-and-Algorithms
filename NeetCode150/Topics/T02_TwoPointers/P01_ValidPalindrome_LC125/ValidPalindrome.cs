@@ -10,7 +10,7 @@ public class Solution {
     public bool IsPalindrome(string s) {
         s=s.ToLower();
         int matched=0;
-       for(int i=0, j=s.Length-1;i<=j;)
+       for(int i=0, j=s.Length-1;i<j;)
        {
             if(!Char.IsLetterOrDigit(s[i]))
             {
