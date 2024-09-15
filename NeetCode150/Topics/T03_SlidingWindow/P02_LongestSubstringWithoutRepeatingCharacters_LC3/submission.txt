@@ -1,12 +1,12 @@
-4, Wrong Answer
+5, Accepted
 {
-    "date": "2024-09-15T21:02:55.102Z",
-    "statusDescription": "Wrong Answer",
-    "code": "public class Solution {\n    //# Sliding Window:\n    //      TC: O(N)\n    //      SC: O(N) (or O(k) where k is the length of longest substring, which is <=N and as such this is asymptotically bounded by O(N))\n    public int LengthOfLongestSubstring(string s) {\n        if(s.Length<2)\n            return s.Length;\n        HashSet<char> hs = new();\n        int l=0;int r=1;\n        hs.Add(s[l]);\n        int maxLength=1;\n        while(r<s.Length)\n        {\n            if(hs.Contains(s[r]))\n            {\n                maxLength=(int)Math.Max(r-l, maxLength);\n                while(hs.Contains(s[r]))\n                {\n                    hs.Remove(s[l]);\n                    l++;\n                }\n                if(l==r)\n                {\n                    hs.Add(s[l]);\n                    r++;\n                    continue;\n                }\n            }\n            hs.Add(s[r]);\n            r++;\n        }\n        return maxLength;\n    }\n}\n",
-    "memory": 54584,
+    "date": "2024-09-15T21:06:36.983Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {\n    //# Sliding Window:\n    //      TC: O(N)\n    //      SC: O(N) (or O(k) where k is the length of longest substring, which is <=N and as such this is asymptotically bounded by O(N))\n    public int LengthOfLongestSubstring(string s) {\n        if(s.Length<2)\n            return s.Length;\n        HashSet<char> hs = new();\n        int l=0;int r=1;\n        hs.Add(s[l]);\n        int maxLength=1;\n        while(r<s.Length)\n        {\n            if(hs.Contains(s[r]))\n            {\n                while(hs.Contains(s[r]))\n                {\n                    hs.Remove(s[l]);\n                    l++;\n                }\n                if(l==r)\n                {\n                    hs.Add(s[l]);\n                    r++;\n                    continue;\n                }\n            }\n            hs.Add(s[r]);\n            maxLength=(int)Math.Max(r-l+1, maxLength);\n            r++;\n        }\n        return maxLength;\n    }\n}\n",
+    "memory": 54340,
     "stdout": "",
     "language": "csharp",
-    "time": "0.72",
+    "time": "0.73",
     "problemId": "longest-substring-without-duplicates",
     "stderr": ""
 }

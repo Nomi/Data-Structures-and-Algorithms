@@ -21,7 +21,6 @@ public class Solution {
         {
             if(hs.Contains(s[r]))
             {
-                maxLength=(int)Math.Max(r-l, maxLength);
                 while(hs.Contains(s[r]))
                 {
                     hs.Remove(s[l]);
@@ -35,6 +34,7 @@ public class Solution {
                 }
             }
             hs.Add(s[r]);
+            maxLength=(int)Math.Max(r-l+1, maxLength);
             r++;
         }
         return maxLength;
