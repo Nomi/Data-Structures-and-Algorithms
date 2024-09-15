@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-09-15T00:11:53.990Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {\n    public int MaxArea(int[] heights) {\n        return attempt1(heights);\n    }\n\n    public int attempt1(int[] heights)\n    {\n        int maxAr = -1;\n        int l=0, r=heights.Count()-1;\n        while(l<r)//not == because there'd be no space for water\n        {\n            int ar = (int)Math.Min(heights[l],heights[r])*(r-l);\n            maxAr = ar>maxAr ? ar : maxAr;\n            //It is better to make the smaller bar bigger than\n            //messing with the bigger of the two.\n            if(heights[l]>heights[r])\n            {\n                r--;\n            }\n            else\n            {\n                l++;\n            }\n        }\n        return maxAr;\n    }\n}\n",
+    "memory": 52272,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.674",
+    "problemId": "max-water-container",
+    "stderr": ""
+}
