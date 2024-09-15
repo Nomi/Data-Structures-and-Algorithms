@@ -6,6 +6,8 @@ using System.Text;
 
 namespace DSA.NeetCode150.Topics.T02_TwoPointers.P05_TrappingRainWater_LC42;
 
+//Check my physical notes for Max Water Container (on BWS notebook)
+//to see why this works! (and how)
 public class Solution {
     //## TWO POINTER APPROACH:
     //# TC = O(N)
