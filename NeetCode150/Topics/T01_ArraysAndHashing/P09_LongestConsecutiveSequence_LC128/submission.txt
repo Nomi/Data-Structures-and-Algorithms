@@ -1,12 +1,12 @@
-1, Accepted
+2, Accepted
 {
-    "date": "2024-09-14T22:02:40.816Z",
+    "date": "2024-09-15T17:19:59.615Z",
     "statusDescription": "Accepted",
-    "code": "public class Solution {\n    public int LongestConsecutive(int[] nums) {\n        return attempt1(nums);\n    }\n\n    public int attempt1(int[] nums)\n    {\n        int maxLength = 0;\n        //TC - O(N):\n        HashSet<int> hs = new(nums);\n\n        //TC - O(N) [because there's N elements in HS and we only go over any sequence once by skipping any non-starting elements.]\n        foreach(var n in hs)\n        {\n            if(hs.Contains(n-1))\n                continue; //Not the start of a series. This skipping is the reason the algorithm TC is O(N) and NOT O(N^2)\n            \n            int length=1;\n            int next = n+1;\n            while(hs.Contains(next))\n            {\n                next+=1;\n                length++;\n            }\n\n            maxLength = length>maxLength ? length : maxLength;\n        }\n\n        return maxLength;\n    }\n}\n",
-    "memory": 51128,
+    "code": "public class Solution {\n    public int LongestConsecutive(int[] nums) {\n        // return attempt1(nums);\n        return attempt2(nums);\n    }\n\n    public int attempt1(int[] nums)\n    {\n        int maxLength = 0;\n        //TC - O(N):\n        HashSet<int> hs = new(nums);\n\n        //TC - O(N) [because there's N elements in HS and we only go over any sequence once by skipping any non-starting elements.]\n        foreach(var n in hs)\n        {\n            if(hs.Contains(n-1))\n                continue; //Not the start of a series. This skipping is the reason the algorithm TC is O(N) and NOT O(N^2)\n            \n            int length=1;\n            int next = n+1;\n            while(hs.Contains(next))\n            {\n                next+=1;\n                length++;\n            }\n\n            maxLength = length>maxLength ? length : maxLength;\n        }\n\n        return maxLength;\n    }\n\n\n    public int attempt2(int[] nums)\n    {\n        HashSet<int> hs = new(nums);\n        \n        var maxLength = 0;\n        foreach(var num in hs)\n        {\n            if(hs.Contains(num-1)) //not the starting point of a sequence (an element exists before this).\n                continue;\n            var length=1;\n            var nextNum = num+1;\n            while(hs.Contains(nextNum))\n            {\n                length++;\n                nextNum++;\n            }\n            if(length>maxLength)\n                maxLength=length;\n        }\n        return maxLength;\n    }\n}\n",
+    "memory": 51392,
     "stdout": "",
     "language": "csharp",
-    "time": "0.99",
+    "time": "0.791",
     "problemId": "longest-consecutive-sequence",
     "stderr": ""
 }

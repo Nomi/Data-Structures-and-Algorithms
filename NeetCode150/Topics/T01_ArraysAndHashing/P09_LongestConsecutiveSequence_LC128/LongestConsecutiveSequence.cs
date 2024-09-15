@@ -8,7 +8,8 @@ namespace DSA.NeetCode150.Topics.T01_ArraysAndHashing.P09_LongestConsecutiveSequ
 
 public class Solution {
     public int LongestConsecutive(int[] nums) {
-        return attempt1(nums);
+        // return attempt1(nums);
+        return attempt2(nums);
     }
 
     public int attempt1(int[] nums)
@@ -34,6 +35,29 @@ public class Solution {
             maxLength = length>maxLength ? length : maxLength;
         }
 
+        return maxLength;
+    }
+
+
+    public int attempt2(int[] nums)
+    {
+        HashSet<int> hs = new(nums);
+        
+        var maxLength = 0;
+        foreach(var num in hs)
+        {
+            if(hs.Contains(num-1)) //not the starting point of a sequence (an element exists before this).
+                continue;
+            var length=1;
+            var nextNum = num+1;
+            while(hs.Contains(nextNum))
+            {
+                length++;
+                nextNum++;
+            }
+            if(length>maxLength)
+                maxLength=length;
+        }
         return maxLength;
     }
 }
