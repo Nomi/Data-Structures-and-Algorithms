@@ -6,6 +6,8 @@ using System.Text;
 
 namespace DSA.NeetCode150.Topics.T02_TwoPointers.P04_ContainerWithMostWater_LC11;
 
+//Check my physical notes for Max Water Container (on BWS notebook)
+//to see why this works! (and how)
 public class Solution {
     public int MaxArea(int[] heights) {
         //return attempt1(heights); //TC: O(N) //READ THE COMMENTS??
