@@ -11,7 +11,9 @@ public class Solution {
     //# TC = O(N)
     //# SC = O(1)
     public int Trap(int[] height) {
-        return attempt1(height);
+        // return attempt1(height); //PREFER LOOP STYLE FROM HERE!
+
+        return attempt2(height); //USE ATTEMPT1 LOOP STILE RATHER THAN THIS!!
     }
 
     //## TWO POINTER APPROACH:
@@ -55,4 +57,40 @@ public class Solution {
         //     int minHeight
         // }
     }
+
+    public int attempt2(int[] height)
+    {
+        if(height==null||height.Count()==0)
+            return 0;
+        
+        int l = 0, r = height.Count()-1;
+        int lMax = 0, rMax = 0;
+        int water=0;
+        while(l<=r) //the way I have written this, it wouldn't work with l<r
+        {
+            //it doesn't work with l<r because we would not
+            //calculate the water on the middle block (for odd numbered blocks).
+            Console.Write($"{l},{r} : {lMax},{rMax} :");
+            if(lMax<rMax)
+            {
+                int temp = (int)Math.Min(lMax,rMax)-height[l];
+                if(temp>0) //The current bar is not higher than water level (i.e. not negative ot zero)
+                    water+=temp;
+                lMax = (int)Math.Max(lMax,height[l]);
+                l++;
+                Console.WriteLine($"l - {temp} : total_water - {water}");
+            }
+            else
+            {
+                int temp = (int)Math.Min(lMax,rMax)-height[r];
+                if(temp>0) //The current bar is not higher than water level (i.e. not negative ot zero)
+                    water+=temp;
+                rMax = (int)Math.Max(rMax,height[r]);
+                r--;
+                Console.WriteLine($"r - {temp} : total_water - {water}");
+            }
+        }
+        return water;
+    }
+
 }
