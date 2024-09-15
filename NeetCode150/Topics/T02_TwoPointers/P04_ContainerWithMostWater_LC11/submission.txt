@@ -1,12 +1,12 @@
-2, Accepted
+3, Accepted
 {
-    "date": "2024-09-15T00:12:38.483Z",
+    "date": "2024-09-15T00:18:37.483Z",
     "statusDescription": "Accepted",
-    "code": "public class Solution {\n    public int MaxArea(int[] heights) {\n        return attempt1(heights); //TC: O(N)\n    }\n\n    //TC: O(N)\n    public int attempt1(int[] heights)\n    {\n        int maxAr = -1;\n        int l=0, r=heights.Count()-1;\n        while(l<r)//not == because there'd be no space for water\n        {\n            int ar = (int)Math.Min(heights[l],heights[r])*(r-l);\n            maxAr = ar>maxAr ? ar : maxAr;\n            //It is better to make the smaller bar bigger than\n            //messing with the bigger of the two.\n            if(heights[l]>heights[r])\n            {\n                r--;\n            }\n            else\n            {\n                l++;\n            }\n        }\n        return maxAr;\n    }\n}\n",
-    "memory": 58084,
+    "code": "public class Solution {\n    public int MaxArea(int[] heights) {\n        return attempt1(heights); //TC: O(N)\n    }\n\n    //TC: O(N)\n    //Since width has to decrease as we change heights, we want to make sure the bar we swap is the smaller one and make it bigger.\n    //almost like having pre-sorted width because we start from max width and decrease it by 1 with every change of bars.\n    public int attempt1(int[] heights)\n    {\n        int maxAr = -1;\n        int l=0, r=heights.Count()-1; //we start from max width and decrease it as a tradeoff for height from hereonforth.\n        while(l<r)//not == because that's just one bar.\n        {\n            int ar = (int)Math.Min(heights[l],heights[r])*(r-l);\n            maxAr = ar>maxAr ? ar : maxAr;\n            //It is better to make the smaller bar bigger than\n            //messing with the bigger of the two.\n            if(heights[l]>heights[r])\n            {\n                r--;\n            }\n            else\n            {\n                l++;\n            }\n        }\n        return maxAr;\n    }\n}\n",
+    "memory": 54488,
     "stdout": "",
     "language": "csharp",
-    "time": "0.897",
+    "time": "0.775",
     "problemId": "max-water-container",
     "stderr": ""
 }
