@@ -11,10 +11,12 @@ public class Solution {
     //      TC: O(N)
     //      SC: O(N) (or O(k) where k is the length of longest substring, which is <=N and as such this is asymptotically bounded by O(N))
     public int LengthOfLongestSubstring(string s) {
+        if(s.Length<2)
+            return s.Length;
         HashSet<char> hs = new();
         int l=0;int r=1;
         hs.Add(s[l]);
-        int maxLength=0;
+        int maxLength=1;
         while(r<s.Length)
         {
             if(hs.Contains(s[r]))
