@@ -8,7 +8,7 @@ namespace DSA.NeetCode150.Topics.T02_TwoPointers.P04_ContainerWithMostWater_LC11
 
 public class Solution {
     public int MaxArea(int[] heights) {
-        return attempt1(heights); //TC: O(N)
+        return attempt1(heights); //TC: O(N) //READ THE COMMENTS??
     }
 
     //TC: O(N)
