@@ -79,7 +79,7 @@ public class Solution {
         return res;
     }
 
-    // public int attempt1(string s)
+    // public int attempt2(string s)
     // {
 
     // }
