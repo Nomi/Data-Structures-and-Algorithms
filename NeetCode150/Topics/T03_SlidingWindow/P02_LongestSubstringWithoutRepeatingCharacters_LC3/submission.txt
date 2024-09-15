@@ -1,0 +1,12 @@
+1, Wrong Answer
+{
+    "date": "2024-09-15T20:58:49.711Z",
+    "statusDescription": "Wrong Answer",
+    "code": "public class Solution {\n    //\n    //TC: O(N)\n    //SC: O(N) [or O(k) where k is the length of the longest substring, which can be at most O(N) and as such, is asymptotically bounded by that]\n    public int LengthOfLongestSubstring(string s) {\n        HashSet<char> hs = new();\n        int l=0;int r=1;\n        hs.Add(s[l]);\n        int maxLength=0;\n        while(r<s.Length)\n        {\n            if(hs.Contains(s[r]))\n            {\n                maxLength=(int)Math.Max(r-l, maxLength);\n                while(hs.Contains(s[r]))\n                {\n                    hs.Remove(s[l]);\n                    l++;\n                }\n                if(l==r)\n                {\n                    hs.Add(s[l]);\n                    r++;\n                    continue;\n                }\n            }\n            hs.Add(s[r]);\n            r++;\n        }\n        return maxLength;\n    }\n}\n",
+    "memory": 55888,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.764",
+    "problemId": "longest-substring-without-duplicates",
+    "stderr": ""
+}
