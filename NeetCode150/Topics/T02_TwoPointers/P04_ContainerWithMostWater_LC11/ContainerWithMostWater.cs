@@ -8,7 +8,9 @@ namespace DSA.NeetCode150.Topics.T02_TwoPointers.P04_ContainerWithMostWater_LC11
 
 public class Solution {
     public int MaxArea(int[] heights) {
-        return attempt1(heights); //TC: O(N) //READ THE COMMENTS??
+        //return attempt1(heights); //TC: O(N) //READ THE COMMENTS??
+
+        return attempt2(heights);
     }
 
     //TC: O(N)
@@ -34,5 +36,25 @@ public class Solution {
             }
         }
         return maxAr;
+    }
+
+
+    public int attempt2(int[] heights)
+    {
+        int l=0,r=heights.Count()-1;
+        int maxArea = 0;
+        while(l<r)
+        {
+            int hl = heights[l];
+            int hr = heights[r];
+            int area = (r-l)*(int)Math.Min(hl,hr);
+            if(area>maxArea)
+                maxArea = area;
+            if(hl<hr)
+                l++;
+            else
+                r--;
+        }
+        return maxArea;
     }
 }
