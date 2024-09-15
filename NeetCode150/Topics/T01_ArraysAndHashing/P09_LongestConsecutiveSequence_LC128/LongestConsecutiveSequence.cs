@@ -8,7 +8,7 @@ namespace DSA.NeetCode150.Topics.T01_ArraysAndHashing.P09_LongestConsecutiveSequ
 
 public class Solution {
     public int LongestConsecutive(int[] nums) {
-        // return attempt1(nums);
+        // return attempt1(nums); //READ COMMENTS FROM THIS ONE!
         return attempt2(nums);
     }
 
