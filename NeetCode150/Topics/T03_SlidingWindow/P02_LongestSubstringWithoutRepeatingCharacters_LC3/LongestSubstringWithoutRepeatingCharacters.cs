@@ -9,7 +9,7 @@ namespace DSA.NeetCode150.Topics.T03_SlidingWindow.P02_LongestSubstringWithoutRe
 public class Solution {
     //# Sliding Window:
     //      TC: O(N)
-    //      SC: O(N) [or O(k) where k is the length of longest substring, which is <=N and as such this is asymptotically bounded by O(N)]
+    //      SC: O(N) (or O(k) where k is the length of longest substring, which is <=N and as such this is asymptotically bounded by O(N))
     public int LengthOfLongestSubstring(string s) {
         HashSet<char> hs = new();
         int l=0;int r=1;
