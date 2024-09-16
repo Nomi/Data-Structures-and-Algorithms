@@ -37,7 +37,7 @@ public class Solution {
             //where top is on the left. Therefore, to get a-b as 
             //we want, we pop to get b first, then pop to get
             //a first and b second.
-            stk.Push(operations[s](x,y).ToString());
+            stk.Push(operations[s](a,b).ToString());
             // Console.WriteLine($"{a} {s} {b} = {stk.Peek()}");
         }
         int.TryParse(stk.Pop(), out int res);
