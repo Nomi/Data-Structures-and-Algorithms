@@ -55,6 +55,8 @@ public class Solution {
                 l++;
             }
         }
+        if(minStrR-minStrL+1<0)
+            return "";
         return s.Substring(minStrL, minStrR-minStrL+1);
     }
 }
