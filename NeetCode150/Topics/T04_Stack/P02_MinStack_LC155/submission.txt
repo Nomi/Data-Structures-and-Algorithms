@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-09-16T22:30:17.103Z",
+    "statusDescription": "Accepted",
+    "code": "public class MinStack {\n    //THESE PROVIDED CONSTRAINTS MIGHT SERVE AS GOOD CLARIFYING QUESTIONS???\n    //-2^31 <= val <= 2^31 - 1. //fits in int32?\n    //pop, top and getMin will always be called on non-empty stacks.\n    LinkedList<int> values;\n    LinkedList<int> minimums;\n    public MinStack() {\n        values = new();\n        minimums=new();\n    }\n    \n    public void Push(int val) {\n        values.AddLast(val);\n        if(minimums.Count==0)\n            minimums.AddLast(val);\n        else\n            minimums.AddLast((int)Math.Min(val,minimums.Last.Value));\n    }\n    \n    public void Pop() {\n        values.RemoveLast();\n        minimums.RemoveLast();\n    }\n    \n    public int Top() {\n        return values.Last.Value;\n    }\n    \n    public int GetMin() {\n        return minimums.Last.Value;\n    }\n}\n",
+    "memory": 121052,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.801",
+    "problemId": "minimum-stack",
+    "stderr": ""
+}
