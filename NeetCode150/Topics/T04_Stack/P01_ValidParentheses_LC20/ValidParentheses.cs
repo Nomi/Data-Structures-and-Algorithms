@@ -36,6 +36,8 @@ public class Solution {
             if(c!=openToClose[lastChar])
                 return false;
         }
+        if(stack.Count>0)
+            return false;
         return true;
     }
 }

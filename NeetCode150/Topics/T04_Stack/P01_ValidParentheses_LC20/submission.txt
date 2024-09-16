@@ -1,12 +1,12 @@
-1, Wrong Answer
+2, Accepted
 {
-    "date": "2024-09-16T22:01:54.624Z",
-    "statusDescription": "Wrong Answer",
-    "code": "public class Solution {\n    public bool IsValid(string s) {\n        return attempt1(s);\n    }\n    \n    public bool attempt1(string s)\n    {\n        Stack<char> stack = new();\n        Dictionary<char,char> openToClose = new(){\n            {'(',')'},\n            {'{','}'},\n            {'[',']'}};\n        HashSet<char> close = new(){')','}',']'};\n\n        for(int i=0;i<s.Length;i++)\n        {\n            char c = s[i];\n            if(stack.Count==0||openToClose.ContainsKey(c))\n            {\n                if(close.Contains(c))\n                    return false;\n                stack.Push(c);\n                continue;\n            }\n            char lastChar = stack.Pop();\n            if(!openToClose.ContainsKey(lastChar))\n                return false;\n            if(c!=openToClose[lastChar])\n                return false;\n        }\n        return true;\n    }\n}\n",
-    "memory": 55168,
+    "date": "2024-09-16T22:02:46.583Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {\n    public bool IsValid(string s) {\n        return attempt1(s);\n    }\n    \n    public bool attempt1(string s)\n    {\n        Stack<char> stack = new();\n        Dictionary<char,char> openToClose = new(){\n            {'(',')'},\n            {'{','}'},\n            {'[',']'}};\n        HashSet<char> close = new(){')','}',']'};\n\n        for(int i=0;i<s.Length;i++)\n        {\n            char c = s[i];\n            if(stack.Count==0||openToClose.ContainsKey(c))\n            {\n                if(close.Contains(c))\n                    return false;\n                stack.Push(c);\n                continue;\n            }\n            char lastChar = stack.Pop();\n            if(!openToClose.ContainsKey(lastChar))\n                return false;\n            if(c!=openToClose[lastChar])\n                return false;\n        }\n        if(stack.Count>0)\n            return false;\n        return true;\n    }\n}\n",
+    "memory": 54352,
     "stdout": "",
     "language": "csharp",
-    "time": "0.779",
+    "time": "0.894",
     "problemId": "validate-parentheses",
     "stderr": ""
 }
