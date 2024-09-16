@@ -1,12 +1,12 @@
-1, Accepted
+2, Accepted
 {
-    "date": "2024-09-16T22:30:17.103Z",
+    "date": "2024-09-16T22:33:50.773Z",
     "statusDescription": "Accepted",
-    "code": "public class MinStack {\n    //THESE PROVIDED CONSTRAINTS MIGHT SERVE AS GOOD CLARIFYING QUESTIONS???\n    //-2^31 <= val <= 2^31 - 1. //fits in int32?\n    //pop, top and getMin will always be called on non-empty stacks.\n    LinkedList<int> values;\n    LinkedList<int> minimums;\n    public MinStack() {\n        values = new();\n        minimums=new();\n    }\n    \n    public void Push(int val) {\n        values.AddLast(val);\n        if(minimums.Count==0)\n            minimums.AddLast(val);\n        else\n            minimums.AddLast((int)Math.Min(val,minimums.Last.Value));\n    }\n    \n    public void Pop() {\n        values.RemoveLast();\n        minimums.RemoveLast();\n    }\n    \n    public int Top() {\n        return values.Last.Value;\n    }\n    \n    public int GetMin() {\n        return minimums.Last.Value;\n    }\n}\n",
-    "memory": 121052,
+    "code": "public class MinStack {\n    //THESE PROVIDED CONSTRAINTS MIGHT SERVE AS GOOD CLARIFYING QUESTIONS???\n    //-2^31 <= val <= 2^31 - 1. //fits in int32?\n    //pop, top and getMin will always be called on non-empty stacks.\n    \n\n    //Solution: We clearly just use another place that keeps\n    // track of the minimum at each level of insertions,\n    // so that when Pop is done, instead of recalculating\n    // we can just remove the last value from both values\n    // and minumum and have the last elements be the up to date\n    // without having to recalculate maximum.\n    \n    // LinkedList<int> values;\n    // LinkedList<int> minimums;\n    Stack<int> values;\n    Stack<int> minimums;\n    public MinStack() {\n        values = new();\n        minimums = new();\n    }\n    \n    public void Push(int val) {\n        values.Push(val);\n        if(minimums.Count==0)\n            minimums.Push(val);\n        else\n            minimums.Push((int)Math.Min(val,minimums.Peek()));\n    }\n    \n    public void Pop() {\n        values.Pop();\n        minimums.Pop();\n    }\n    \n    public int Top() {\n        return values.Peek();\n    }\n    \n    public int GetMin() {\n        return minimums.Peek();\n    }\n}\n",
+    "memory": 53528,
     "stdout": "",
     "language": "csharp",
-    "time": "0.801",
+    "time": "0.95",
     "problemId": "minimum-stack",
     "stderr": ""
 }
