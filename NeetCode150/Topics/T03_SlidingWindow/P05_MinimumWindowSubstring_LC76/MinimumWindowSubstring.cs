@@ -8,6 +8,7 @@ namespace DSA.NeetCode150.Topics.T03_SlidingWindow.P05_MinimumWindowSubstring_LC
 
 public class Solution {
     public string MinWindow(string s, string t) {
+        //check provided solution for more streamlined code?
         return attempt1(s,t);
     }
 
