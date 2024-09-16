@@ -8,6 +8,7 @@ namespace DSA.NeetCode150.Topics.T03_SlidingWindow.P04_PermutationInString_LC567
 
 public class Solution {
     public bool CheckInclusion(string s1, string s2) {
+        //check provided solution for more streamlined code?
         return attempt1(s1,s2);
     }
 

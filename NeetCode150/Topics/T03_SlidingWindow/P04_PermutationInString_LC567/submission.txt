@@ -1,12 +1,12 @@
-1, Accepted
+2, Accepted
 {
-    "date": "2024-09-16T09:43:46.575Z",
+    "date": "2024-09-16T20:53:58.943Z",
     "statusDescription": "Accepted",
-    "code": "public class Solution {\n    public bool CheckInclusion(string s1, string s2) {\n        return attempt1(s1,s2);\n    }\n\n    public bool attempt1(string s1, string s2)\n    {\n        if(s1.Length>s2.Length)\n            return false;\n        int[] freq1 = new int[26]; //initialized to 0 by default.\n        for(int i=0;i<s1.Length;i++)\n        {\n            freq1[s1[i]-'a']++;\n        }\n\n        int l=0;\n        int[] freq2 = new int[26];\n        bool found = false;\n        for(int r=0;r<s2.Length;r++)\n        {\n            freq2[s2[r]-'a']++;\n            //+1 gets length!\n            if(r-l+1==s1.Length)//making sure the window is the size of s1, cuz we want to look for permutation of s1\n            {\n                found = true;\n                for(int i=0;i<26;i++)\n                {\n                    if(freq1[i]!=freq2[i])\n                    {\n                        found = false;\n                    }\n                }\n                if(found)\n                    return true;\n                \n                freq2[s2[l]-'a']--;\n                l++;\n                continue;\n            }\n            //Here only if r-l+1>=S1.Length\n                // continue;\n            // if(r-l+1==s1.Length)\n            // {\n\n            // }\n        }\n        return false;\n    }\n}\n",
-    "memory": 54712,
+    "code": "public class Solution {\n    public bool CheckInclusion(string s1, string s2) {\n        //check provided solution for more streamlined code?\n        return attempt1(s1,s2);\n    }\n\n    public bool attempt1(string s1, string s2)\n    {\n        if(s1.Length>s2.Length)\n            return false;\n        int[] freq1 = new int[26]; //initialized to 0 by default.\n        for(int i=0;i<s1.Length;i++)\n        {\n            freq1[s1[i]-'a']++;\n        }\n\n        int l=0;\n        int[] freq2 = new int[26];\n        bool found = false;\n        for(int r=0;r<s2.Length;r++)\n        {\n            freq2[s2[r]-'a']++;\n            //+1 gets length!\n            if(r-l+1==s1.Length)//making sure the window is the size of s1, cuz we want to look for permutation of s1\n            {\n                found = true;\n                for(int i=0;i<26;i++)\n                {\n                    if(freq1[i]!=freq2[i])\n                    {\n                        found = false;\n                    }\n                }\n                if(found)\n                    return true;\n                \n                freq2[s2[l]-'a']--;\n                l++;\n                continue;\n            }\n            //Here only if r-l+1>=S1.Length\n                // continue;\n            // if(r-l+1==s1.Length)\n            // {\n\n            // }\n        }\n        return false;\n    }\n}\n",
+    "memory": 56244,
     "stdout": "",
     "language": "csharp",
-    "time": "0.749",
+    "time": "0.748",
     "problemId": "permutation-string",
     "stderr": ""
 }
