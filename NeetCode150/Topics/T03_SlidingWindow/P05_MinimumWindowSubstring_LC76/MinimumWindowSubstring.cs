@@ -13,10 +13,10 @@ public class Solution {
 
     public string attempt1(string s, string t)
     {
-        if(s.Length==0||t.Length==0||s.Length<t.Length)
-        {
-            return "";
-        }
+        // if(s.Length==0||t.Length==0||s.Length<t.Length)
+        // {
+        //     return "";
+        // }
 
         var tfreq = new Dictionary<char,int>();
         foreach(char c in t)
