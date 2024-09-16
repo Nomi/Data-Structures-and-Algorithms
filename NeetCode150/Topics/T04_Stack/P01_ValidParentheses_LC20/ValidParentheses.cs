@@ -24,7 +24,7 @@ public class Solution {
         Dictionary<char,char> closeToOpen = new(){
             {')','('},
             {'}','{'},
-            {']''}','['}};
+            {']','['}};
 
         foreach(char c in s)
         {
