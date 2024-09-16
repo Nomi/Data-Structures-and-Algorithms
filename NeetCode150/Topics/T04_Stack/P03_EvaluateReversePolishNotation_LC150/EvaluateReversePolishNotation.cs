@@ -30,8 +30,8 @@ public class Solution {
                 continue;
             }
             //else:
-            int.TryParse(stk.Pop(), out int x);
             int.TryParse(stk.Pop(), out int y);
+            int.TryParse(stk.Pop(), out int x);
             stk.Push(operations[s](x,y).ToString());
             Console.WriteLine($"{x} {s} {y} = {stk.Peek()}");
         }

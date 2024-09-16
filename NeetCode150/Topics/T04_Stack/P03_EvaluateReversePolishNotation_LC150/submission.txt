@@ -1,12 +1,12 @@
-3, Wrong Answer
+4, Accepted
 {
-    "date": "2024-09-16T23:00:02.651Z",
-    "statusDescription": "Wrong Answer",
-    "code": "public class Solution {\n    public int EvalRPN(string[] tokens) {\n        //are we guaranteed input is correct?\n        return attempt1(tokens);\n    }\n\n    static readonly Dictionary<string, Func<int, int, int>> operations = new(){\n        { \"+\", (x, y) => x + y },\n        { \"*\", (x, y) => x * y },\n        { \"-\", (x, y) => x - y },\n        { \"/\", (x, y) => (int)((double)x / y) } //GOTTA REMEMBER!?!?!\n    };\n\n    public int attempt1(string[] tokens)\n    {\n        Stack<string> stk = new();\n        foreach(string s in tokens) //Currently assuming the input is always correct.\n        {\n            if(int.TryParse(s, out int num))\n            {\n                stk.Push(s);\n                continue;\n            }\n            //else:\n            int.TryParse(stk.Pop(), out int x);\n            int.TryParse(stk.Pop(), out int y);\n            stk.Push(operations[s](x,y).ToString());\n            Console.WriteLine($\"{x} {s} {y} = {stk.Peek()}\");\n        }\n        int.TryParse(stk.Pop(), out int res);\n        return res;\n    }\n}\n",
-    "memory": 53796,
+    "date": "2024-09-16T23:00:51.313Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {\n    public int EvalRPN(string[] tokens) {\n        //are we guaranteed input is correct?\n        return attempt1(tokens);\n    }\n\n    static readonly Dictionary<string, Func<int, int, int>> operations = new(){\n        { \"+\", (x, y) => x + y },\n        { \"*\", (x, y) => x * y },\n        { \"-\", (x, y) => x - y },\n        { \"/\", (x, y) => (int)((double)x / y) } //GOTTA REMEMBER!?!?!\n    };\n\n    public int attempt1(string[] tokens)\n    {\n        Stack<string> stk = new();\n        foreach(string s in tokens) //Currently assuming the input is always correct.\n        {\n            if(int.TryParse(s, out int num))\n            {\n                stk.Push(s);\n                continue;\n            }\n            //else:\n            int.TryParse(stk.Pop(), out int y);\n            int.TryParse(stk.Pop(), out int x);\n            stk.Push(operations[s](x,y).ToString());\n            Console.WriteLine($\"{x} {s} {y} = {stk.Peek()}\");\n        }\n        int.TryParse(stk.Pop(), out int res);\n        return res;\n    }\n}\n",
+    "memory": 122292,
     "stdout": "",
     "language": "csharp",
-    "time": "0.789",
+    "time": "0.985",
     "problemId": "evaluate-reverse-polish-notation",
     "stderr": ""
 }
