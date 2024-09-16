@@ -33,7 +33,7 @@ public class Solution {
             int.TryParse(stk.Pop(), out int y);
             int.TryParse(stk.Pop(), out int x);
             stk.Push(operations[s](x,y).ToString());
-            Console.WriteLine($"{x} {s} {y} = {stk.Peek()}");
+            // Console.WriteLine($"{x} {s} {y} = {stk.Peek()}");
         }
         int.TryParse(stk.Pop(), out int res);
         return res;
