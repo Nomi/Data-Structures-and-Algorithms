@@ -30,10 +30,15 @@ public class Solution {
                 continue;
             }
             //else:
-            int.TryParse(stk.Pop(), out int y);
-            int.TryParse(stk.Pop(), out int x);
+            int.TryParse(stk.Pop(), out int b);//later number is on top of stack!
+            int.TryParse(stk.Pop(), out int a);//earlier number will be deeper in the stack, of course!
+            //[Important] the above order is because for [a,b,'-'],
+            //the stack looks like [b,a] when we encounter '-', 
+            //where top is on the left. Therefore, to get a-b as 
+            //we want, we pop to get b first, then pop to get
+            //a first and b second.
             stk.Push(operations[s](x,y).ToString());
-            // Console.WriteLine($"{x} {s} {y} = {stk.Peek()}");
+            // Console.WriteLine($"{a} {s} {b} = {stk.Peek()}");
         }
         int.TryParse(stk.Pop(), out int res);
         return res;
