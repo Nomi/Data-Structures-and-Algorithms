@@ -16,7 +16,7 @@ public class Solution {
         { "+", (x, y) => x + y },
         { "*", (x, y) => x * y },
         { "-", (x, y) => x - y },
-        { "/", (x, y) => x / y }
+        { "/", (x, y) => (int)((double)x / y) } //GOTTA REMEMBER!?!?!
     };
 
     public int attempt1(string[] tokens)
