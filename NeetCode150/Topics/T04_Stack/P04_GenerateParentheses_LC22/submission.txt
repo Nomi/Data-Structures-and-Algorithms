@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-09-18T18:07:41.794Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {  \n    public List<string> GenerateParenthesis(int n) {\n        // int openingRemaining = n;\n        // int closingRemaining = n;\n\n        //only 1 type of bracket means we\n        //don't need a stack to check and we can\n        //just use the count of open and closed brackets\n        //to figure out if it is valid!\n        \n        List<string> res = new();\n        recur1(n, 0, 0, \"\", res);\n        return res;\n    }\n    void recur1(int n, int opn, int cls, string current, List<string> res)\n    {\n        if(cls>opn) //invalid! (it is this simple because only one type of brackets!)\n            return;\n\n        if(cls==n&&opn==n) //used all brackets.\n        {\n            res.Add(current);\n            return;\n        }\n\n        if(opn<n)\n            recur1(n, opn+1, cls, current+\"(\",res);\n        if(cls<n)\n            recur1(n, opn, cls+1, current+\")\",res);\n    }\n}\n",
+    "memory": 59108,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.724",
+    "problemId": "generate-parentheses",
+    "stderr": ""
+}
