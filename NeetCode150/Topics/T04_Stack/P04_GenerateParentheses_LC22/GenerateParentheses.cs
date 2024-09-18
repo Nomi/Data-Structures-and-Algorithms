@@ -17,14 +17,11 @@ public class Solution {
         //to figure out if it is valid!
         
         List<string> res = new();
-        recur1(n, 0, 0, "", res);
+        recur1(n, 0, 0, "", res); //USE THE SECOND IF CONDITION FROM THE PROVIDED SOLUTION ON NC.IO
         return res;
     }
     void recur1(int n, int opn, int cls, string current, List<string> res)
     {
-        if(cls>opn) //invalid! (it is this simple because only one type of brackets!)
-            return;
-
         if(cls==n&&opn==n) //used all brackets.
         {
             res.Add(current);
@@ -33,7 +30,7 @@ public class Solution {
 
         if(opn<n)
             recur1(n, opn+1, cls, current+"(",res);
-        if(cls<n)
+        if(cls<opn) //(it is this simple because only one type of brackets!)
             recur1(n, opn, cls+1, current+")",res);
     }
 }
