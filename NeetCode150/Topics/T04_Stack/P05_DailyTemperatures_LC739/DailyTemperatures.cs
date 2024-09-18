@@ -18,7 +18,7 @@ public class Solution {
         //considering that at least this 1 element is bigger than them
         //and is before them. As such, we remove all those from stack
         //in that case (which also keeps the stack monotonically increasing). 
-        //Therefore,
+        //Therefore, 
         Stack<int> idxStk = new();
         int[] res = new int[temperatures.Length];
         idxStk.Push(temperatures.Length-1);
@@ -26,7 +26,7 @@ public class Solution {
         
         for(int i=temperatures.Length-2;i>=0;i--)
         {
-            while(idxStk.Count>0&&temperatures[i]>temperatures[idxStk.Peek()])
+            while(idxStk.Count>0&&temperatures[i]>=temperatures[idxStk.Peek()])
             {
                 idxStk.Pop();
             }
