@@ -22,10 +22,8 @@ public class Solution {
         
         Stack<int> idxStk = new();
         int[] res = new int[temperatures.Length];
-        idxStk.Push(temperatures.Length-1);
-        res[temperatures.Length-1]=0;
         
-        for(int i=temperatures.Length-2;i>=0;i--)
+        for(int i=temperatures.Length-1;i>=0;i--)
         {
             //Removes all indexes NOT bigger than it.
             //NEEDS >= BECAUSE THE TEMPERATURE NEEDS TO BE
