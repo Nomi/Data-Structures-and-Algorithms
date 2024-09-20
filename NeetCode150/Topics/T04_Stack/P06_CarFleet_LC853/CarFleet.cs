@@ -30,15 +30,17 @@ public class Solution {
         {
             if(fleet.Count==0)
             {
+                // Console.WriteLine($"{target}: {p},{s}");
                 fleet.Push((p,s));
                 continue;
             }
             var (lp, ls) = fleet.Peek();
-            double lastFleetTimeToDist = (target-lp)/ls;
-            double timeToDistCurrCar = (target-p)/s;
-            if(lastFleetTimeToDist>=timeToDistCurrCar)
-                continue;
-            fleet.Push((p,s));
+            //REMEMBER: YOU GOTTA CAST THEM AS DOUBLES TO GET ACTUAL TIMES!!!
+            double lastFleetTimeToDist = (double)(target-lp)/ls;
+            double timeToDistCurrCar = (double)(target-p)/s;
+            // Console.WriteLine($"{target}: {p},{s}={timeToDistCurrCar} -- {lp},{ls}={lastFleetTimeToDist}");
+            if(lastFleetTimeToDist<timeToDistCurrCar)
+                fleet.Push((p,s));
         }
         return fleet.Count;
     }
