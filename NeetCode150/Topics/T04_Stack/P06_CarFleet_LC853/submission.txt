@@ -1,12 +1,12 @@
-1, Wrong Answer
+2, Wrong Answer
 {
-    "date": "2024-09-20T10:30:21.761Z",
+    "date": "2024-09-20T20:27:36.704Z",
     "statusDescription": "Wrong Answer",
-    "code": "public class Solution {\n    public int CarFleet(int target, int[] position, int[] speed) {\n        return attempt1(target, position, speed);\n    }\n\n    public int attempt1(int target, int[] position, int[] speed)\n    {\n        var pairs = position.Zip(speed,(p,s)=>(p,s)).ToArray(); //tuple has .first/.second????\n        pairs = pairs.OrderBy(x=>x.p).ToArray();\n        // Array.Sort(pairs, x=> x.Item1);\n\n        var fleet = new Stack<(int,int)>();\n        \n        return -1;\n    }\n}\n",
-    "memory": 54132,
+    "code": "public class Solution {\n    public int CarFleet(int target, int[] position, int[] speed) {\n        return attempt1(target, position, speed);\n    }\n\n    public int attempt1(int target, int[] position, int[] speed)\n    {\n        var pairs = position.Zip(speed,(p,s)=>(p,s)).ToArray(); //tuple has .first/.second????\n        pairs = pairs.OrderByDescending(x=>x.p).ToArray();\n        //A LESSON ON TUPLES:\n        //Could also use (int p, int s)[] pairs =...; \n        //OR\n        //(a,b)=>(p: a, s: b);\n        //READ UP ON https://www.bytehide.com/blog/tuple-csharp\n        //For loops, an also use: \n        //foreach (var (p, s) in myList) and access them separately\n        // OR EVEN var (p, s) = myList[0] to use them separately.\n        // Array.Sort(pairs, x=> x.Item1);\n        var fleet = new Stack<(int p,int s)>();\n        \n        foreach(var (p, s) in pairs)\n        {\n            if(fleet.Count==0)\n            {\n                fleet.Push((p,s));\n                continue;\n            }\n            var (lp, ls) = fleet.Peek();\n            double lastFleetTimeToDist = (target-lp)/ls;\n            double timeToDistCurrCar = (target-p)/s;\n            if(lastFleetTimeToDist>=timeToDistCurrCar)\n                continue;\n            fleet.Push((p,s));\n        }\n        return fleet.Count;\n    }\n}",
+    "memory": 53984,
     "stdout": "",
     "language": "csharp",
-    "time": "0.849",
+    "time": "0.791",
     "problemId": "car-fleet",
     "stderr": ""
 }

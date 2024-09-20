@@ -14,11 +14,32 @@ public class Solution {
     public int attempt1(int target, int[] position, int[] speed)
     {
         var pairs = position.Zip(speed,(p,s)=>(p,s)).ToArray(); //tuple has .first/.second????
-        pairs = pairs.OrderBy(x=>x.p).ToArray();
+        pairs = pairs.OrderByDescending(x=>x.p).ToArray();
+        //A LESSON ON TUPLES:
+        //Could also use (int p, int s)[] pairs =...; 
+        //OR
+        //(a,b)=>(p: a, s: b);
+        //READ UP ON https://www.bytehide.com/blog/tuple-csharp
+        //For loops, an also use: 
+        //foreach (var (p, s) in myList) and access them separately
+        // OR EVEN var (p, s) = myList[0] to use them separately.
         // Array.Sort(pairs, x=> x.Item1);
-
-        var fleet = new Stack<(int,int)>();
+        var fleet = new Stack<(int p,int s)>();
         
-        return -1;
+        foreach(var (p, s) in pairs)
+        {
+            if(fleet.Count==0)
+            {
+                fleet.Push((p,s));
+                continue;
+            }
+            var (lp, ls) = fleet.Peek();
+            double lastFleetTimeToDist = (target-lp)/ls;
+            double timeToDistCurrCar = (target-p)/s;
+            if(lastFleetTimeToDist>=timeToDistCurrCar)
+                continue;
+            fleet.Push((p,s));
+        }
+        return fleet.Count;
     }
 }
