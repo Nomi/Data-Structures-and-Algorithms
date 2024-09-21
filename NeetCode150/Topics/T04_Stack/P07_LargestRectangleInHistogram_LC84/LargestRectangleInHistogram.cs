@@ -8,6 +8,9 @@ namespace DSA.NeetCode150.Topics.T04_Stack.P07_LargestRectangleInHistogram_LC84;
 
 public class Solution {
     public int LargestRectangleArea(int[] heights) {
+        //READ THE COMMENTS ON MY attempt1!! 
+        //check neetcode video!
+        //compare my solution (in terms of style) with what neetcode wrote?
         return attempt1(heights);
     }
     
