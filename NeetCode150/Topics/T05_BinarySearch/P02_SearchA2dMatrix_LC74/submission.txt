@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-09-21T17:31:39.468Z",
+    "statusDescription": "Accepted",
+    "code": "public class Solution {\n    public bool SearchMatrix(int[][] matrix, int target) {\n        return attempt1(matrix, target);   \n    }\n\n    public bool attempt1(int[][] matrix, int target) \n    {\n        int u = 0, d = matrix.Length-1;\n        while(u<=d)\n        {\n            int mid = u+(d-u)/2;\n            int[] midArr = matrix[mid];\n            if(midArr[0]>target)\n                d = mid-1;\n            else if(midArr[midArr.Length-1]<target)\n                u = mid+1;\n            else //if it exists, it will be in here.\n            {\n                return bsHelper1(midArr, target);\n            }\n        }\n        return false; //there wasn't even a matrix whose range this element belonged to.\n    }\n    public bool bsHelper1(int[] row, int target)\n    {\n        int l=0, r=row.Length-1;\n        while(l<=r)\n        {\n            int mid = l+(r-l)/2;\n            int midNum = row[mid];\n            if(midNum<target)\n                l = mid+1;\n            else if(midNum>target)\n                r = mid-1;\n            else //==\n                return true;\n        }\n        return false; //not found.\n    }\n}\n",
+    "memory": 92156,
+    "stdout": "",
+    "language": "csharp",
+    "time": "1.022",
+    "problemId": "search-2d-matrix",
+    "stderr": ""
+}
