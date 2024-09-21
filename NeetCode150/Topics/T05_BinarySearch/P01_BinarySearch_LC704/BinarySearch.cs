@@ -20,6 +20,8 @@ public class Solution {
             var numMid = nums[mid];
             Console.WriteLine(numMid);
             //Be careful about checking the inequalities because I had them switched at first (and seems to happen often).
+            //Basically, if numMid<target, it means number is on right and we can contract left to focus on that window.
+            //And vice-versa.
             if(numMid<target)
             {
                 l=mid+1; //+1 because we already checked mid.
