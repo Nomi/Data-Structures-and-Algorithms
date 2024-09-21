@@ -9,6 +9,7 @@ namespace DSA.NeetCode150.Topics.T05_BinarySearch.P03_KokoEatingBananas_LC875;
 public class Solution {
     public int MinEatingSpeed(int[] piles, int h) {
         //WATCH EDGE CASES FROM NEETCODE VIDEO
+        //Read comments?
         return attempt1(piles, h);
     }
     const int MAX_BANANAS_IN_PILE = 1000000000;
