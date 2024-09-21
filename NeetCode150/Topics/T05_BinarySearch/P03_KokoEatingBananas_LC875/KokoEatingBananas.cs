@@ -23,7 +23,7 @@ public class Solution {
         //Could also set r = maxmum pile banana count (and it might lead to faster search for smaller piles because complexity would become O(n)+O(n*log(n)) which is asymptotically bounded by O(n*log(n)))
         
         int minIntEatingRate = MAX_BANANAS_IN_PILE;
-        while(l<=r) //COMPLEXITY: O(log(MAX_BANANAS_IN_PILE)*n) where n = length of piles which is <= number of hours
+        while(l<=r) //COMPLEXITY: O(log(MAX_BANANAS_IN_PILE)*n) where n = length of piles which is <= number of hours. It is also technically partially a constant so we get O(n), but this O(n) MIGHT be worse than using max(pile) for small piles.
         {
             int midEatingRate = l + (r-l)/2;
             var numHoursEatingBananas = 0;
