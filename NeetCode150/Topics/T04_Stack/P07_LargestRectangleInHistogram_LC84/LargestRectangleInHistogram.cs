@@ -17,12 +17,15 @@ public class Solution {
     public int attempt1(int[] heights) 
     {
         int maxArea = 0;
+
+        //solution brief description:
         //WE NEED TO KEEP HEIGHTS IN INCREASING ORDER FOR THE ALGORITHM! (because we can't extend the prior rectangle to the right anymore).
         //This means that for any element in the stack, we can extend its rectangle to the end of the stack (while keeping the height of the rectangle equal to it)
         //But, we can't extend towards the older/lower elements in the stack.
         //If it is not increasing, we pop (and calculate)
         //This is a monotonic increasing stack (because we go from low on bottom to high on top)
 
+        //[IMPORTANT] SOLUTION STEPS:
         //While we move to right and add elements to stack until we reach an element smaller than the current one (can't extend the rectangle to the right).
         //Then we pop elements from the stack (while the top element is bigger than current one) and calculate the area of the bar on top of the stack.
         //Then if the one before that is the same height, we calculate the area of that bar and the prior one (or until the last bar with same height) (won't have lesser height cuz we maintain monotonic increasing stack).
