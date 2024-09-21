@@ -13,16 +13,18 @@ public class Solution {
 
     public int attempt1(int[] nums, int target) 
     {
-        int l=0. r=nums.Length-1;
+        int l=0, r=nums.Length-1;
         while(l<=r)
         {
             var mid = l+(r-l)/2;
             var numMid = nums[mid];
-            if(numMid>target)
+            Console.WriteLine(numMid);
+            //Be careful about checking the inequalities because I had them switched at first (and seems to happen often).
+            if(numMid<target)
             {
                 l=mid+1; //+1 because we already checked mid.
             }
-            else if(numMid<target)
+            else if(numMid>target)
             {
                 r=mid-1;
             }
