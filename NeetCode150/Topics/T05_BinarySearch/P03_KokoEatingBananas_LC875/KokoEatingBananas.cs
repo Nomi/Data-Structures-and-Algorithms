@@ -8,16 +8,22 @@ namespace DSA.NeetCode150.Topics.T05_BinarySearch.P03_KokoEatingBananas_LC875;
 
 public class Solution {
     public int MinEatingSpeed(int[] piles, int h) {
+        //WATCH EDGE CASES FROM NEETCODE VIDEO
         return attempt1(piles, h);
     }
     const int MAX_BANANAS_IN_PILE = 1000000000;
     public int attempt1(int[] piles, int h)
     {
+        //EDGE CASE: MORE PILES THAN HOURS => IMPOSSIBLE TO FINISH! //Only figured it out when watching NeetCode video.
+        if(piles.Length>h)
+            return -1;
+
         int l = 1; //min you'd need to eat 1 banana per hour (UNLESS BANANAS IN ALL PILES CAN BE 0, WHICH CONSTRAINTS SPECIFY THEY CANNOT!)
         int r = MAX_BANANAS_IN_PILE; //[ASSUMING] WE EAT AT MOST MAX_BANANAS_IN_PILE
-
+        //Could also set r = maxmum pile banana count (and it might lead to faster search for smaller piles because complexity would become O(n)+O(n*log(n)) which is asymptotically bounded by O(n*log(n)))
+        
         int minIntEatingRate = MAX_BANANAS_IN_PILE;
-        while(l<=r)
+        while(l<=r) //COMPLEXITY: O(log(MAX_BANANAS_IN_PILE)*n) where n = length of piles which is <= number of hours
         {
             int midEatingRate = l + (r-l)/2;
             var numHoursEatingBananas = 0;
