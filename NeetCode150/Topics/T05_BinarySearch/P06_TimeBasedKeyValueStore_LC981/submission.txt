@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-09-22T00:25:58.152Z",
+    "statusDescription": "Accepted",
+    "code": "public class TimeMap {\n    Dictionary<string, List<(string val, int ts)>> map;\n    public TimeMap() {\n        map = new();\n    }\n    \n    public void Set(string key, string value, int timestamp) {\n        map.TryAdd(key, new());\n        map[key].Add((value, timestamp));\n    }\n    \n    public string Get(string key, int timestamp) {\n        if(!map.ContainsKey(key)) //EDGE CASE I ONLY FIGURED OUT BECAUSE OF CODE PROVIDED ON NC.io\n            return \"\";\n        var list = map[key];\n        int l = 0, r = list.Count-1;\n        string res = \"\";\n        while(l<=r)\n        {\n            int m = (l+r)/2;\n            Console.WriteLine(list[m]);\n            var (mVal, mTs) = list[m];\n            if(mTs>timestamp)\n                r = m-1;\n            else if (mTs<=timestamp)\n            {\n                res = mVal; \n                l = m+1;\n                //[IMPORTANT NOTE]\n                //we don't need Math.Max because any further \n                //ones matching this condition will be the \n                //most recent because we increase l.\n            }\n        }\n        return res;\n    }\n}\n",
+    "memory": 51948,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.709",
+    "problemId": "time-based-key-value-store",
+    "stderr": ""
+}
