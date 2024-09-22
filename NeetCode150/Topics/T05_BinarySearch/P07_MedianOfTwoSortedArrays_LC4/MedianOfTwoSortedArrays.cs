@@ -22,11 +22,17 @@ public class Solution {
     {
         var A = nums1;
         var B = nums2;
+        
+        if (B.Length < A.Length) {
+            int[] temp = A;
+            A = B;
+            B = temp;
+        }
 
         int totalCount = A.Length + B.Length;
-        int sizeOfHalves = totalCount/2; //Integer division => decimal is truncated.
+        int sizeOfHalves = (totalCount+1)/2; //Integer division => decimal is truncated.
         
-        //Time complexity: O(log(min(n,m))) //min because we are running binary search on the smaller of the two?
+        //Time complexity: O(log(min(n,m))) //min because we are running binary search on the smaller of the two.
         //We can binary search through B as we can calculate the remaining elements needed for each side after picking both the left and right subarrays for B.
         int l=0, r=A.Length-1;
         while(true) //There's guaranteed to be a median so we can just return from there when we find it!
@@ -53,11 +59,10 @@ public class Solution {
                 //even:
                 return (Math.Max(Aleft,Bleft) + Math.Min(Aright, Bright))/2.0; //Gotta divide by 2.0 (instead of simply 2) to get decimal division
             }
-            else if(Aleft>Bleft) //Aleft is too big, meaning we have many elements from B on the left side <=> not enough elements in A on the left side!
+            else if(Aleft>Bright) //the right most element of left window of A is smaller than the leftmost element of right window of B (keep in mind A and B are sorted)! //Aleft is too big, meaning we have too many elements from B on the left side <=> not enough elements in A on the left side!
                 r = mA - 1;
-            else //Bleft <= Aright
+            else //Bleft > Aright <=> Aright < Bleft //Aleft is too small, meaning we have at least 1 element smaller than the the last element of B in our A right window! (keep in mind A and B are sorted)
                 l = mA + 1;
-
         }
     }
 
