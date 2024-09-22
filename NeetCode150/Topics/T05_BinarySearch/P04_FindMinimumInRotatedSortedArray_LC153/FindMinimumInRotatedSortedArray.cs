@@ -74,7 +74,7 @@ public class Solution {
         //else, when mid ptr is in left sorted portion, we search the right. (to find minimum)
         int l=0,r=nums.Length-1;
         int min = int.MaxValue;
-        while(l<r)
+        while(l=<r)
         {
             //It also handles the case where original array was rotated by n, giving back the original sorted array.
             if(nums[l]<nums[r]) //We are in a sorted subarray. 
