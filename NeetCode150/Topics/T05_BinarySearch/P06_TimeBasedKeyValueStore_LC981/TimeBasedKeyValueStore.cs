@@ -46,6 +46,7 @@ public class TimeMap {
                 //or there's one or more after it <=5. We don't consider anything to its left including itself (by setting left to mid+1) because we already know there's one <=5 that's newer than those (as for 2 itself, we already set it as the newest and it won't change unless we find a newer timestamp <=5)
                 //Then m=3, which is 4, and just like above, we set timestamp to this because it is newer than all those considered before it (by definition).
                 //Then m = 4, which is 6, but 6 is > 5, so we don't consider and move r to mid-1.
+                //note that everything to the left of l has been checked and everything to the right of r has been checked.
             }
         }
         return res;
