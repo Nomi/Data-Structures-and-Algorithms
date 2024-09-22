@@ -13,10 +13,10 @@ public class Solution {
         //IT MUST BE LOOKING FOR BINARY SEARCH!
 
         //Greg Hogg's solution (better than NeetCode's)
-        return attempt1(nums);  //READ THE COMMENTS!
+        // return attempt1(nums);  //READ THE COMMENTS!
 
         //Check NeetCode's solution as well as that might be useful for other problems as well (e.g. Search in Rotated Sorted Array)
-        
+        return neetCodeBasedSoln(nums);
     }
     public int attempt1(int[] nums)
     {
@@ -53,40 +53,45 @@ public class Solution {
         }
         //AT l==r, we have our solution (we can return either nums[l] or nums[r])!
         return nums[l];
-
-
-        //OLD TRY:
-        //Clearly, we can identify max when the next element is smaller than current.
-        //Clearly, the min element will be right after the max one.
-        //(Could also do it the other way around, I guess.)
-        //This is to be done via using the modulo (%) operator to avoid going out of bounds of array.
-
-        // int l=0, r=(2*nums.Length)-1; 
-        // //^^ SHOUTOUT TO NeetCode'S SHORTS!
-        // // I JUST RANDOMLY REMEMBERED SEEING THIS IN ONE OF HIS VIDEOS AFTER BANGING MY HEAD AGAINST THE WALL FOR 15 MINUTES NOW!
-        // // WE USE THIS TO MIRROR THE ARRAY (alongside the use of a modulo)
-        // // THEN WE CAN PRETEND THAT EVERYTHING IS SORTED BECAUSE DOING THIS WILL GIVE US THE CORRECT ARRAY IN THE MIDDLE OF THE DUPLICATED ARRAY.
-        // //e.g. : [4,1,2,3]+[4,1,2,3] has the correct subarray inside it!
-        // while(l<=r)
-        // {
-        //     int mid = l + (r-l);
-        //     int midPlus1 = (mid+1)%nums.Length;
-        //     if(nums[mid]>nums[midPlus1])
-        //         return nums[midPlus1];
-        //     else(nums[mid]==nums[midPlus1])
-        //     {
-        //         nu
-        //     }
-        // }
     }
 
 
-    // public int neetCodeBasedSoln(int[] nums)
-    // {
-    //     int l=0,r=(2*nums.Length)-1;
-    //     while(l<r)
-    //     {
+    public int neetCodeBasedSoln(int[] nums)
+    {
+        //After any rotation, the array can have
+        //Left sorted portion and Right sorted portion
+        //Where left sorted portion is the elements that 
+        //were orignally towards the end but now 
+        //rotation brought them to the left side.
+        //Clearly, our minimum will be somewhere in the right sorted portion.
+        //Next, as long as our nums[mid] has value >= than nums[l],
+        //it means that the minimum must be towards the right (because mid is in right sorted array),
+        //BUT, if nums[mid]<nums[l] (mid is in right sorted array),
+        // it means that either this is minimum, or minimum is to its left.
+        // so we do keep it there and then move right to mid (or mid-1?);
 
-    //     }
-    // }
+        //Basically, if mid ptr is in right sorted portion, we search to the left. (to find if there's an element smaller than the one at current mid)
+        //else, when mid ptr is in left sorted portion, we search the right. (to find minimum)
+        int l=0,r=nums.Length-1;
+        int min = int.MaxValue;
+        while(l<r)
+        {
+            //It also handles the case where original array was rotated by n, giving back the original sorted array.
+            if(nums[l]<nums[r]) //We are in a sorted subarray. 
+                return (int)Math.Min(nums[l],min); //We use min to make sure we haven't seen a smaller value before this (e.g. when subarray between l and r is just the whole left sorted array)
+            int m = (l+r)/2;
+            if(nums[m]>=nums[l]) //We are in left sorted array.
+            {
+                l=m+1; //search right of m to go to the right sorted array.
+            }
+            else //nums[m]<nums[l] => we are in right sorted array.
+            {
+                min = nums[m]; //(int)Math.Min(nums[m], min);
+                r=m-1;//we search to the left of m to go see if there are any elements smaller than this there.
+                //Not that there will never be an element smaller than it to the right because it is a sorted sub array (specifically the right sorted array)
+            }
+            //we gotta handle the edgecase where m==l (which is possible) //Only got this because of NeetCode
+        }
+        return min;
+    }
 }
