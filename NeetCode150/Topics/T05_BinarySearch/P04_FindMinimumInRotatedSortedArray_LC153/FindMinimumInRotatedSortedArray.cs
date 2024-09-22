@@ -13,10 +13,10 @@ public class Solution {
         //IT MUST BE LOOKING FOR BINARY SEARCH!
 
         //Greg Hogg's solution (better than NeetCode's)
-        // return attempt1(nums);  //READ THE COMMENTS!
+        return attempt1(nums);  //READ THE COMMENTS!
 
         //Check NeetCode's solution as well as that might be useful for other problems as well (e.g. Search in Rotated Sorted Array)
-        return neetCodeBasedSoln(nums);
+        //return neetCodeBasedSoln(nums);
     }
     public int attempt1(int[] nums)
     {
