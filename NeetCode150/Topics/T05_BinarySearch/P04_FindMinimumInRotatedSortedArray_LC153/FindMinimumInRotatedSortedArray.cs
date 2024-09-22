@@ -77,7 +77,7 @@ public class Solution {
         while(l<=r)
         {
             //It also handles the case where original array was rotated by n, giving back the original sorted array.
-            if(nums[l]<nums[r]) //We are in a sorted subarray. 
+            if(nums[l]<=nums[r]) //We are in a sorted subarray. //<= because what if we have a 1 element array as our original array? or if our binary search leads us to just a 1 element sub array?
                 return (int)Math.Min(nums[l],min); //We use min to make sure we haven't seen a smaller value before this (e.g. when subarray between l and r is just the whole left sorted array)
             int m = (l+r)/2;
             if(nums[m]>=nums[l]) //We are in left sorted array.
