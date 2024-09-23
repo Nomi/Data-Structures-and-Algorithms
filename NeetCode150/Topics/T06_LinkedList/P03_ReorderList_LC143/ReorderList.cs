@@ -44,7 +44,7 @@ public class Solution {
             node=node.next;
         }
 
-        //EDGE CASE:
+        //[IMPORTANT] EDGE CASE:
         //I think I thought of this edge case before but decided not to care until I had something?
         if(len<=2)
             return;
