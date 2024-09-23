@@ -43,6 +43,11 @@ public class Solution {
             len++;
             node=node.next;
         }
+
+        //EDGE CASE:
+        //I think I thought of this edge case before but decided not to care until I had something?
+        if(len<=2)
+            return;
         
         
         //Step 2: Go halfway (include the middle element for odd length lists)
