@@ -8,6 +8,10 @@ namespace DSA.NeetCode150.Topics.T05_BinarySearch.P07_MedianOfTwoSortedArrays_LC
 
 public class Solution {
     public double FindMedianSortedArrays(int[] nums1, int[] nums2) {
+        //EXTREMELY IMPORANT: Read comments from attempt1,
+        //at least for the edgecases.
+        //Watching NC's video only comes AFTER that :3.
+        
         //My intuition (bruteforce):
         //the bruteforce solution would be O(m+n) with two pointers, one each on nums1 and nums2 which we can use to traverse these as if they were a single sorted array (by checking which pointer is currently at a smaller value and the using that for that iteration)
         //^^This bruteforce might be enough in an interview when followed up with just an explanation of how you would do it in O(log(m+n)) time instead.
@@ -25,44 +29,6 @@ public class Solution {
 
     public double attempt1(int[] nums1, int[] nums2) 
     {
-        // int[] A = nums1;
-        // int[] B = nums2;
-        // int total = A.Length + B.Length;
-        // int half = (total + 1) / 2;
-
-        // if (B.Length < A.Length) {
-        //     int[] temp = A;
-        //     A = B;
-        //     B = temp;
-        // }
-
-        // int l = 0;
-        // int r = A.Length;
-        // while (l <= r) {
-        //     int i = (l + r) / 2;
-        //     int j = half - i;
-
-        //     int Aleft = i > 0 ? A[i - 1] : int.MinValue;
-        //     int Aright = i < A.Length ? A[i] : int.MaxValue;
-        //     int Bleft = j > 0 ? B[j - 1] : int.MinValue;
-        //     int Bright = j < B.Length ? B[j] : int.MaxValue;
-
-        //     if (Aleft <= Bright && Bleft <= Aright) {
-        //         if (total % 2 != 0) {
-        //             return Math.Max(Aleft, Bleft);
-        //         }
-        //         return (Math.Max(Aleft, Bleft) + Math.Min(Aright, Bright)) / 2.0;
-        //     }
-        //     else if (Aleft > Bright) {
-        //         r = i - 1;
-        //     }
-        //     else {
-        //         l = i + 1;
-        //     }
-        // }
-        // return -1;
-
-
         var A = nums1;
         var B = nums2;
         
@@ -80,6 +46,15 @@ public class Solution {
         int l=0, r=A.Length-1;
         while(true) //We can use While True because There's guaranteed to be a median so we can just return from there when we find it!
         {
+
+            //** EXTREMELY IMPORTANT!  [!! EDGE CASES !!] **
+            //We want Floor for when the A (the smaller array) is 
+            //of length 1 or 0, because that makes mA = -1 when
+            //((l+r)/2 == -1/2) (which happens in those cases).
+            //NeetCode's YouTube/Python solution uses "//",
+            //which, ONLY for positive numbers, is equivalent to int division for postiive numbers
+            //For both negative and positive, it is actually equivalent
+            //to Math.Floor().
             int mA = (int)Math.Floor((l+r)/2.0); //int division => truncate
 
             //IMPORTANT: sizeOfHalves - (mA+1) 
