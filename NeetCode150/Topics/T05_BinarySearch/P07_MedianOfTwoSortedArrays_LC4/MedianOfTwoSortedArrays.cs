@@ -15,11 +15,54 @@ public class Solution {
         
         // IMPORTANT NOTES: (try reading the ones with ^ suffix above first!)
         // Just skim through the NeetCode video for a great explanation for the solution!
+        //CHECK THESE FOR STUDYING:
+        // Editorial part we need: https://leetcode.com/problems/median-of-two-sorted-arrays/editorial/#approach-3-a-better-binary-search
+        // C# solution by someone: https://leetcode.com/problems/median-of-two-sorted-arrays/solutions/5783216/median-of-two-sorted-arrays-binary-search-approach-in-c-beginner-friendly/
         return attempt1(nums1, nums2);
+
+        
     }
 
     public double attempt1(int[] nums1, int[] nums2) 
     {
+        // int[] A = nums1;
+        // int[] B = nums2;
+        // int total = A.Length + B.Length;
+        // int half = (total + 1) / 2;
+
+        // if (B.Length < A.Length) {
+        //     int[] temp = A;
+        //     A = B;
+        //     B = temp;
+        // }
+
+        // int l = 0;
+        // int r = A.Length;
+        // while (l <= r) {
+        //     int i = (l + r) / 2;
+        //     int j = half - i;
+
+        //     int Aleft = i > 0 ? A[i - 1] : int.MinValue;
+        //     int Aright = i < A.Length ? A[i] : int.MaxValue;
+        //     int Bleft = j > 0 ? B[j - 1] : int.MinValue;
+        //     int Bright = j < B.Length ? B[j] : int.MaxValue;
+
+        //     if (Aleft <= Bright && Bleft <= Aright) {
+        //         if (total % 2 != 0) {
+        //             return Math.Max(Aleft, Bleft);
+        //         }
+        //         return (Math.Max(Aleft, Bleft) + Math.Min(Aright, Bright)) / 2.0;
+        //     }
+        //     else if (Aleft > Bright) {
+        //         r = i - 1;
+        //     }
+        //     else {
+        //         l = i + 1;
+        //     }
+        // }
+        // return -1;
+
+
         var A = nums1;
         var B = nums2;
         
@@ -30,14 +73,14 @@ public class Solution {
         }
 
         int totalCount = A.Length + B.Length;
-        int sizeOfHalves = (totalCount+1)/2; //Integer division => decimal is truncated.
+        int sizeOfHalves = totalCount/2; //Integer division => decimal is truncated.
         
         //Time complexity: O(log(min(n,m))) //min because we are running binary search on the smaller of the two.
         //We can binary search through B as we can calculate the remaining elements needed for each side after picking both the left and right subarrays for B.
         int l=0, r=A.Length-1;
-        while(true) //There's guaranteed to be a median so we can just return from there when we find it!
+        while(true) //We can use While True because There's guaranteed to be a median so we can just return from there when we find it!
         {
-            int mA = (l+r)/2; //int division => truncate
+            int mA = (int)Math.Floor((l+r)/2.0); //int division => truncate
 
             //IMPORTANT: sizeOfHalves - (mA+1) 
             //is the remaining length (of the left subarray
@@ -46,15 +89,15 @@ public class Solution {
             
 
             //[VERY IMPORTANT]: HANDLING EDGE CASES
-            var Aleft = mA>=0 ? A[mA] : int.MinValue;
-            var Aright = mA+1<A.Length ? A[mA+1] : int.MaxValue;
-            var Bleft = idxB>=0 ? B[idxB] : int.MinValue;
-            var Bright = idxB+1<B.Length ? B[idxB+1] : int.MaxValue;
+            var Aleft = mA>=0 ? A[mA] : double.MinValue; //right most element of left window of A
+            var Aright = mA+1<A.Length ? A[mA+1] : double.MaxValue; //left most element of right window of A
+            var Bleft = idxB>=0 ? B[idxB] : double.MinValue; //right most element of left window of B
+            var Bright = idxB+1<B.Length ? B[idxB+1] : double.MaxValue; //left most element of right window of B
 
             //Partition is correct:
             if(Aleft<=Bright && Bleft <= Aright)
             {
-                if(totalCount%2==1) //odd:
+                if(totalCount%2!=0) //odd:  //the one on right will be the one actual median because neither window should contain it for odd length, and it is ensured here by calculating half in int/truncating division.
                     return Math.Min(Aright, Bright); //There will never be a case where both will be MaxValue obviously.
                 //even:
                 return (Math.Max(Aleft,Bleft) + Math.Min(Aright, Bright))/2.0; //Gotta divide by 2.0 (instead of simply 2) to get decimal division
@@ -64,6 +107,7 @@ public class Solution {
             else //Bleft > Aright <=> Aright < Bleft //Aleft is too small, meaning we have at least 1 element smaller than the the last element of B in our A right window! (keep in mind A and B are sorted)
                 l = mA + 1;
         }
+        return -1;
     }
 
 }
