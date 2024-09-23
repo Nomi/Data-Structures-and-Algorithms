@@ -22,8 +22,10 @@ namespace DSA.NeetCode150.Topics.T06_LinkedList.P03_ReorderList_LC143;
 
 public class Solution {
     public void ReorderList(ListNode head) {
-        //READ MY COMMENTS!!! 
+        //READ MY COMMENTS IN attempt1!!! 
         //Easy but a bit tricky. Just need to know what to do (big picture) and some minor implementation tips/tricks.
+        //Also, only figured out the edge cases after facing the error.
+        //But I do think I thought of them when I was starting but back then I had bigger fish to fry.
         attempt1(head);
     }
 
