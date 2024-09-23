@@ -11,6 +11,7 @@ public class Solution {
         //EXTREMELY IMPORANT: Read comments from attempt1,
         //at least for the edgecases.
         //Watching NC's video only comes AFTER that :3.
+        //Though the LC solutions might be better!
         
         //My intuition (bruteforce):
         //the bruteforce solution would be O(m+n) with two pointers, one each on nums1 and nums2 which we can use to traverse these as if they were a single sorted array (by checking which pointer is currently at a smaller value and the using that for that iteration)
