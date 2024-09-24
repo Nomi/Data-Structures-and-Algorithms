@@ -35,7 +35,7 @@ public class Solution {
 
     public void attempt1Efficient(ListNode head)
     {
-        if(head.next==null)
+        if(head.next==null) //Could modify the following solution to avoid this condition!
             return;
         var slow = head;
         var fast = head.next; //because we want to move slow right after the center element in odd list.
