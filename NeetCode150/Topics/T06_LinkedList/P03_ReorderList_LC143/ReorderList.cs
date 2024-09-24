@@ -26,10 +26,76 @@ public class Solution {
         //Easy but a bit tricky. Just need to know what to do (big picture) and some minor implementation tips/tricks.
         //Also, only figured out the edge cases after facing the error.
         //But I do think I thought of them when I was starting but back then I had bigger fish to fry.
-        attempt1(head);
+        // attempt1NotThatEfficient(head);
+
+        ///ACTUALLY: USE THE FOLLOWING SOLUTION!!
+        //Also take a look at my prior "attempt1NotThatEfficient"'s comments! 
+        attempt1Efficient(head);
     }
 
-    public void attempt1(ListNode head)
+    public void attempt1Efficient(ListNode head)
+    {
+        var slow = head;
+        var fast = head.next; //because we want to move slow right after the center element in odd list.
+        while(fast!=null && fast.next!=null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        //Here slow, will be at mid point because fast is 2x faster than slow.
+        //E.g. for [1,2,3,4,5,6,7{,8}] if starting pos xs = 1, and starting pos xf = 2:
+        //then, each of the iterations will be:
+        //  (slow, fast)
+        //  (1, 2) //starting (they have to start from double position (2=2*1) right from the start to keep it even.)
+        //  (2, 4) 
+        //  (3, 6) //for odd length, slow is at the last element of the left (unchanged sublist).
+        //  {(4, 8)} //for even length, slow is at the last element of the left (unchanged sublist).
+        //Therefore, we can see that for both even and odd length, slow is at the last element of the left (unchanged sublist).
+        //So, we go next to get the point after which we pick the elements.
+
+        var rightHead = slow.next;
+        slow.next = null; //break left and right sublists.
+
+        //Reverse:
+        var prev = rightHead;
+        var cur = prev.next;
+        prev.next = null;
+        while(cur!=null)
+        {
+            var tmp = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = tmp;
+        }
+        rightHead = prev;
+
+        //Merge:
+        var node = head;
+        while(rightHead!=null) //we only check right because it might end before the left (because we can have the extra middle element for odd lengths there) and we can just keep the rest of the linked list as is.
+        {
+            var nodeOldNext = node.next;
+            node.next = rightHead;
+            rightHead = rightHead.next;
+            node.next.next = nodeOldNext;
+            node = nodeOldNext; //because we the current next is just the one we inserted.
+        }
+    }   
+
+    public ListNode ReverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+        while (current != null) {
+            var next = current.next;  // Store next node
+            current.next = prev;  // Reverse current node's pointer
+            prev = current;       // Move prev to current node
+            current = next;       // Move to next node
+        }
+
+        return prev;  // New head of the reversed list
+    }
+
+
+    public void attempt1NotThatEfficient(ListNode head)
     {
         //We can reverse the linkedlist from halfway through.
         //And for odd length, the element in the middle
