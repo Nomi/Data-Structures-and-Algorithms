@@ -22,6 +22,7 @@ namespace DSA.NeetCode150.Topics.T06_LinkedList.P04_RemoveNthNodeFromEndOfList_L
 
 public class Solution {
     public ListNode RemoveNthFromEnd(ListNode head, int n) {
+        //READ MY COMMENTS FOR attempt1!!
         return attempt1(head, n);
     }
 
