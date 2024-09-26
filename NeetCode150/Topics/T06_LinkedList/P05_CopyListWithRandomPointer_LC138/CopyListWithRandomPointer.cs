@@ -23,9 +23,37 @@ public class Node {
 
 public class Solution {
     public Node copyRandomList(Node head) {
-        return attempt1(head);
+
+        //USE NEETCODE IO SOLUTION AS REFERENCE? 
+        //Because, even though my solution (attempt1) and that are both using the same logic,
+        //that code is a little cleaner and less verbose (due to the structure).
+        
+        // return attempt1(head);
+        return NeetCodeIoSoln(head);
     }
- 
+    
+     public Node NeetCodeIoSoln(Node head) 
+     {
+        Dictionary<Node, Node> oldToCopy = new Dictionary<Node, Node>();
+
+        Node cur = head;
+        while (cur != null) {
+            Node copy = new Node(cur.val);
+            oldToCopy[cur] = copy;
+            cur = cur.next;
+        }
+
+        cur = head;
+        while (cur != null) {
+            Node copy = oldToCopy[cur];
+            copy.next = cur.next != null ? oldToCopy[cur.next] : null;
+            copy.random = cur.random != null ? oldToCopy[cur.random] : null;
+            cur = cur.next;
+        }
+
+        return head != null ? oldToCopy[head] : null;
+    }
+
     public Node attempt1(Node head)
     {
         Dictionary<Node, Node> orig2new = new();
@@ -33,7 +61,6 @@ public class Solution {
         Node newNode = dummy;
         while(head!=null)
         {
-            Console.WriteLine(head.val);
             if(orig2new.ContainsKey(head))
             {
                 newNode.next=orig2new[head];
@@ -43,7 +70,6 @@ public class Solution {
                 newNode.next = new(head.val);
                 orig2new.Add(head, newNode.next);
             }
-            Console.WriteLine(head.val);
 
             newNode = newNode.next;
             
