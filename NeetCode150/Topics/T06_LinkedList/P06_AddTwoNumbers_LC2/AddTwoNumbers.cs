@@ -23,7 +23,7 @@ namespace DSA.NeetCode150.Topics.T06_LinkedList.P06_AddTwoNumbers_LC2;
 public class Solution {
     public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
         return attempt1(l1, l2);
-        //Oher, more conventional ways to calculate the Carry and the value.
+        //Oher, more conventional ways to calculate the Carry and the value:
         //Would be helpful if we need multiple digits in same node somehow??? (which doesn't really make sense) 
         // valCurrNode = currSum%10;
         // carry = currSum/10 (integer division means we get truncate everytime, so 18/10 = 1 and 9/10 = 0)
