@@ -16,7 +16,7 @@ public class LRUCache {
     }
     
     public int Get(int key) {
-        attempt1.Get(key);
+        return attempt1.Get(key);
     }
     
     public void Put(int key, int value) {
