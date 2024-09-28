@@ -50,7 +50,8 @@ public class Solution {
 
         //"slow"/"slow2", not "nums[slow]"/"nums[slow2]",
         //because slow is the linked list node that is the beginning of the cycle! (the one that's repeating as explained above).
-        //This happens because b 
+        //as when nums[slow] == nums[slow2] are the same, it means the we reached the node with more than 1 arrow.
+        //as such, since slow and slow2 store these values from prior iteration, when we get here slow2 == slow == previousnumsatslow/slow2.
         return slow;
     }
 }
