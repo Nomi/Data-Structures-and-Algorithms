@@ -68,10 +68,8 @@ public class LRUCache {
     
     public void Put(int key, int value) 
     {
-        Console.WriteLine($"outside 1 : {key}, {value}");
         if(cache.TryGetValue(key, out var existingNode))
         {
-            Console.WriteLine($"if 1 : {key}, {existingNode.val}->{value}");
             RemoveNode(existingNode);
             InsertNodeAtEnd(existingNode);
             existingNode.val = value;
