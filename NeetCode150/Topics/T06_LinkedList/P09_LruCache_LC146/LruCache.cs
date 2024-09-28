@@ -9,6 +9,24 @@ using DSA.NeetCode150.Topics.T06_LinkedList.Common;
 namespace DSA.NeetCode150.Topics.T06_LinkedList.P09_LruCache_LC146;
 
 public class LRUCache {
+    //Read my solution Attempt1 as it is uses some nifty and useful tricks!!!!
+    Attempt1 attempt1;
+    public LRUCache(int capacity) {
+        attempt1 = new(capacity);
+    }
+    
+    public int Get(int key) {
+        attempt1.Get(key);
+    }
+    
+    public void Put(int key, int value) {
+        attempt1.Put(key, value);
+    }
+}
+
+
+public class Attempt1
+{
     public class Node 
     {
         public Node prev;
@@ -47,7 +65,7 @@ public class LRUCache {
     }
 
 
-    public LRUCache(int capacity) {
+    public Attempt1(int capacity) {
         cap = capacity;
         cache = new(cap);
         left = new(-1,-1);
