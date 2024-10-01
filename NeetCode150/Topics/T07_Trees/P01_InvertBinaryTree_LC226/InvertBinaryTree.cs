@@ -25,11 +25,10 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P01_InvertBinaryTree_LC226;
 public class Solution {
     public TreeNode InvertTree(TreeNode root) {
         //REMEMBER TO CHECK FOR NULL (leafs)!!!
-        return attempt1(root);
+        return iterative1(root);
     }
 
-
-    public TreeNode attempt1(TreeNode root)
+    public TreeNode iterative1(TreeNode root)
     {
         Queue<TreeNode> q = new();
         q.Enqueue(root);
@@ -47,4 +46,5 @@ public class Solution {
         }
         return root;
     }
+    
 }
