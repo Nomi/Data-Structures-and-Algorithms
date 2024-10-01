@@ -25,7 +25,8 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P01_InvertBinaryTree_LC226;
 public class Solution {
     public TreeNode InvertTree(TreeNode root) {
         //REMEMBER TO CHECK FOR NULL (leafs)!!!
-        return iterative1(root);
+        // return iterative1(root);
+        return recursive1(root);
     }
 
     public TreeNode iterative1(TreeNode root)
@@ -46,5 +47,17 @@ public class Solution {
         }
         return root;
     }
-    
+
+    public TreeNode recursive1(TreeNode root)
+    {
+        if(root==null)
+            return null;
+
+        var tmp = root.left;
+        
+        root.left = recursive1(root.right);
+        root.right = recursive1(tmp);
+
+        return root;
+    }
 }
