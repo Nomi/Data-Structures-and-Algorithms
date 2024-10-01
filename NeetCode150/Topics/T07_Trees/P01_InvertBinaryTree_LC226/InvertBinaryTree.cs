@@ -25,6 +25,7 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P01_InvertBinaryTree_LC226;
 public class Solution {
     public TreeNode InvertTree(TreeNode root) {
         //REMEMBER TO CHECK FOR NULL (leafs)!!!
+        //RECURSIVE SOLUTION BETTER??? (No reason except that the Neetcode solution uses that.)
         // return iterative1(root);
         return recursive1(root);
     }
@@ -54,7 +55,7 @@ public class Solution {
             return null;
 
         var tmp = root.left;
-        
+
         root.left = recursive1(root.right);
         root.right = recursive1(tmp);
 
