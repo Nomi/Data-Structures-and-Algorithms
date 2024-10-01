@@ -25,7 +25,8 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P02_MaximumDepthOfBinaryTree_LC104;
 public class Solution {
     public int MaxDepth(TreeNode root) {
         // return recDfs1(root); //Best solution?
-        return itrBfs1(root);
+        // return itrBfs1(root);
+        return itrDfs1(root);
     }
 
     public int recDfs1(TreeNode root) //Best solution?
@@ -55,6 +56,26 @@ public class Solution {
                 if(cur.right!=null)
                     q.Enqueue(cur.right);
             }
+        }
+        return maxDepth;
+    }
+
+    public int itrDfs1(TreeNode root) //Used a little help from neetcode io solution!!
+    {
+        Stack<(TreeNode node, int depth)> stk = new();
+        int maxDepth = 0;
+        stk.Push((root, 1));
+        while(stk.Count>0)
+        {
+            var cur = stk.Pop();
+            var node = cur.node;
+            if(node==null)
+                continue;
+            var depth = cur.depth;
+            if(maxDepth<depth)
+                maxDepth = depth;
+            stk.Push((node.right, 1+depth));
+            stk.Push((node.left, 1+depth));
         }
         return maxDepth;
     }
