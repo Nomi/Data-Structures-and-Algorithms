@@ -26,7 +26,7 @@ public class Solution {
     public int MaxDepth(TreeNode root) {
         return recDfs1(root); //Best solution?
         // return itrBfs1(root);
-        // return itrDfs1(root);
+        // return itrDfs1(root); //Look at how the stack is used (and depth is stored in too, as a tuple!)
     }
 
     public int recDfs1(TreeNode root) //Best solution?
