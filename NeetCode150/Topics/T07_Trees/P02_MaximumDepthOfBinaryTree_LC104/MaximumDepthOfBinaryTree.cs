@@ -24,9 +24,9 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P02_MaximumDepthOfBinaryTree_LC104;
 
 public class Solution {
     public int MaxDepth(TreeNode root) {
-        // return recDfs1(root); //Best solution?
+        return recDfs1(root); //Best solution?
         // return itrBfs1(root);
-        return itrDfs1(root);
+        // return itrDfs1(root);
     }
 
     public int recDfs1(TreeNode root) //Best solution?
