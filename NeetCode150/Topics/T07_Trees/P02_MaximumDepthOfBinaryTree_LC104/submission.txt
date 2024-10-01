@@ -1,12 +1,12 @@
-1, Accepted
+2, Accepted
 {
-    "date": "2024-10-01T20:35:29.539Z",
+    "date": "2024-10-01T22:51:47.670Z",
     "statusDescription": "Accepted",
-    "code": "/**\n * Definition for a binary tree node.\n * public class TreeNode {\n *     public int val;\n *     public TreeNode left;\n *     public TreeNode right;\n *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {\n *         this.val = val;\n *         this.left = left;\n *         this.right = right;\n *     }\n * }\n */\n\npublic class Solution {\n    public int MaxDepth(TreeNode root) {\n        return rec1(root);\n    }\n\n    public int rec1(TreeNode root)\n    {\n        if(root == null)\n            return 0;\n        return (int) Math.Max(1+rec1(root.left), 1+rec1(root.right));\n    }\n}\n",
-    "memory": 51056,
+    "code": "/**\n * Definition for a binary tree node.\n * public class TreeNode {\n *     public int val;\n *     public TreeNode left;\n *     public TreeNode right;\n *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {\n *         this.val = val;\n *         this.left = left;\n *         this.right = right;\n *     }\n * }\n */\n\npublic class Solution {\n    public int MaxDepth(TreeNode root) {\n        // return recDfs1(root); //Best solution?\n        return itrBfs1(root);\n    }\n\n    public int recDfs1(TreeNode root) //Best solution?\n    {\n        if(root == null)\n            return 0;\n        return (int) Math.Max(1+recDfs1(root.left), 1+recDfs1(root.right));\n    }\n\n    public int itrBfs1(TreeNode root) \n    {\n        if(root==null)\n            return 0;\n        Queue<TreeNode> q = new();\n        q.Enqueue(root);\n        int maxDepth = 0;\n\n        while(q.Count>0)\n        {\n            maxDepth++;\n            var countAtThisDepth = q.Count;\n            for(int i=0;i<countAtThisDepth;i++)\n            {\n                var cur = q.Dequeue();\n                if(cur.left!=null)\n                    q.Enqueue(cur.left);\n                if(cur.right!=null)\n                    q.Enqueue(cur.right);\n            }\n        }\n        return maxDepth;\n    }\n}\n",
+    "memory": 53188,
     "stdout": "",
     "language": "csharp",
-    "time": "0.734",
+    "time": "0.851",
     "problemId": "depth-of-binary-tree",
     "stderr": ""
 }
