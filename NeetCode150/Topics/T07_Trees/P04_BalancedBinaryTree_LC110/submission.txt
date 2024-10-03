@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "date": "2024-10-03T20:03:54.772Z",
+    "statusDescription": "Accepted",
+    "code": "/**\n * Definition for a binary tree node.\n * public class TreeNode {\n *     public int val;\n *     public TreeNode left;\n *     public TreeNode right;\n *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {\n *         this.val = val;\n *         this.left = left;\n *         this.right = right;\n *     }\n * }\n */\n\npublic class Solution {\n    public bool IsBalanced(TreeNode root) {\n        return rec1(root).bal;\n    }\n\n    public (int h, bool bal) rec1(TreeNode root)\n    {\n        //Clearly suited to a Post-Order DFS!\n        if(root==null)\n            return (0, true);\n        var (lh, lbal) = rec1(root.left);\n        if(!lbal) return (-1, false);\n        var (rh, rbal) = rec1(root.right);\n        if(!rbal) return (-1, false);\n\n        if(1<(int)Math.Abs(lh-rh))\n            return (-1, false);\n\n        return (1 + (int)Math.Max(lh, rh), true);\n    }\n}\n",
+    "memory": 54088,
+    "stdout": "",
+    "language": "csharp",
+    "time": "0.802",
+    "problemId": "balanced-binary-tree",
+    "stderr": ""
+}
