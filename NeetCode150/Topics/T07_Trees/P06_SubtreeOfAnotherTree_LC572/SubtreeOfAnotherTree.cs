@@ -25,6 +25,7 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P06_SubtreeOfAnotherTree_LC572;
 public class Solution {    
     public bool IsSubtree(TreeNode root, TreeNode subRoot) {
         //USE THE NEETCODE SOLN AS REFERENCE!!! (compare to mine?)
+        //Time Complexity is of course O(mainTreeLen * subTreeLen)
 
         // return Attempt1_MyOwn.rec1(root, subRoot);
         return NeetCodeIoBasedSoln.IsSubtree(root, subRoot);
