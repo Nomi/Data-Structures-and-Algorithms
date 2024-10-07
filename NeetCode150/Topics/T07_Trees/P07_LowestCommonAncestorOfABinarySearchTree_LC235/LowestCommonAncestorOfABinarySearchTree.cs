@@ -25,7 +25,7 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P07_LowestCommonAncestorOfABinarySear
 public class Solution {
     public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
-        //READ THE COMMENTS!!!
+        //READ THE COMMENTS FOR ATTEMPT1!!!
         var bigger = p.val>=q.val ? p : q;
         var smaller = p.val>=q.val ? q : p;
         return rec1(root, smaller, bigger);
