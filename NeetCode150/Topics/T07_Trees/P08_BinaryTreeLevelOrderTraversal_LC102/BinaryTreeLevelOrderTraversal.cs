@@ -29,6 +29,8 @@ public class Solution {
 
     public List<List<int>> bfs1(TreeNode root) 
     {
+        if(root == null)
+            return new();
         List<List<int>> res = new();
         Queue<TreeNode> q = new();
         q.Enqueue(root);
@@ -39,14 +41,12 @@ public class Solution {
             for(int i=0; i<curLevelCount; i++)
             {
                 var node = q.Dequeue();
-                if(node == null) continue;
-                
                 curLevel.Add(node.val);
 
-                q.Enqueue(node.left);
-                q.Enqueue(node.right);
+                if(node.left!=null) q.Enqueue(node.left);
+                if(node.right!=null) q.Enqueue(node.right);
             }
-            if(curLevel.Count>0) res.Add(curLevel);
+            res.Add(curLevel);
         }
         return res;
     }
