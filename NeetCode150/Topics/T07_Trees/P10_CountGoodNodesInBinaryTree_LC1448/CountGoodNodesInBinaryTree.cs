@@ -26,8 +26,8 @@ public class Solution {
     public int GoodNodes(TreeNode root) {
         return rec1Dfs(root, int.MinValue);
     }
-    //TC: O(2^n)
-    //SC: O(2^n)
+    //TC: O(n)
+    //SC: O(n) [?? IDK: or log2(n) because at a time we only have 1 branch in the stack??]
     public int rec1Dfs(TreeNode root, int maxThusFar)
     {
         if(root == null)
