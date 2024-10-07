@@ -26,7 +26,8 @@ public class Solution {
     public int GoodNodes(TreeNode root) {
         return rec1Dfs(root, int.MinValue);
     }
-
+    //TC: O(2^n)
+    //SC: O(2^n)
     public int rec1Dfs(TreeNode root, int maxThusFar)
     {
         if(root == null)
