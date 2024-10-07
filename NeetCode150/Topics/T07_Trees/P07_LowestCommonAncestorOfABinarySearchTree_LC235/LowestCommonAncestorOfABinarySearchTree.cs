@@ -29,10 +29,11 @@ public class Solution {
         // BECAUSE IT IS BETTER DUE TO SAME TIME COMPLEXITY BUT O(1) SPACE COMPLEXITY 
         // (recursive has O(log(n) space complexity)!!!!
         //READ THE COMMENTS FOR rec1 (and rec1Helper) 
-        return rec1(root, p, q);
+        // return rec1(root, p, q);
+        return itr1_NeetCodeBasedSoln(root, p, q);
     }
 
-    public TreeNode NeetCodeBasedSoln(TreeNode root, TreeNode p, TreeNode q) //Should modify to bigger and smaller precalculated like in rec1 to simplify conditions!
+    public TreeNode itr1_NeetCodeBasedSoln(TreeNode root, TreeNode p, TreeNode q) //Should modify to bigger and smaller precalculated like in rec1 to simplify conditions!
     {
         while(true)
         {
