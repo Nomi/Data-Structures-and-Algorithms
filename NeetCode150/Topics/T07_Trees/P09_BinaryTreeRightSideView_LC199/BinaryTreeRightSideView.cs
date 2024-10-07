@@ -24,17 +24,42 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P09_BinaryTreeRightSideView_LC199;
 
 public class Solution {
     public List<int> RightSideView(TreeNode root) {
-        return itr1DfsRHS(root);
+        // IMPORTANT!! BE CAREFUL!!
+        // I DID NOT THINK IF THE TREE COULD BE LARGER TOWARDS THE LEFT SIDE (until I ran into a breaking test case)!!
+        return itr1BFS(root);
     }
 
-    public List<int> itr1DfsRHS(TreeNode root)
+    public List<int> itr1BFS(TreeNode root)
     {
         List<int> res = new();
-        while(root!=null)
+        Queue<TreeNode> q = new();
+        q.Enqueue(root);
+
+        while(q.Count>0)
         {
-            res.Add(root.val);
-            root = root.right;
+            int lastElem = -1;
+            for(int i=0, len = q.Count; i<len; i++)
+            {
+                var cur =  q.Dequeue();
+                lastElem = cur.val;
+                if(cur.left!=null) q.Enqueue(cur.left);
+                if(cur.right!=null) q.Enqueue(cur.right);
+            }
+            res.Add(lastElem);
         }
+
         return res;
     }
+    
+    //THE FOLLOWING IS WRONG BECAUSE A BRANCH ON THE LEFT CAN BE LONGER THAN THE RIGHT MOST BRANCH FROM THE ROOT!!!
+    // public List<int> itr1DfsRHS(TreeNode root)
+    // {
+    //     List<int> res = new();
+    //     while(root!=null)
+    //     {
+    //         res.Add(root.val);
+    //         root = root.right??root.left;
+    //     }
+    //     return res;
+    // }
 }
