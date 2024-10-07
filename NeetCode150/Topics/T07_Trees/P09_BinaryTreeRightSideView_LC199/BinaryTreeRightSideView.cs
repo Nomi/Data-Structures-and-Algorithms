@@ -31,6 +31,8 @@ public class Solution {
 
     public List<int> itr1BFS(TreeNode root)
     {
+        if(root==null)
+            return new();
         List<int> res = new();
         Queue<TreeNode> q = new();
         q.Enqueue(root);
