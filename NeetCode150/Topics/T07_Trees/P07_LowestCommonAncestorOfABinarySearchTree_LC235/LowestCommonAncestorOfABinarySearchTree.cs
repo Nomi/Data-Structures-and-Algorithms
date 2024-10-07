@@ -31,15 +31,15 @@ public class Solution {
 
     public TreeNode rec1(TreeNode root, TreeNode smaller, TreeNode bigger)
     {
-        Console.WriteLine($"{root?.val} : {smaller.val}, {bigger.val}");
-        if(root==null) //this node cannot be ancestor of anything
-            return null;
+        // Console.WriteLine($"{root?.val} : {smaller.val}, {bigger.val}");
+
         if(root.val>bigger.val)
             return rec1(root.left, smaller, bigger);
         if(root.val<smaller.val)
             return rec1(root.right, smaller, bigger);
 
-        // == 
+        //IF root.val >= smaller.val || root.val <= bigger.val (because of above if conditions) 
+        
         //Notice how because of the conditions above we will only ever get here when in the following cases:
         //
         //1. When `root`'s value is between smaller and bigger and as such,
@@ -50,11 +50,5 @@ public class Solution {
         // and since we haven't found the other one yet and it is guaranteed [clarification question???] that
         // both the values exist in there, we can be sure that this is the lowest common ancestor because this element won't be anywhere after here.
         return root;
-
-        // //Here, we're guaranteed `root` is AN ancestor, but not necessarily the lowest.
-        // // if(root.val>=smaller.val && root.val<=bigger.val) //<= and >= because the nodes themselves can be the ancestor.
-        // // {
-        //     return rec1(root.left, smaller, bigger) ?? rec1(root.right, smaller, bigger) ?? root; //Either the lowest common ancestor is lower than this to EITHER left OR right (because of definiton of BST) OR this node is the lowest common ancestor.
-        // // }            
     }
 }
