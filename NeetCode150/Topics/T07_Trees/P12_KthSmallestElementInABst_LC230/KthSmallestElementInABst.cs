@@ -24,10 +24,12 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P12_KthSmallestElementInABst_LC230;
 
 public class Solution {
     public int KthSmallest(TreeNode root, int k) {
+        //READ COMMENTS OF rec1Dfs!!!!
         nodesTraversedInOrder = 0;
         return rec1Dfs(root, k);
     }
 
+    //Came up with the solution on my own but faced a few minor hiccups that I resolved by myself.
     int nodesTraversedInOrder;
     public int rec1Dfs(TreeNode root, int k)
     {
