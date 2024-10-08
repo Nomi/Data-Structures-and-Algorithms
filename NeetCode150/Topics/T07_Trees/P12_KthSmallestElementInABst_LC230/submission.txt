@@ -1,12 +1,12 @@
-3, Accepted
+4, Accepted
 {
-    "date": "2024-10-08T22:55:16.393Z",
+    "date": "2024-10-08T22:55:23.845Z",
     "statusDescription": "Accepted",
     "code": "/**\n * Definition for a binary tree node.\n * public class TreeNode {\n *     public int val;\n *     public TreeNode left;\n *     public TreeNode right;\n *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {\n *         this.val = val;\n *         this.left = left;\n *         this.right = right;\n *     }\n * }\n */\n\npublic class Solution {\n    public int KthSmallest(TreeNode root, int k) {\n        //READ COMMENTS OF rec1Dfs!!!!\n        //Check NeetCode IO's solution for iterative approach.\n        nodesTraversedInOrder = 0;\n        return rec1Dfs(root, k);\n\n        //IMPORTANT SIDE NOTE:\n        //Iterative solutions are only better (in space complexity) in Binary Search Trees ONLY if you're going \n        //through only 1 branch \n        //  (For example: \n        //      - searching for LOWEST COMMON ANCESTOR,\n        //      - a target value, the smallest/biggest value,\n        //      - first value smaller/bigger than, \n        //  etc.)\n        //because in those you don't need to keep a queue or stack (or the implicit, function stack in recursion)\n        //and as such you save on space complexity.  \n    }\n\n    //Came up with the solution on my own but faced a few minor hiccups that I resolved by myself.\n    int nodesTraversedInOrder;\n    public int rec1Dfs(TreeNode root, int k)\n    {\n        if(root == null)\n            return -404;\n        \n        var left = rec1Dfs(root.left, k);\n        if(left!=-404)\n            return left;\n        \n        //ELSE we still need to look at this node and, if needed, its right subtree\n        ///The following comment is DEPRECATED/invalid due to changes abovee. // if(left == -404) //Clearly we don't need to check for this because if we don't then even if we find the node, we will end up with the nodesTraversedInOrder stuck at =k and as such every node after that as we traverse back up to the beginning of the recursive stack will overwrite the correct result in our program.\n        nodesTraversedInOrder++;\n        if(nodesTraversedInOrder == k) //Found k-th smallest element.\n            return root.val;\n            \n        var right = rec1Dfs(root.right, k);\n        return right; //right will be -404 if we don't actually find it in this branch, so we continue our search in that case.\n    }\n}\n",
-    "memory": 53360,
+    "memory": 51472,
     "stdout": "",
     "language": "csharp",
-    "time": "0.754",
+    "time": "0.72",
     "problemId": "kth-smallest-integer-in-bst",
     "stderr": ""
 }
