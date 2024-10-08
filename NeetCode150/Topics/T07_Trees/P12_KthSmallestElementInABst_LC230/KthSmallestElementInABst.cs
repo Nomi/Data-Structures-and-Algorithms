@@ -25,8 +25,20 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P12_KthSmallestElementInABst_LC230;
 public class Solution {
     public int KthSmallest(TreeNode root, int k) {
         //READ COMMENTS OF rec1Dfs!!!!
+        //Check NeetCode IO's solution for iterative approach.
         nodesTraversedInOrder = 0;
         return rec1Dfs(root, k);
+
+        //IMPORTANT SIDE NOTE:
+        //Iterative solutions are only better (in space complexity) in Binary Search Trees ONLY if you're going 
+        //through only 1 branch 
+        //  (For example: 
+        //      - searching for LOWEST COMMON ANCESTOR,
+        //      - a target value, the smallest/biggest value,
+        //      - first value smaller/bigger than, 
+        //  etc.)
+        //because in those you don't need to keep a queue or stack (or the implicit, function stack in recursion)
+        //and as such you save on space complexity.  
     }
 
     //Came up with the solution on my own but faced a few minor hiccups that I resolved by myself.
