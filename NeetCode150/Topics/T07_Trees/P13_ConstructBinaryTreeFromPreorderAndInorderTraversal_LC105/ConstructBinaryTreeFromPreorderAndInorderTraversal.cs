@@ -47,10 +47,9 @@ public class Solution {
         var curRoot = new TreeNode(preorder[0]);
         Console.WriteLine(preorder[0]);
         int curPosInInorder = inorder.IndexOf(curRoot.val);
-        if(curPosInInorder==-1) //Why??
-            return curRoot;
+
         // try{
-        curRoot.left = rec1(preorder[1..(1+curPosInInorder)], preorder[..curPosInInorder]); //rec1(preorder.Slice(1,1+curPosInOrder), inorder.Slice(0, curPosInOrder));
+        curRoot.left = rec1(preorder[1..(1+curPosInInorder)], inorder[..curPosInInorder]); //rec1(preorder.Slice(1,1+curPosInOrder), inorder.Slice(0, curPosInOrder));
         //NOTES FOR THE LINE DIRECTLY ABOVE THIS COMMENT:
         //??? (1+curPosInOrder) because the second parameter is length and we want to include the same number of elements in inorder as we do in preorder (i.) We start from 1 because we don't want it as we're done with creating it.
         curRoot.right = rec1(preorder[(1+curPosInInorder)..], inorder[(1+curPosInInorder)..]); //rec1(preorder.Slice(1+curPosInOrder));
