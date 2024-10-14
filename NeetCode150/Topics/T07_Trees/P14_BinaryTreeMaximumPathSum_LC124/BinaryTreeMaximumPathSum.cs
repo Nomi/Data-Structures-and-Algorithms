@@ -29,7 +29,7 @@ public class Solution {
         return maxSum;
     }
 
-    int maxSum = 0; //because even if every value is negative, we can select an 0 nodes to get an empty path with the sum 0.
+    int maxSum = int.MinValue; //The FOLLOWING comment is DEPRECATED BECAUSE WHEN READING THE PROBLEM CAREFULLY, YOU'LL SEE THAT YOU CAN'T NOT SELECT! I only realized after failing a test case.://because even if every value is negative, we can select an 0 nodes to get an empty path with the sum 0.
     public (int lSum, int rSum) rec1(TreeNode root)
     {
         //Clearly we need to do this postorder?
