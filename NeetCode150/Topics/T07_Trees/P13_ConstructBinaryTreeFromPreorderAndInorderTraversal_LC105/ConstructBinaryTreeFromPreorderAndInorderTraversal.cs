@@ -24,30 +24,47 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P13_ConstructBinaryTreeFromPreorderAn
 
 public class Solution {
     public TreeNode BuildTree(int[] preorder, int[] inorder) {
+        //READ REC2 (and comments from it), and maybe after that read rec1/
+        //Also, TakeUForward's video was better!
+
         //Since we are not making changes to the values of the sub-arrays, we can use the ArraySegment wrapper (otherwise it would change the original array as well).
         ReadOnlySpan<int> preo = new(preorder);
         ReadOnlySpan<int> ino = new(inorder);
         //ARRAY SLICING IN C#: https://code-maze.com/csharp-array-slicing/
         //SHOULD HAVE USED ReadOnlySpan!!
-        return rec1(preo, ino);
+        // return rec1(preo, ino);
+        return rec2(preo, ino);
     }
     public TreeNode rec2(ReadOnlySpan<int> preorder, ReadOnlySpan<int> inorder)
     {
-        //Done on my own!
+        //Done on my own! //Used TakeUForward's YouTube video to re-learn/confirm the theory! Explains better than NeetCode, honestly. (more like, his visualization of the arrays is better or at least my headspace now is better than it was back then! (don't have as much of a headache!))
         if(preorder.IsEmpty || inorder.IsEmpty)
             return null;
         var currRoot = new TreeNode(preorder[0]);
         int currRootPosInorder = inorder.IndexOf(preorder[0]);
-        //[!! IMPORTANT !!]
+
+        //[!! IMPORTANT !!] (some of the theory explained!)
         //Notice that currRootPosInorder is also the number of nodes to the left of the root because InOrder is recursively left>root>right, 
         //and as such, all the nodes to in the left subtree of the node are to its left in the inorder array and are stored contiguosly.
-        //Furthermore, preorder is root>left>right, all the left element will be contiguously right after it, and we have the count already,
-
+        //Furthermore, preorder is root>left>right, all the left element will be contiguously right after it, and we have the count of 
+        //the nodes left already sub tree already so we can split the arrays into subproblems for each left and right sub treee.
+        //For right sub tree, we use similar logic.
+        //ALSO, each of the subarrays will obviously preserve their nature (i.e. being the preorder or inorder tree of the subtree.)
+        
         //Recursively build sub-trees:
-        currRoot.Left = rec2(preorder[1..currRootPosInorder], inorder[0..curRootPosInorder]); //Remember the second parameter in the indices is the length
+        //Remember the second parameter in the range operator is EXCLUDED! 
+        //(NOTE: second parameter is the first index to exclude, NOT the length of the subarray as I had initally thought)
+        currRoot.left = rec2(preorder[1 .. (1+currRootPosInorder)], inorder[..currRootPosInorder]);
+        
         //Recursively build the right sub-tree:
-        currRoot.Right = rec2(preorder[1+currRootPosInorder..], inorder[1+curRootPosInorder..])''
+        currRoot.right = rec2(preorder[(1+currRootPosInorder)..], inorder[(1+currRootPosInorder)..]);
+
+
+        //Also notice the sub inorder and sub preorder subarrays being passed contain the next root, but not the current root. Obvious, but just wanted to point it out.
+        return currRoot;
     }
+
+
     public TreeNode rec1(ReadOnlySpan<int> preorder, ReadOnlySpan<int> inorder)
     {
         //ACCORDING TO THE NEETCODE VIDEO, WE NEED THE FOLLOWING:   (WATCH THE NEETCODE VIDEO!!!)
@@ -66,7 +83,8 @@ public class Solution {
 
         curRoot.left = rec1(preorder[1..(1+curPosInInorder)], inorder[..curPosInInorder]); //rec1(preorder.Slice(1,1+curPosInOrder), inorder.Slice(0, curPosInOrder));
         //NOTES FOR THE LINE DIRECTLY ABOVE THIS COMMENT:
-        //??? (1+curPosInOrder) because the second parameter is length and we want to include the same number of elements in inorder as we do in preorder (i.) We start from 1 because we don't want it as we're done with creating it.
+        //DEPRECATED!! READ COMMENT BELOW INSTEAD OF THE ONE TO THE RIGH!! /??? (1+curPosInOrder) because the second parameter is length and we want to include the same number of elements in inorder as we do in preorder (i.) We start from 1 because we don't want it as we're done with creating it.
+        //ACTUALLY: the second parameter in the range operator is EXCLUDED! (also, the second parameter is the first index to exclude, NOT the length of the subarray as I had initally thought)
         curRoot.right = rec1(preorder[(1+curPosInInorder)..], inorder[(1+curPosInInorder)..]); //rec1(preorder.Slice(1+curPosInOrder));
         
         return curRoot;
