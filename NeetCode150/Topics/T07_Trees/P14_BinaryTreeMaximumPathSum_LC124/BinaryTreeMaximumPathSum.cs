@@ -25,6 +25,7 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P14_BinaryTreeMaximumPathSum_LC124;
 public class Solution {
     public int MaxPathSum(TreeNode root) {
         //YOOOOO!!! DID IT BY MYSELF WITHIN 20 MINTUES (no outside help AT ALL)!!!!
+        //MAYBE I shoulde watch a video for this sometime, maybe?
         rec1(root);
         return maxSum;
     }
