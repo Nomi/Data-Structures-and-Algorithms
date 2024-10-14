@@ -24,7 +24,7 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P14_BinaryTreeMaximumPathSum_LC124;
 
 public class Solution {
     public int MaxPathSum(TreeNode root) {
-        maxSum = 0;
+
         rec1(root);
         return maxSum;
     }
@@ -49,7 +49,7 @@ public class Solution {
         // int biggerSum = lSum > rSum ? lSum : rSum;
         // biggerSum += currVal;
         int maxSumAtCurrNode = lSum+rSum+currVal; //Notice that none of these can be negative due to the if conditions above where we set them to 0 in case they're negative (i.e. we ignore the branch(es) that is(are) not helpful).
-        // Console.WriteLine($"MS= {maxSum}, CV= {currVal}, MSACN = {maxSumAtCurrNode}"); //BS= {biggerSum},
+        Console.WriteLine($"MS= {maxSum}, CV= {currVal}, MSACN = {maxSumAtCurrNode}"); //BS= {biggerSum},
         if(maxSum<maxSumAtCurrNode)
             maxSum = maxSumAtCurrNode;
         
