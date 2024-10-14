@@ -31,7 +31,23 @@ public class Solution {
         //SHOULD HAVE USED ReadOnlySpan!!
         return rec1(preo, ino);
     }
+    public TreeNode rec2(ReadOnlySpan<int> preorder, ReadOnlySpan<int> inorder)
+    {
+        //Done on my own!
+        if(preorder.IsEmpty || inorder.IsEmpty)
+            return null;
+        var currRoot = new TreeNode(preorder[0]);
+        int currRootPosInorder = inorder.IndexOf(preorder[0]);
+        //[!! IMPORTANT !!]
+        //Notice that currRootPosInorder is also the number of nodes to the left of the root because InOrder is recursively left>root>right, 
+        //and as such, all the nodes to in the left subtree of the node are to its left in the inorder array and are stored contiguosly.
+        //Furthermore, preorder is root>left>right, all the left element will be contiguously right after it, and we have the count already,
 
+        //Recursively build sub-trees:
+        currRoot.Left = rec2(preorder[1..currRootPosInorder], inorder[0..curRootPosInorder]); //Remember the second parameter in the indices is the length
+        //Recursively build the right sub-tree:
+        currRoot.Right = rec2(preorder[1+currRootPosInorder..], inorder[1+curRootPosInorder..])''
+    }
     public TreeNode rec1(ReadOnlySpan<int> preorder, ReadOnlySpan<int> inorder)
     {
         //ACCORDING TO THE NEETCODE VIDEO, WE NEED THE FOLLOWING:   (WATCH THE NEETCODE VIDEO!!!)
@@ -45,7 +61,7 @@ public class Solution {
             return null;
 
         var curRoot = new TreeNode(preorder[0]);
-        Console.WriteLine(preorder[0]);
+        // Console.WriteLine(preorder[0]);
         int curPosInInorder = inorder.IndexOf(curRoot.val);
 
         curRoot.left = rec1(preorder[1..(1+curPosInInorder)], inorder[..curPosInInorder]); //rec1(preorder.Slice(1,1+curPosInOrder), inorder.Slice(0, curPosInOrder));
