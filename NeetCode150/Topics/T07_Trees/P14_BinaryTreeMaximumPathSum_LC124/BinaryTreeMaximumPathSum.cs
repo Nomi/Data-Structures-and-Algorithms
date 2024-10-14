@@ -25,7 +25,9 @@ namespace DSA.NeetCode150.Topics.T07_Trees.P14_BinaryTreeMaximumPathSum_LC124;
 public class Solution {
     public int MaxPathSum(TreeNode root) {
         //YOOOOO!!! DID IT BY MYSELF WITHIN 20 MINTUES (no outside help AT ALL)!!!!
-        //MAYBE I shoulde watch a video for this sometime, maybe?
+
+        //!!! MAYBE I shoulde watch a video for this sometime, maybe????
+        
         // rec1(root);
 
         maxSum = int.MinValue; //int.MinValue and NOT 0 because we need to select AT LEAST 1 element in our path, even if it is negative. (or the 1 element, i.e. the max element, even if the whole tree is negative) //If we could select the empty path, we could set it to 0.
