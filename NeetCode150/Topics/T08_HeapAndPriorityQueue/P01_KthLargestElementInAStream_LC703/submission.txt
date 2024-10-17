@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "language": "csharp",
+    "code": "public class KthLargest {\n    Attempt1 atmpt1;\n    public KthLargest(int k, int[] nums) {\n        atmpt1 = new(k, nums);\n    }\n    \n    public int Add(int val) {\n        return atmpt1.Add(val);\n    }\n}\n\n\npublic class Attempt1\n{\n    PriorityQueue<int,int> pQ;\n    int k;\n\n    public Attempt1(int _k, int[] nums)\n    {\n        k=_k;\n        pQ = new(k+1);\n        foreach(int n in nums)\n        {\n            Add(n); //AddWithoutPeek(n);\n        }\n    }\n    \n    public int Add(int val) \n    {\n        //If you look at the algorithm, you'll realize that this algorithm basically stores the k biggest numbers, \n        //with the first one being the smallest and the last one being the largest!\n        pQ.Enqueue(val, val);\n        if(pQ.Count>k)\n            pQ.Dequeue();\n        return pQ.Peek();\n    }\n}",
+    "problemId": "kth-largest-integer-in-a-stream",
+    "statusDescription": "Accepted",
+    "time": "0.722",
+    "date": "2024-10-17T23:57:55.271Z",
+    "memory": 51852,
+    "stdout": "",
+    "stderr": ""
+}
