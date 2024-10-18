@@ -16,21 +16,21 @@ public static class Attempt1
 {
     public static int LastStoneWeight(int[] stones) 
     {
-        PriorityQueue<int, int> pQ = new(stones.Length);
+        PriorityQueue<int, int> minHeap = new(stones.Length);
         foreach(int s in stones)
-            pQ.Enqueue(s, -s); // (-s) helps get biggest elements on front!
-        while(pQ.Count>1)
+            minHeap.Enqueue(s, -s); // (-s) helps get biggest elements on front!
+        while(minHeap.Count>1)
         {
-            int bigger = pQ.Dequeue();
-            int smaller = pQ.Dequeue();
+            int bigger = minHeap.Dequeue();
+            int smaller = minHeap.Dequeue();
             if(bigger==smaller)
                 continue;
             int biggerNewWeight = bigger-smaller;
-            pQ.Enqueue(biggerNewWeight, -biggerNewWeight);
+            minHeap.Enqueue(biggerNewWeight, -biggerNewWeight);
         }
-        if(pQ.Count==0)
+        if(minHeap.Count==0)
             return 0;
         else //==1
-            return pQ.Dequeue();
+            return minHeap.Dequeue();
     }
 }
