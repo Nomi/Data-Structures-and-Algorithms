@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    public int LastStoneWeight(int[] stones) {\n        return Attempt1.LastStoneWeight(stones);\n    }\n}\n\npublic static class Attempt1\n{\n    public static int LastStoneWeight(int[] stones) \n    {\n        PriorityQueue<int, int> pQ = new(stones.Length);\n        foreach(int s in stones)\n            pQ.Enqueue(s, -s); // (-s) helps get biggest elements on front!\n        while(pQ.Count>1)\n        {\n            int bigger = pQ.Dequeue();\n            int smaller = pQ.Dequeue();\n            if(bigger==smaller)\n                continue;\n            int biggerNewWeight = bigger-smaller;\n            pQ.Enqueue(biggerNewWeight, -biggerNewWeight);\n        }\n        if(pQ.Count==0)\n            return 0;\n        else //==1\n            return pQ.Dequeue();\n    }\n}\n",
+    "problemId": "last-stone-weight",
+    "statusDescription": "Accepted",
+    "time": "0.99",
+    "date": "2024-10-18T00:08:09.637Z",
+    "memory": 72332,
+    "stdout": "",
+    "stderr": ""
+}
