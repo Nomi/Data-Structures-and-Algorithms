@@ -11,6 +11,8 @@ public class Solution {
         return attempt1(points, k);
     }
 
+    //Space complexity: O(K)
+    //Time complexity: O(n*log2(k))
     public int[][] attempt1(int[][] points, int k)
     {
         if(points.Length<=k)

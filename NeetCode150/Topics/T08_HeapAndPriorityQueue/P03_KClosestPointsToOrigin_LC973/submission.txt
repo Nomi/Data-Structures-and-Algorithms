@@ -1,12 +1,12 @@
-4, Accepted
+5, Accepted
 {
     "language": "csharp",
-    "code": "public class Solution {\n    public int[][] KClosest(int[][] points, int k) {\n        return attempt1(points, k);\n    }\n\n    public int[][] attempt1(int[][] points, int k)\n    {\n        if(points.Length<=k)\n            return points;\n        PriorityQueue<(int[] pt,double dist), double> q = new();\n        for(int i=0; i<points.Length; i++)\n        {\n            var curDist = DistanceFromOrigin(points[i]);\n            // Console.WriteLine($\"{points[i][0]}, {points[i][1]}, {curDist}\");\n            if(q.Count < k)\n            {\n                q.Enqueue((points[i],curDist), -1*curDist); //MaxHeap\n                continue;\n            }\n            var maxDistThusFar = q.Peek().dist;\n            if(maxDistThusFar>curDist)\n            {\n                q.Dequeue();\n                q.Enqueue((points[i],curDist), -1*curDist);\n            }\n        }\n\n        int[][] res = new int[k][];\n        for(int i=0;i<k;i++)\n        {\n            res[i] = q.Dequeue().pt;\n        }\n        return res;\n    }\n\n    public static double DistanceFromOrigin(int[] point)\n    {\n        return Math.Sqrt(Math.Pow(point[0],2)+Math.Pow(point[1], 2));\n    }\n}\n",
+    "code": "public class Solution {\n    public int[][] KClosest(int[][] points, int k) {\n        return attempt1(points, k);\n    }\n\n    //Space complexity: O(K)\n    //Time complexity: O(n*log2(k))\n    public int[][] attempt1(int[][] points, int k)\n    {\n        if(points.Length<=k)\n            return points;\n        PriorityQueue<(int[] pt,double dist), double> q = new();\n        for(int i=0; i<points.Length; i++)\n        {\n            var curDist = DistanceFromOrigin(points[i]);\n            // Console.WriteLine($\"{points[i][0]}, {points[i][1]}, {curDist}\");\n            if(q.Count < k)\n            {\n                q.Enqueue((points[i],curDist), -1*curDist); //MaxHeap\n                continue;\n            }\n            var maxDistThusFar = q.Peek().dist;\n            if(maxDistThusFar>curDist)\n            {\n                q.Dequeue();\n                q.Enqueue((points[i],curDist), -1*curDist);\n            }\n        }\n\n        int[][] res = new int[k][];\n        for(int i=0;i<k;i++)\n        {\n            res[i] = q.Dequeue().pt;\n        }\n        return res;\n    }\n\n    public static double DistanceFromOrigin(int[] point)\n    {\n        return Math.Sqrt(Math.Pow(point[0],2)+Math.Pow(point[1], 2));\n    }\n}\n",
     "problemId": "k-closest-points-to-origin",
     "statusDescription": "Accepted",
-    "time": "0.855",
-    "date": "2024-10-22T21:35:44.423Z",
-    "memory": 53780,
+    "time": "0.482",
+    "date": "2024-10-22T21:36:28.318Z",
+    "memory": 53900,
     "stdout": "",
     "stderr": ""
 }
