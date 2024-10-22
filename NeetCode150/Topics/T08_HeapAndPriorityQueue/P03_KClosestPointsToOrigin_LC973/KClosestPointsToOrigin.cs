@@ -11,6 +11,7 @@ public class Solution {
         //Wasn't really that hard.
 
         //NOTE: We don't do it like neetcode does because C# does not have an alternative to heapq.heapify!
+        //ALSO: CLARIFICATION/EDGE CASE here would be that the distance can be a non-integer (floating point) value!
         return attempt1(points, k);
     }
 
