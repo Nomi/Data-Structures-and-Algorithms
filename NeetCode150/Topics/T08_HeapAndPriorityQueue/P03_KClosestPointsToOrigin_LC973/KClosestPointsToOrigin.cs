@@ -15,13 +15,13 @@ public class Solution {
     {
         if(points.Length<=k)
             return points;
-        PriorityQueue<int[], int> q = new();
+        PriorityQueue<int[], double> q = new();
         for(int i=0; i<points.Length; i++)
         {
-            Console.WriteLine($"{points[i][0]}, {points[i][0]}, {DistanceFromOrigin(points[i])}");
+            Console.WriteLine($"{points[i][0]}, {points[i][1]}, {DistanceFromOrigin(points[i])}");
             if(q.Count < k)
             {
-                q.Enqueue(points[i], DistanceFromOrigin(points[i])); //MaxHeap
+                q.Enqueue(points[i], -DistanceFromOrigin(points[i])); //MaxHeap
                 continue;
             }
             var maxDistThusFar = DistanceFromOrigin(q.Peek());
@@ -41,8 +41,8 @@ public class Solution {
         return res;
     }
 
-    public static int DistanceFromOrigin(int[] point)
+    public static double DistanceFromOrigin(int[] point)
     {
-        return (int) Math.Sqrt(Math.Pow(point[0],2)+Math.Pow(point[1], 2));
+        return Math.Sqrt(Math.Pow(point[0],2)+Math.Pow(point[1], 2));
     }
 }
