@@ -8,6 +8,7 @@ namespace DSA.NeetCode150.Topics.T08_HeapAndPriorityQueue.P03_KClosestPointsToOr
 
 public class Solution {
     public int[][] KClosest(int[][] points, int k) {
+        //Wasn't really that hard.
         return attempt1(points, k);
     }
 
