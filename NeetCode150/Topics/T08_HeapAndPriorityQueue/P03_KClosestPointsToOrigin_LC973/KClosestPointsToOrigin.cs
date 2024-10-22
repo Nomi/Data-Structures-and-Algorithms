@@ -18,6 +18,7 @@ public class Solution {
         PriorityQueue<int[], int> q = new();
         for(int i=0; i<points.Length; i++)
         {
+            Console.WriteLine($"{points[i][0]}, {points[i][0]}, {DistanceFromOrigin(points[i])}");
             if(q.Count < k)
             {
                 q.Enqueue(points[i], DistanceFromOrigin(points[i])); //MaxHeap
