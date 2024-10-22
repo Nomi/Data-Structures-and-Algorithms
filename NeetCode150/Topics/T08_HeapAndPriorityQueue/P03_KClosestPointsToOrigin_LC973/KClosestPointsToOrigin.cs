@@ -15,28 +15,28 @@ public class Solution {
     {
         if(points.Length<=k)
             return points;
-        PriorityQueue<int[], double> q = new();
+        PriorityQueue<(int[] pt,double dist), double> q = new();
         for(int i=0; i<points.Length; i++)
         {
-            Console.WriteLine($"{points[i][0]}, {points[i][1]}, {DistanceFromOrigin(points[i])}");
+            var curDist = DistanceFromOrigin(points[i]);
+            // Console.WriteLine($"{points[i][0]}, {points[i][1]}, {curDist}");
             if(q.Count < k)
             {
-                q.Enqueue(points[i], -DistanceFromOrigin(points[i])); //MaxHeap
+                q.Enqueue((points[i],curDist), -1*curDist); //MaxHeap
                 continue;
             }
-            var maxDistThusFar = DistanceFromOrigin(q.Peek());
-            var curDist = DistanceFromOrigin(points[i]);
+            var maxDistThusFar = q.Peek().dist;
             if(maxDistThusFar>curDist)
             {
                 q.Dequeue();
-                q.Enqueue(points[i], curDist);
+                q.Enqueue((points[i],curDist), -1*curDist);
             }
         }
 
         int[][] res = new int[k][];
         for(int i=0;i<k;i++)
         {
-            res[i] = q.Dequeue();
+            res[i] = q.Dequeue().pt;
         }
         return res;
     }
