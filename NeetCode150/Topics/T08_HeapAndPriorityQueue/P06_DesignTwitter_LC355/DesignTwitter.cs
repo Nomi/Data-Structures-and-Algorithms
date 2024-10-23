@@ -9,6 +9,9 @@ namespace DSA.NeetCode150.Topics.T08_HeapAndPriorityQueue.P06_DesignTwitter_LC35
 public class Twitter {
     ITwitter backend;
     public Twitter() {
+        //CHECK ATTEMPT1 COMMENTS!!!
+        //Watch neetcode video?
+        //maybe compare with neetcodeio c# soln?
         backend = new attempt1();
     }
     
