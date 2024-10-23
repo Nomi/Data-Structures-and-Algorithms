@@ -101,7 +101,9 @@ public class attempt1 : ITwitter
     }
     
     public void Unfollow(int followerId, int followeeId) {
-        if(followMap.ContainsKey(followerId)) //forgot about this edge case earlier
+        if(followerId==followeeId) //FORGOT ABOUTT THIS EDGE CASE AS WELL UNTIL LATE INTO THE GAME!! (maybe because I added the functionality to follow the user themselves autmatically just recently / a minute ago as well)
+            return;
+        if(followMap.ContainsKey(followerId)) //forgot about checking for this edge case earlier
             followMap[followerId].Remove(followeeId);
     }
 }
