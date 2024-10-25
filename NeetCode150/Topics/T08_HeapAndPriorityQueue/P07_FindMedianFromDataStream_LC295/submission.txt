@@ -1,0 +1,12 @@
+1, Compilation Error
+{
+    "language": "csharp",
+    "code": "public class MedianFinder {\n\n    public MedianFinder() {\n        \n    }\n    \n    public void AddNum(int num) {\n        \n    }\n    \n    public double FindMedian() {\n        \n    }\n}\n\n\npublic interface IMedianFinder { \n    public void AddNum(int num);\n    \n    public double FindMedian();\n}\n\npublic class attempt1 : IMedianFinder\n{\n    PriorityQueue leftHalf;\n    PriorityQueue rightHalf;\n    public attempt1()\n    {\n        \n    }\n\n    public void AddNum(int num)\n    {\n\n    }\n\n    public double FindMedian()\n    {\n\n    }\n}",
+    "problemId": "find-median-in-a-data-stream",
+    "statusDescription": "Compilation Error",
+    "time": "0.0",
+    "date": "2024-10-25T00:15:09.589Z",
+    "memory": "",
+    "stdout": "",
+    "stderr": ""
+}
