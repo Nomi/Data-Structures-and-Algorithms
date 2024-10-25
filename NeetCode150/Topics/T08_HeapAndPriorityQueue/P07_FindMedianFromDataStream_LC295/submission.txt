@@ -1,12 +1,12 @@
-1, Compilation Error
+2, Wrong Answer
 {
     "language": "csharp",
-    "code": "public class MedianFinder {\n\n    public MedianFinder() {\n        \n    }\n    \n    public void AddNum(int num) {\n        \n    }\n    \n    public double FindMedian() {\n        \n    }\n}\n\n\npublic interface IMedianFinder { \n    public void AddNum(int num);\n    \n    public double FindMedian();\n}\n\npublic class attempt1 : IMedianFinder\n{\n    PriorityQueue leftHalf;\n    PriorityQueue rightHalf;\n    public attempt1()\n    {\n        \n    }\n\n    public void AddNum(int num)\n    {\n\n    }\n\n    public double FindMedian()\n    {\n\n    }\n}",
+    "code": "public class MedianFinder {\n    IMedianFinder solver;\n    public MedianFinder() {\n        solver = new attempt1();\n    }\n    \n    public void AddNum(int num) {\n        solver.AddNum(num);\n    }\n    \n    public double FindMedian() {\n        return solver.FindMedian();\n    }\n}\n\n\npublic interface IMedianFinder { \n    public void AddNum(int num);\n    \n    public double FindMedian();\n}\n\npublic class attempt1 : IMedianFinder\n{   \n    //Space Complexity: O(N)\n    PriorityQueue<int,int> leftHalf; //maxheap\n    PriorityQueue<int,int> rightHalf; //minheap\n    \n    public attempt1()\n    {\n        leftHalf = new();\n        rightHalf = new();\n        // //Filling with dummy values to make our checks while adding easier (not checking if either are empty)\n        // leftHalf.Enqueue(int.MinValue, int.MaxValue); //priority = int.MaxValue cuz priority queue has smalles priorty first (and -int.MinValue overflows)\n        // rightHalf.Enqueue(int.MaxValue, int.MaxValue); //priority = int.MaxValue cuz priority queue has smalles priorty first\n    }\n\n    //IMPORTANT!!! TAKE A LOOK AT THIS FUNCTION (and how it's done)!!! (I had to take a peek at the NeetCodeIo solution initally a little to get how its done)\n    //Time Complexity: O(nlog(n))\n    public void AddNum(int num) //THIS FUNCTION REQUIRED ME TO TAKE A BRIEF LOOK AT THE NEETCODEIO SOLN!\n    {\n        if(rightHalf.Count != 0 && num > rightHalf.Peek()) // !=0 because we try to insert to left first, arbitrarily chosen. Could do right too.\n            rightHalf.Enqueue(num, num); //minheap so we use num as prio\n        else\n            leftHalf.Enqueue(num, -num); //maxheap so we use -num as prio\n\n        //Make sure the 'halves' are balanced:\n        if(leftHalf.Count > rightHalf.Count+1) //+1 for when queue has odd number of elements\n        {\n            int largestOnLeft = leftHalf.Dequeue();\n            rightHalf.Enqueue(largestOnLeft, -largestOnLeft); //maxheap so we use (-largestOnLeft) as priority\n        }\n        else if(rightHalf.Count > leftHalf.Count+1) //+1 for when queue has odd number of elements\n        {\n            int smallestOnRight = rightHalf.Dequeue();\n            leftHalf.Enqueue(smallestOnRight, smallestOnRight); //minheap so we keep smallestOnRight as priority\n        }\n    }\n\n    //Time Complexity: O(1)\n    public double FindMedian()\n    {\n        //odd number of numbers:\n        if(leftHalf.Count!=rightHalf.Count) \n            return leftHalf.Count>rightHalf.Count ? leftHalf.Peek() : rightHalf.Peek();\n        \n        //even number of numbers:\n        return (((double)leftHalf.Peek()+rightHalf.Peek())/2.0);\n    }\n}",
     "problemId": "find-median-in-a-data-stream",
-    "statusDescription": "Compilation Error",
-    "time": "0.0",
-    "date": "2024-10-25T00:15:09.589Z",
-    "memory": "",
+    "statusDescription": "Wrong Answer",
+    "time": "0.472",
+    "date": "2024-10-25T00:54:44.676Z",
+    "memory": 53420,
     "stdout": "",
     "stderr": ""
 }
