@@ -56,12 +56,12 @@ public class attempt1 : IMedianFinder
         if(leftHalf.Count > rightHalf.Count+1) //+1 for when queue has odd number of elements
         {
             int largestOnLeft = leftHalf.Dequeue();
-            rightHalf.Enqueue(largestOnLeft, -largestOnLeft); //maxheap so we use (-largestOnLeft) as priority
+            rightHalf.Enqueue(largestOnLeft, largestOnLeft); //minheap so we keep smallestOnRight as priority
         }
         else if(rightHalf.Count > leftHalf.Count+1) //+1 for when queue has odd number of elements
         {
             int smallestOnRight = rightHalf.Dequeue();
-            leftHalf.Enqueue(smallestOnRight, smallestOnRight); //minheap so we keep smallestOnRight as priority
+            leftHalf.Enqueue(smallestOnRight, -smallestOnRight); //maxheap so we use (-largestOnLeft) as priority
         }
     }
 
