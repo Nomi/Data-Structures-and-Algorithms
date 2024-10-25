@@ -9,6 +9,7 @@ namespace DSA.NeetCode150.Topics.T08_HeapAndPriorityQueue.P07_FindMedianFromData
 public class MedianFinder {
     IMedianFinder solver;
     public MedianFinder() {
+        //READ THE COMMENTS OF THE attempt1 CLASS!!!
         solver = new attempt1();
     }
     
