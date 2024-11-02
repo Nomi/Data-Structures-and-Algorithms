@@ -8,6 +8,7 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P01_Subsets_LC78;
 
 public class Solution {
     public List<List<int>> Subsets(int[] nums) {
+        // !!! IMPORTANT: READ COMMENTS OF backtrack1 !!! 
         List<List<int>> res = new(1<<nums.Length); // 1 << nums.Length == 2^nums.Length (which is number of possible subsets (because there are max n numbers and two choices for each of them: pick it or not))
         
         backtrack1(
@@ -19,6 +20,9 @@ public class Solution {
         return res;
     }
 
+
+    //HAD TO WATCH THE THEORY PART OF NEETCODE VIDEO TO SOLVE THIS!!!
+    //HAD TO PEEK AT THE C# SOLUTION ON NEETCODEIO A LITTLE TO SOLVE THIS!!!
     public void backtrack1(int[] nums, int idx, List<int> subset, List<List<int>> res)
     {
         if(idx==nums.Length) //We're at the leaf node (just think about it. Watching neetcodeio video might help visualize!)
