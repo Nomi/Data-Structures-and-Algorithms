@@ -1,0 +1,12 @@
+1, Compilation Error
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    public List<List<int>> Subsets(int[] nums) {\n        \n    }\n\n    public List<List<int>> backtrack1(int[] nums)\n    {\n        int numSubsets = 1 << nums.Length; //==2^nums.Length\n        \n        // IMPORTANT NOTE: \n        // Min subset length = 0, Max subset length = nums.Length\n        // => Time complexity = n*(2^n)\n        // GIVEN THE CONSTRAINTS OF THE PROBLEMS, (since we want subsets and not just the count),\n        // THIS IS THE BEST TIME COMPLEXITY WE CAN ACHIEVE.\n        // HERE, WE USE BACKTRACKING BECAUSE IT IS MOST EFFICIENT HERE, EVEN THOUGH IT IS THE BRUTEFORCE SOLUTION.\n        // (thankfully, the constraints given to us show that the input will be small so it's fine!)\n\n        //IMPORTANT NOTE: BACKTRACKING GIVES US ONLY UNIQUE SUBSETS HERE BECAUSE THE INPUT HAS UNIQUE VALUES (no duplicates).\n    }\n}\n",
+    "problemId": "subsets",
+    "statusDescription": "Compilation Error",
+    "time": "0.0",
+    "date": "2024-11-02T22:21:18.098Z",
+    "memory": "",
+    "stdout": "",
+    "stderr": ""
+}
