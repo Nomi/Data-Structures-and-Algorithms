@@ -27,7 +27,9 @@ public class Solution {
 
         //
 
-        return backtrack1Helper(nums, idx: 0, target, sumThusFar: 0, subset: new(), res);
+        backtrack1Helper(nums, idx: 0, target, sumThusFar: 0, subset: new(), res);
+        
+        return res;
     }
     //Time complexity: O(2^ target) because the smallest possible number in nums is 1, so we can have at most target number of 1s as the height of our decision tree (depth of deepest branch) and for each branch there can only be 2 decisions USE or DISCARD, we get 2^target as MAX number of possible nodes in the decision tree..
     //Space complexity: O((2^target+1)/2) // L = (N + 1)/2 where L is number of leaves for a tree with N nodes.
