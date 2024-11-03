@@ -20,6 +20,7 @@ public class Solution {
 
     public void backtrack1Helper(int[] nums, List<int> subset, HashSet<int> hashset, List<List<int>> res)
     {
+        //Came up with the following condition after watching a short from GregHogg.
         if(subset.Count == nums.Length) //As discussed before, backtracking for fixed length without repetition somehow leads to uniqueness in the answers?
         {
             res.Add(subset.ToList());
