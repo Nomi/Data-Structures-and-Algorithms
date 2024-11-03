@@ -9,11 +9,11 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P02_CombinationSum_LC39;
 public class Solution {
     public List<List<int>> CombinationSum(int[] nums, int target) 
     {
+        //:::IMPORTANT NOTES:::
         //READ THE COMMENTS!!!
         //WATCH THE NEETCODE VIDEO (just skim through it)
         //CHECK NEETCODEIO SOLNS (incl. the OPTIMAL verision!)
-        backtrack1(nums, target);
-        return res;
+        return backtrack1(nums, target);
     }
 
 
