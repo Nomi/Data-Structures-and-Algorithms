@@ -1,12 +1,12 @@
-5, Accepted
+6, Accepted
 {
     "language": "csharp",
-    "code": "public class Solution {\n    public List<List<int>> Permute(int[] nums) {\n        return backtrack1(nums);\n    }\n\n    public List<List<int>> backtrack1(int[] nums) \n    {\n        List<List<int>> res = new();\n        backtrack1Helper(nums, subset: new(nums.Length), hashset: new(nums.Length), res);\n        return res;\n    }\n\n    public void backtrack1Helper(int[] nums, List<int> subset, HashSet<int> hashset, List<List<int>> res)\n    {\n        //Came up with the following condition after watching a YouTube short from GregHogg.\n        if(subset.Count == nums.Length) //As discussed before, backtracking for fixed length without repetition somehow leads to uniqueness in the answers?\n        {\n            res.Add(subset.ToList());\n        }\n\n        for(int i=0; i<nums.Length; i++)\n        {\n            if(hashset.Contains(nums[i]))\n                continue;\n            \n            subset.Add(nums[i]);\n            hashset.Add(nums[i]);\n            backtrack1Helper(nums, subset, hashset, res);\n            subset.RemoveAt(subset.Count-1);\n            hashset.Remove(nums[i]);\n            //Since we MUST pick all of them at least once (by task description), we don't consider the case where we don't pick it, but just the cases for all possible numbers being at this position.\n        }\n    }\n}\n",
+    "code": "public class Solution {\n    public List<List<int>> Permute(int[] nums) {\n        //READ THE COMMENTS!!!\n        return backtrack1(nums);\n    }\n\n    public List<List<int>> backtrack1(int[] nums) \n    {\n        //READ COMMENTS OF THE HELPER!!\n        List<List<int>> res = new();\n        backtrack1Helper(nums, subset: new(nums.Length), hashset: new(nums.Length), res);\n        return res;\n    }\n\n    public void backtrack1Helper(int[] nums, List<int> subset, HashSet<int> hashset, List<List<int>> res)\n    {\n        //Came up with the following condition after watching a YouTube short from GregHogg.\n        if(subset.Count == nums.Length) //As discussed before, backtracking for fixed length without repetition somehow leads to uniqueness in the answers?\n        {\n            res.Add(subset.ToList());\n        }\n\n        for(int i=0; i<nums.Length; i++)\n        {\n            if(hashset.Contains(nums[i]))\n                continue;\n            \n            subset.Add(nums[i]);\n            hashset.Add(nums[i]);\n            backtrack1Helper(nums, subset, hashset, res);\n            subset.RemoveAt(subset.Count-1);\n            hashset.Remove(nums[i]);\n            //Since we MUST pick all of them at least once (by task description), we don't consider the case where we don't pick it, but just the cases for all possible numbers being at this position.\n        }\n    }\n}\n",
     "problemId": "permutations",
     "statusDescription": "Accepted",
-    "time": "0.487",
-    "date": "2024-11-03T04:29:16.110Z",
-    "memory": 52448,
+    "time": "0.582",
+    "date": "2024-11-03T20:51:38.322Z",
+    "memory": 76252,
     "stdout": "",
     "stderr": ""
 }

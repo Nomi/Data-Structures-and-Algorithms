@@ -8,11 +8,13 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P03_Permutations_LC46;
 
 public class Solution {
     public List<List<int>> Permute(int[] nums) {
+        //READ THE COMMENTS!!!
         return backtrack1(nums);
     }
 
     public List<List<int>> backtrack1(int[] nums) 
     {
+        //READ COMMENTS OF THE HELPER!!
         List<List<int>> res = new();
         backtrack1Helper(nums, subset: new(nums.Length), hashset: new(nums.Length), res);
         return res;
