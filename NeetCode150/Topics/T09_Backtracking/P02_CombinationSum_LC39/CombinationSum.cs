@@ -15,7 +15,7 @@ public class Solution {
         //CHECK NEETCODEIO SOLNS (incl. the OPTIMAL verision!)
 
         //Check the sortedOptimalBacktrack1 approach too (aside from the normal backtrack1) 
-        //backtrack1 is more important I guess? Just need to have a rough idea of how optimal backtrack works! (and remember it!)
+        //backtrack1 is more important I guess? Just need to have an idea of how optimal backtrack works! (and remember it!)
         
         // return backtrack1(nums, target);
         return sortedOptimalBacktrack1(nums, target);
