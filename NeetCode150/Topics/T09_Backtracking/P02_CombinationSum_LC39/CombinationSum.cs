@@ -60,10 +60,9 @@ public class Solution {
         return;
     }
 
-
+    //THE OPTIMAL part doesn't come from the time complexity or space complexity, but from SEARCH SPACE PRUNING!
     //Time complexity: O(2^target) because the smallest possible number in nums is 1, so we can have at most target number of 1s as the height of our decision tree (depth of deepest branch) and for each branch there can only be 2 decisions USE or DISCARD, we get 2^target as MAX number of possible nodes in the decision tree..
-    //Space complexity: O((2^target+1)/2) // L = (N + 1)/2 where L is number of leaves for a tree with N nodes.
-    //CAN ALSO READ MORE ABOUT THIS IN NEETCODEIO SOLNS
+    //Space complexity: O(2^target) // L = (N + 1)/2 where L is number of leaves for a tree with N nodes.
     public List<List<int>> sortedOptimalBacktrack1(int[] nums, int target)
     {
         Array.Sort(nums); //default sort by ascending I think
