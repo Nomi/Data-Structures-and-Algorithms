@@ -51,6 +51,11 @@ public class Solution {
 
         //IMPORTANT PART: SKIP ALL INSTANCES OF THIS DIGIT (because the backtrack1Helper recursive call above will deal with those, 
         // we simply use the next case to when NONE of ANY of this digit is used)
+        //This loop in conjunction with recursion helps do the following:
+        //* Assume we start with array [1, 1, 1, 1, 2]
+        //* First, above case considers [1], then [1,1], then [1,1,1], then [1,1,1,1], then [1,1,1,1,2]
+        //* The loop below makes it so that for each of the above levels, respectively, we consider the following cases after not including current element:
+        //* i.e. [2], [1,2], [1,1,2], [1,1,1,2], and then [1,1,1,2] where ".." represents not choosing the element that could have been there.
         while(idx+1 < nums.Length && nums[idx] == nums[idx+1])
             idx++;
 
