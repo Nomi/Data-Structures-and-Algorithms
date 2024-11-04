@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    public List<List<int>> SubsetsWithDup(int[] nums) {\n        //READ COMMENTS!!\n        //And watch Leetcode soln? (I had to read the written one on leetcodeio)\n        return backtrack1(nums);\n    }\n    \n    public List<List<int>> backtrack1(int[] nums)\n    {\n        List<List<int>> res = new(1 << nums.Length); //1<<n == 2^n //https://stackoverflow.com/a/10983207\n        \n        //IMPORTANT PART:\n        Array.Sort(nums);\n\n        backtrack1Helper(\n            nums: nums,\n            idx: 0,\n            subset: new(nums.Length),\n            res: res\n        );\n\n        return res;\n    }\n\n    public void backtrack1Helper(int[] nums, int idx, List<int> subset, List<List<int>> res)\n    {\n        // EACH DUPLICATE IN THE SET IS TREATED AS ITS OWN UNIQUE ENTITY (so subset can contain multiple of same value but not from the same index)! (I assume they wanted us to use a hashset for the first problem?)\n        //We CAN (not must) use the binary decision tree when there's NO possibility of NOT picking for each element.\n        //The n-nary decision tree (via iteration) helps when the elements MUST be picked (e.g. Permutations) (or we need to stop as soon as we can't pick up an element from all or unused-only options(like in \"Combination Sum\").\n\n        if(idx == nums.Length)\n        {\n            res.Add(new(subset)); //Use copy constructor to create new reference but same data\n            return;\n        }\n\n        //Case 1: Adding current element (only if it's not a duplicate / been encountered before.)\n        subset.Add(nums[idx]);\n        backtrack1Helper(nums, idx+1, subset, res);\n        subset.RemoveAt(subset.Count-1);\n\n        //IMPORTANT PART: SKIP ALL INSTANCES OF THIS DIGIT (because the backtrack1Helper recursive call above will deal with those, \n        // we simply use the next case to when NONE of ANY of this digit is used)\n        while(idx+1 < nums.Length && nums[idx] == nums[idx+1])\n            idx++;\n\n        //Case 2: We do not use the current element\n        backtrack1Helper(nums, idx+1, subset, res);\n        \n        return;\n    }\n}\n",
+    "problemId": "subsets-ii",
+    "statusDescription": "Accepted",
+    "time": "0.512",
+    "date": "2024-11-04T01:32:20.101Z",
+    "memory": 54168,
+    "stdout": "",
+    "stderr": ""
+}
