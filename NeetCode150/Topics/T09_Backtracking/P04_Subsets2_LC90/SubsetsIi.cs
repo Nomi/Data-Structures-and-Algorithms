@@ -55,7 +55,7 @@ public class Solution {
         //* Assume we start with array [1, 1, 1, 1, 2]
         //* First, above case considers [1], then [1,1], then [1,1,1], then [1,1,1,1], then [1,1,1,1,2]
         //* The loop below makes it so that for each of the above levels, respectively, we consider the following cases after not including current element:
-        //* i.e. [2], [1,2], [1,1,2], [1,1,1,2], and then [1,1,1,2] where ".." represents not choosing the element that could have been there.
+        //* i.e. [2], [1,2], [1,1,2], [1,1,1,2], [1,1,1,2], and then []
         while(idx+1 < nums.Length && nums[idx] == nums[idx+1])
             idx++;
 
