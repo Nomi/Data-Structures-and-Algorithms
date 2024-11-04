@@ -10,6 +10,8 @@ public class Solution {
     public List<List<int>> SubsetsWithDup(int[] nums) {
         //READ COMMENTS!!
         //And watch Leetcode soln? (I had to read the written one on leetcodeio)
+        //LOOK AT THE LEETCODEIO SOLN THAT MAKES THIS ITERATIVE!!
+        
         return backtrack1(nums);
     }
     
