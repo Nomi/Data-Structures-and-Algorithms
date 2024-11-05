@@ -8,6 +8,7 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P06_WordSearch_LC79;
 
 public class Solution {
     public bool Exist(char[][] board, string word) {
+        //DID IT ALL ON MY OWN, LET'S GOOOO!!!
         return backtrack1Wrapper(board, word);
     }
 
@@ -31,7 +32,7 @@ public class Solution {
             return false;
         
         char curr = board[x][y];
-        board[x][y] = '*';
+        board[x][y] = '*'; //COULD'VE USED A SET OF TUPLES IF MODIFYING ARRAY WAS NOT ALLOWED OR THERE WAS NO UNALLOWED CHARACTER.
 
         bool isFound = 
             backtrack1(board, word, idx+1, x+1, y) ||
