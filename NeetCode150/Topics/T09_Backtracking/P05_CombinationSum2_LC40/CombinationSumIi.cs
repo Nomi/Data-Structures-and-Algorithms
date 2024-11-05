@@ -71,7 +71,7 @@ public class Solution {
         while((idx+1)<candidates.Length && candidates[idx]==candidates[(idx+1)])
             idx++;
 
-        //Case 2: Don't pick this
+        //Case 2: Don't pick this (i.e. try the idx after this element finishes repeating)
         backtrack1_PickOrNotHelper(candidates, idx+1, target, curSum, subset, res);
         
         return;
