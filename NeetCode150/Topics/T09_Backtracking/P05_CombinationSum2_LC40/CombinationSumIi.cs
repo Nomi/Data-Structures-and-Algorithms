@@ -8,6 +8,8 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P05_CombinationSum2_LC40;
 
 public class Solution {
     public List<List<int>> CombinationSum2(int[] candidates, int target) {
+        //https://algo.monster/flowchart
+        
         //CHECK THE HASHMAP AND OPTIMAL VERSIONS ON NEETCODEIO (written ones)?????
         //WATCH THE NEETCODE VIDEO MAYBE!!!!
         return backtrack1_PickOrNot(candidates, target);
@@ -16,7 +18,7 @@ public class Solution {
 
     public List<List<int>> backtrack1_PickOrNot(int[] candidates, int target) 
     {
-                // FOR [2, 2] WE CAN HAVE SUBSETS [2, 2] (where each 2 is from different index) and [2]. Notice there's only ONE [2]. 
+        // FOR [2, 2] WE CAN HAVE SUBSETS [2, 2] (where each 2 is from different index) and [2]. Notice there's only ONE [2]. 
         //i.e. A subset may contain the duplicate values more than once, but each subset only appears once so ([2] and [2] are considered the same even if they're 2 from different indices).       
         
         //General note: 
