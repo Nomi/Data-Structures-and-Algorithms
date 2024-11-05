@@ -8,6 +8,8 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P08_LetterCombinationsOfAPhone
 
 public class Solution {
     public List<string> LetterCombinations(string digits) {
+        //GO THROUGH THE SOLUTION ONCE!
+        //(also, check neetcodeio soln for less verbose solution!)
         return backtrack1(digits);
     }
 
@@ -46,7 +48,7 @@ public class Solution {
         foreach(var c in map[digits[idx]])
         {
             //curStr.Append() is O(m) where m is max length of digits string, here 4, so very small impact.
-            backtrack1Helper(digits, idx+1, map, string.Concat(curStr,c), res);
+            backtrack1Helper(digits, idx+1, map, curStr + c, res);
         }
         return;
     }
