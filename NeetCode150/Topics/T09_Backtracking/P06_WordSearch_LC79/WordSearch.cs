@@ -8,6 +8,11 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P06_WordSearch_LC79;
 
 public class Solution {
     public bool Exist(char[][] board, string word) {
+        return backtrack1Wrapper(board, word);
+    }
+
+    public bool backtrack1Wrapper(char[][] board, string word)
+    {
         for(int i=0;i<board.Length;i++)
         {
             for(int j=0; j<board[i].Length;j++)
@@ -18,8 +23,6 @@ public class Solution {
         }
         return false;
     }
-
-
     public bool backtrack1(char[][]board, string word, int idx, int x, int y)
     {
         if(idx==word.Length)
