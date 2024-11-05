@@ -16,6 +16,8 @@ public class Solution {
     }
 
 
+    //TC: O(n*2^n) (length of subsets *  number of subsets) [we remove duplicates so it is not exactly 2^n subsets if there are duplicates]
+    //SC: O(n) //subset
     public List<List<int>> backtrack1_PickOrNot(int[] candidates, int target) 
     {
         // FOR [2, 2] WE CAN HAVE SUBSETS [2, 2] (where each 2 is from different index) and [2]. Notice there's only ONE [2]. 
