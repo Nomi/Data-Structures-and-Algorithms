@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    public List<List<string>> Partition(string s) {\n        //SIZE OF INPUT IS A GREAT CLARIFYING QUESTION! (and other constraints)\n        //ALSO CONFIRM EXPECTED TIME COMPLEXITY \n        //(say your solution, say the complexity and ask them if that's what they're looking for or I should think more)\n        \n        //Notice that no matter the string given (as long as it is not \"\"), you can partition it in this because at least you will have each individual character as a palindrome.\n        return (new Backtrack1(s)).Solve();\n    }\n}\n\npublic class Backtrack1\n{\n    List<List<string>> res; //all partitions\n    List<string> part; //current partition\n    //This solution MIGHT POSSIBLY improve by using ReadOnlySpan<Char> but the result and partitions contain the strings themselves\n    string s;\n    public Backtrack1(string s)\n    {\n        res = new(1<<s.Length); //O(2^n) [where n==s.Length]\n        part = new(s.Length); //O(n) because min partition is each element by itself\n        this.s = s;\n    }\n    public List<List<string>> Solve()\n    {\n        dfs(0);\n        return res;\n    } \n    public void dfs(int idx)\n    {\n        if(idx==s.Length)\n        {\n            res.Add(new(part));\n            return;\n        }\n\n        for(int j = idx;j<s.Length;j++) //is every possible string a palindrome\n        {\n            if(isPalindrome(s, idx, j))\n            {\n                part.Add(s[idx..(j+1)]);\n                dfs(j+1);\n                part.RemoveAt(part.Count-1);\n            }\n        }\n    }\n\n    public bool isPalindrome(string s, int i, int j)\n    {\n        for(;i<j;i++, j--)\n        {\n            if(s[i]!=s[j])\n                return false;\n        }\n        return true;\n    }\n}\n",
+    "problemId": "palindrome-partitioning",
+    "statusDescription": "Accepted",
+    "time": "0.474",
+    "date": "2024-11-05T23:59:15.367Z",
+    "memory": 53076,
+    "stdout": "",
+    "stderr": ""
+}
