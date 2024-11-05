@@ -9,7 +9,7 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P06_WordSearch_LC79;
 public class Solution {
     public bool Exist(char[][] board, string word) {
         //DID IT ALL ON MY OWN, LET'S GOOOO!!!
-        return backtrack1Wrapper(board, word);
+        return backtrack1Wrapper(board, word); //Read the ONE comment I left on it :P
     }
 
     public bool backtrack1Wrapper(char[][] board, string word)
