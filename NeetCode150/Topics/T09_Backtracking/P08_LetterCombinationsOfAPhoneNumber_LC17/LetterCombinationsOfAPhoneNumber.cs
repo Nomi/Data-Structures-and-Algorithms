@@ -26,7 +26,7 @@ public class Solution {
             {'6', new(){"m", "n", "o"}},
             {'7', new(){"p", "q", "r", "s"}},
             {'8', new(){"t", "u", "v"}},
-            {'9', new(){"x", "y", "z"}},
+            {'9', new(){"w", "x", "y", "z"}},
         };
         List<string> res = new(1<<digits.Length);
 
