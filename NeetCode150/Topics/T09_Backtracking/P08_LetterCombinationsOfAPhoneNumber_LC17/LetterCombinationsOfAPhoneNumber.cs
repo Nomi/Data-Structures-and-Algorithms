@@ -9,7 +9,7 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P08_LetterCombinationsOfAPhone
 public class Solution {
     public List<string> LetterCombinations(string digits) {
         //GO THROUGH THE SOLUTION ONCE!
-        //(also, check neetcodeio soln for less verbose solution!)
+        //(also, check neetcodeio soln for less verbose solution (and it is less syntax error prone e.g. forgetting new() before list initialization)!)
         return backtrack1(digits);
     }
 
