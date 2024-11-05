@@ -32,9 +32,9 @@ public class Solution {
 
         bool isFound = 
             backtrack1(board, word, idx+1, x+1, y) ||
-            // backtrack1(board, word, idx+1, x-1, y) ||
-            backtrack1(board, word, idx+1, x, y+1); //||
-            // backtrack1(board, word, idx+1, x, y-1);
+            backtrack1(board, word, idx+1, x-1, y) ||
+            backtrack1(board, word, idx+1, x, y+1) ||
+            backtrack1(board, word, idx+1, x, y-1);
 
         board[x][y] = curr;
 
