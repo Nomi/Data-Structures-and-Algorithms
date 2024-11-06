@@ -8,6 +8,8 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P07_PalindromePartitioning_LC1
 
 public class Solution {
     //HAD TO WATCH THE VIDEO TO DO IT! STILL DON'T FULLY UNDERSTAND
+    //this helps: https://www.geeksforgeeks.org/given-a-string-print-all-possible-palindromic-partition/
+    
     public List<List<string>> Partition(string s) {
         //** GENERAL TIPS: **
         //SIZE OF INPUT IS A GREAT CLARIFYING QUESTION! (and other constraints)
@@ -44,12 +46,12 @@ public class Backtrack1
             return;
         }
 
-        for(int j = idx;j<s.Length;j++) //is every possible string a palindrome
+        for(int j = idx;j<s.Length;j++) //is every possible substring (starting at idx) a palindrome
         {
             if(isPalindrome(s, idx, j))
             {
                 part.Add(s[idx..(j+1)]);
-                dfs(j+1);
+                dfs(j+1);       //dfs is in this loop because all divisions in a partition need to be palindromes, so any set that contains this substring would not fulfil the criteria so no need to go any further and we can stop/prune the search off.
                 part.RemoveAt(part.Count-1);
             }
         }
