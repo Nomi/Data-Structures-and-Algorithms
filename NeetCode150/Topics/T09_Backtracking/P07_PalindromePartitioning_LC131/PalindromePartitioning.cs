@@ -7,7 +7,9 @@ using System.Text;
 namespace DSA.NeetCode150.Topics.T09_Backtracking.P07_PalindromePartitioning_LC131;
 
 public class Solution {
+    //HAD TO WATCH THE VIDEO TO DO IT! STILL DON'T FULLY UNDERSTAND
     public List<List<string>> Partition(string s) {
+        //** GENERAL TIPS: **
         //SIZE OF INPUT IS A GREAT CLARIFYING QUESTION! (and other constraints)
         //ALSO CONFIRM EXPECTED TIME COMPLEXITY 
         //(say your solution, say the complexity and ask them if that's what they're looking for or I should think more)
