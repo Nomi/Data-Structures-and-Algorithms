@@ -9,6 +9,7 @@ namespace DSA.NeetCode150.Topics.T09_Backtracking.P09_NQueens_LC51;
 public class Solution {
     public List<List<string>> SolveNQueens(int n) { 
         //IMPORTANT!!! : WATCH NEETCODE VIDEO AND CHECK MY 1ST ATTEMPT (WaysToPlaceNQueens, recBacktrackHelper)!!
+        //I also had to check the solution a little before writing this and I checked for a little help many times, but it is still not hard!
         return WaysToPlaceNQueens(n);
     }
 
