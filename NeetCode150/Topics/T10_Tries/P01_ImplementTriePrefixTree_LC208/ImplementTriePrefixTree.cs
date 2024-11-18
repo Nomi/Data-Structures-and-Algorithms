@@ -10,6 +10,9 @@ public class PrefixTree {
     IPrefixTree soln;
     public PrefixTree() {
         //WATCH THE HACKERRANK VIDEO ABOUT TRIE FROM THE LADY WHO WROTE CRACKING THE CODING INTERVIEW.
+        
+        //Dictionary/HashMap would've been less verbose, thus easier to implement, while Array is faster in performance.
+
         soln = new Attempt1();
     }
     
