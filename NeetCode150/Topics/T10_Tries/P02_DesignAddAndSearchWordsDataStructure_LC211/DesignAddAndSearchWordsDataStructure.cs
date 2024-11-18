@@ -10,6 +10,10 @@ public class WordDictionary {
     IWordDictionary soln;
 
     public WordDictionary() {
+        //TBH it wasn't really hard. 
+        //I knew we would have to use DFS but I just wanted to see if we would go for the 
+        //more complicated approach (iterative until reaching wildcard), which would be 
+        //better performing. Ended up with the simpler decision of just only using dfs.
         soln =  new Attempt1();    
     }
     
