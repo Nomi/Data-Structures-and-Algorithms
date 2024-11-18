@@ -9,6 +9,7 @@ namespace DSA.NeetCode150.Topics.T10_Tries.P01_ImplementTriePrefixTree_LC208;
 public class PrefixTree {
     IPrefixTree soln;
     public PrefixTree() {
+        //WATCH THE HACKERRANK VIDEO ABOUT TRIE FROM THE LADY WHO WROTE CRACKING THE CODING INTERVIEW.
         soln = new Attempt1();
     }
     
