@@ -11,7 +11,7 @@ public class Solution {
         //Wasn't extremely hard, but very verbose (and the duplicates of words not being allowed was tricky).
 
         //IMPORTANT!!! I DID NOT THINK ABOUT THE SAME WORD APPEARING MULTIPLE TIMES!! (good clarification question?)
-        
+
         return Attempt1.FindWords(board, words);
     }
 }
@@ -52,7 +52,7 @@ public static class Attempt1
         return res.ToList();
     }
 
-    private static void dfs(char[][] board, int r, int c, TrieNode prevNode, List<char> wordSoFar, List<string> res)
+    private static void dfs(char[][] board, int r, int c, TrieNode prevNode, List<char> wordSoFar, HashSet<string> res)
     {
         // Console.WriteLine($"r:{r} / {board.Length-1}, c:{c} / {board[0].Length-1}");
         if(r<0||r>=board.Length||c<0||c>=board[0].Length||board[r][c]==visited||wordSoFar.Count==maxWordLen) //im dumb cuz I spend so long debugging just to realize I was using r > length and c > length instead of >= !!!
@@ -60,7 +60,7 @@ public static class Attempt1
             // Console.WriteLine($"{r<0}||{r>=board.Length}||{c<0}||{c>=board[0].Length}");
             return;
         }
-        Console.WriteLine($"--> {board[r][c]}, {wordSoFar.Count} / {maxWordLen}");
+        // Console.WriteLine($"--> {board[r][c]}, {wordSoFar.Count} / {maxWordLen}");
 
         if(!prevNode.children.ContainsKey(board[r][c]))
             return;
