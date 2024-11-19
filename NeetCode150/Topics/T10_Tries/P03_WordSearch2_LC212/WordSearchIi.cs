@@ -10,7 +10,8 @@ public class Solution {
     public List<string> FindWords(char[][] board, string[] words) {
         //Wasn't extremely hard, but very verbose (and the duplicates of words not being allowed was tricky).
 
-        //Watch NeetCode video!! (especially to see how the refs based non-HashSet solution works!)
+        //Watch NeetCode video!! (especially to see how the refs based non-HashSet solution works!) 
+        //OHH maybe I could also just have set isWord to false for each node that I added to the list instead of switching to hashset
 
         //IMPORTANT!!! I DID NOT THINK ABOUT THE SAME WORD APPEARING MULTIPLE TIMES!! (good clarification question?)
 
