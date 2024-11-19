@@ -14,7 +14,7 @@ public class Solution {
         
     }
 
-    ////////// DFS:
+    ////////// DFS (+overwriting original array):
     public int dfs1Wrapper(char[][] grid)
     {
         //TC: O(ROWS*COLUMNS) SC: O(ROWS*COLUMNS)
@@ -48,7 +48,7 @@ public class Solution {
     }
 
 
-    ////////// BFS (WITHOUT overwriting input array)
+    ////////// BFS (+ WITHOUT overwriting input array)
     HashSet<(int r, int c)> seen;
     public int bfs1_MarkIslandVisited(char[][] grid) //marks connected parts of islands as visited.
     {
