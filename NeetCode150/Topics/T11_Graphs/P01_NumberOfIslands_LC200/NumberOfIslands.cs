@@ -8,6 +8,9 @@ namespace DSA.NeetCode150.Topics.T11_Graphs.P01_NumberOfIslands_LC200;
 
 public class Solution {
     public int NumIslands(char[][] grid) {
+        //COULD'VE DONE BFS!!!
+
+        //TC: O(ROWS*COLUMNS) SC: O(ROWS*COLUMNS)
         int numIslands = 0;
         for(int r = 0; r < grid.Length; r++)
         {
