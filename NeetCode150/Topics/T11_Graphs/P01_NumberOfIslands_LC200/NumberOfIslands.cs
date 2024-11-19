@@ -8,8 +8,14 @@ namespace DSA.NeetCode150.Topics.T11_Graphs.P01_NumberOfIslands_LC200;
 
 public class Solution {
     public int NumIslands(char[][] grid) {
-        //COULD'VE DONE BFS!!!
+        
+        return dfs1Wrapper(grid);
+        
+    }
 
+    ////////// DFS:
+    public int dfs1Wrapper(char[][] grid)
+    {
         //TC: O(ROWS*COLUMNS) SC: O(ROWS*COLUMNS)
         int numIslands = 0;
         for(int r = 0; r < grid.Length; r++)
@@ -25,7 +31,6 @@ public class Solution {
         }
         return numIslands;
     }
-
     char visited = '*'; //if not allowed to overwrite input array, we could use a seen (HashSet of tuples r,c),
     public void dfs1_MarkIslandVisited(char[][] grid, int r, int c) //marks connected parts of islands as visited.
     {
@@ -39,5 +44,12 @@ public class Solution {
         dfs1_MarkIslandVisited(grid, r, c+1); //right
         dfs1_MarkIslandVisited(grid, r, c-1); //left
         return;
+    }
+
+
+    ////////// BFS (WITHOUT overwriting input array)
+    public void bfs1_MarkIslandVisited(char[][] grid) //marks connected parts of islands as visited.
+    {
+        throw new NotImplementedException();
     }
 }
