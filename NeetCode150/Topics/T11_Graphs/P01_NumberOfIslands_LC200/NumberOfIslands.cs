@@ -74,6 +74,7 @@ public class Solution {
     public void bfs1_Helper(char[][] grid, (int r, int c) _rc)
     {
         Queue<(int r, int c)> q = new();
+        //Earlier, I spent a while trying to fix it when i had simply just added the _rc to seen here and so it never did anything except add that to seen (check if condition inside loop)
         q.Enqueue(_rc);
         while(q.Count>0)
         {
