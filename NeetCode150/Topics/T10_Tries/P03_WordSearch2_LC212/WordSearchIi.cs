@@ -50,28 +50,29 @@ public static class Attempt1
 
     private static void dfs(char[][] board, int r, int c, TrieNode prevNode, List<char> wordSoFar, List<string> res)
     {
-        Console.WriteLine($"r:{r} / {board.Length-1}, c:{c} / {board[0].Length-1}");
-
+        // Console.WriteLine($"r:{r} / {board.Length-1}, c:{c} / {board[0].Length-1}");
         if(r<0||r>=board.Length||c<0||c>=board[0].Length||board[r][c]==visited||wordSoFar.Count==maxWordLen) //im dumb cuz I spend so long debugging just to realize I was using r > length and c > length instead of >= !!!
+        {
+            // Console.WriteLine($"{r<0}||{r>=board.Length}||{c<0}||{c>=board[0].Length}");
             return;
+        }
+        Console.WriteLine($"--> {board[r][c]}, {wordSoFar.Count} / {maxWordLen}");
 
         if(!prevNode.children.ContainsKey(board[r][c]))
             return;
 
-        Console.WriteLine($"--> {board[r][c]}, {wordSoFar.Count} / {maxWordLen}         {string.Concat(wordSoFar)}");
-        
         var curChar = board[r][c];
         board[r][c] = visited;
         wordSoFar.Add(curChar);
 
         var curNode = prevNode.children[curChar];
-        if(curNode.isWord) Console.WriteLine($"-----------------------------{string.Concat(wordSoFar)}");
+        // if(curNode.isWord) Console.WriteLine($"-----------------------------{string.Concat(wordSoFar)}");
         if(curNode.isWord) res.Add(string.Concat(wordSoFar));
 
-        dfs(board, r-1, c, root, wordSoFar, res);
-        dfs(board, r+1, c, root, wordSoFar, res);
-        dfs(board, r, c-1, root, wordSoFar, res);
-        dfs(board, r, c+1, root, wordSoFar, res);
+        dfs(board, r-1, c, curNode, wordSoFar, res);    //I SPENT SOOO FUCKING LONG TO DEBUG THE IF CONDITIONS AT THE TOP THAT I DIDN'T REALIZE THE PROBLEM WAS I WAS PASSING ROOT INSTEAD OF CURRENT NODE BY MISTAKE WTFFF!!!
+        dfs(board, r+1, c, curNode, wordSoFar, res);
+        dfs(board, r, c-1, curNode, wordSoFar, res);
+        dfs(board, r, c+1, curNode, wordSoFar, res);
 
         wordSoFar.RemoveAt(wordSoFar.Count-1);
         board[r][c] = curChar;
