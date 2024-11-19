@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    public int NumIslands(char[][] grid) {\n        int numIslands = 0;\n        for(int r = 0; r < grid.Length; r++)\n        {\n            for(int c = 0; c< grid[0].Length; c++)\n            {\n                if(grid[r][c] == '1')\n                {\n                    numIslands += 1;\n                    dfs1_MarkIslandVisited(grid, r, c);\n                }\n            }\n        }\n        return numIslands;\n    }\n\n    char visited = '*'; //if not allowed to overwrite input array, we could use a seen (HashSet of tuples r,c),\n    public void dfs1_MarkIslandVisited(char[][] grid, int r, int c) //marks connected parts of islands as visited.\n    {\n        if(r<0 || r>= grid.Length || c<0 || c>=grid[r].Length || grid[r][c] != '1')\n            return;\n        \n        grid[r][c]=visited;\n\n        dfs1_MarkIslandVisited(grid, r+1, c); //down\n        dfs1_MarkIslandVisited(grid, r-1, c); //up\n        dfs1_MarkIslandVisited(grid, r, c+1); //right\n        dfs1_MarkIslandVisited(grid, r, c-1); //left\n        return;\n    }\n}\n",
+    "problemId": "count-number-of-islands",
+    "statusDescription": "Accepted",
+    "time": "0.396",
+    "date": "2024-11-19T22:51:53.027Z",
+    "memory": 56188,
+    "stdout": "",
+    "stderr": ""
+}
