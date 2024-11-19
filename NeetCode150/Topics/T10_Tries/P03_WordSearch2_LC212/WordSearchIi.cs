@@ -8,6 +8,10 @@ namespace DSA.NeetCode150.Topics.T10_Tries.P03_WordSearch2_LC212;
 
 public class Solution {
     public List<string> FindWords(char[][] board, string[] words) {
+        //Wasn't extremely hard, but very verbose (and the duplicates of words not being allowed was tricky).
+
+        //IMPORTANT!!! I DID NOT THINK ABOUT THE SAME WORD APPEARING MULTIPLE TIMES!! (good clarification question?)
+        
         return Attempt1.FindWords(board, words);
     }
 }
@@ -34,7 +38,7 @@ public static class Attempt1
             AddWord(word, root);
         }
 
-        List<string> res = new();
+        HashSet<string> res = new(); //IMPORTANT!!! I DID NOT THINK ABOUT THE SAME WORD APPEARING MULTIPLE TIMES!! (good clarification question?)
         List<char> wordSoFar = new(maxWordLen);
 
         for(int r=0; r<board.Length;r++)
@@ -45,7 +49,7 @@ public static class Attempt1
             }
         }
 
-        return res;
+        return res.ToList();
     }
 
     private static void dfs(char[][] board, int r, int c, TrieNode prevNode, List<char> wordSoFar, List<string> res)
