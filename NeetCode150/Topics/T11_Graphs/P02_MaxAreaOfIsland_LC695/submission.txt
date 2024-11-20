@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    public int MaxAreaOfIsland(int[][] grid) {\n        return dfs1(grid);\n    }\n\n    /////// DFS (NO INPUT ARRAY OVERWRITE)\n    HashSet<(int r, int c)> seen;\n    int dfs1(int[][] grid)\n    {\n        seen=new();\n\n        int maxArea = 0;\n        for(int r=0; r<grid.Length; r++)\n        {\n            for(int c=0; c<grid[0].Length; c++)\n            {\n                var rc = (r,c);\n                if(grid[r][c]==1 && !seen.Contains(rc))\n                {\n                    var curArea = dfs1Helper(grid, rc);\n                    if(maxArea < curArea)\n                        maxArea = curArea;\n                }\n            }\n        }\n        return maxArea;\n    }\n\n    int dfs1Helper(int[][] grid, (int r, int c) rc)\n    {\n        if(rc.r<0||rc.r>=grid.Length||rc.c<0||rc.c>=grid[rc.r].Length||grid[rc.r][rc.c]==0 || seen.Contains(rc)) //keep forgetting to add 'rc.' before r and c here. Could try (int r, int c) = rc above this line for easy fix.\n            return 0;\n\n        int sum = 1;\n        seen.Add(rc);\n\n        sum += dfs1Helper(grid, (rc.r-1, rc.c)); //Up\n        sum += dfs1Helper(grid, (rc.r+1, rc.c)); //Down\n        sum += dfs1Helper(grid, (rc.r, rc.c-1)); //Left\n        sum += dfs1Helper(grid, (rc.r, rc.c+1)); //Right\n\n        return sum;\n    }\n}\n",
+    "problemId": "max-area-of-island",
+    "statusDescription": "Accepted",
+    "time": "0.417",
+    "date": "2024-11-20T00:00:44.714Z",
+    "memory": 55952,
+    "stdout": "",
+    "stderr": ""
+}
