@@ -8,6 +8,7 @@ namespace DSA.NeetCode150.Topics.T11_Graphs.P05_RottingOranges_LC994;
 
 public class Solution {
     public int OrangesRotting(int[][] grid) {
+        //READ COMMENTS!!
         return msbfs1(grid);
     }
 
