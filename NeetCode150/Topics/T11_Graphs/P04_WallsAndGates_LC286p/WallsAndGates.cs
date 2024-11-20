@@ -11,6 +11,9 @@ public class Solution {
 
     public void islandsAndTreasure(int[][] grid) {
         //GO THROUGH THIS!!! (multi-source BFS is kinda fkn nifty!!)
+        //Greg Hogg's YouTube Short (58secs): https://www.youtube.com/watch?v=eObg8suJOBU
+        //Maybe use this? https://medium.com/geekculture/multisource-bfs-for-your-faang-coding-interviews-d5177753f507
+        
         multisourceBfs1(grid);
     }
 
