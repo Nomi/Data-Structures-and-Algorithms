@@ -42,7 +42,7 @@ public class Solution {
             }
         }
         if(freshFruitCount==0)
-            return freshFruitCount;
+            return 0;
 
         //BFS
         while(q.Count>0) //TC: O(r*c)
