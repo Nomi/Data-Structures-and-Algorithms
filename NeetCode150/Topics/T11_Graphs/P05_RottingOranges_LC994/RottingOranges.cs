@@ -23,7 +23,8 @@ public class Solution {
         // - Coming up with the freshFruitCount was(or seems like) a happy accident.
         // - I FORGOT TO READ THE QUESTION AGAIN AND DIDN'T REALIZE I NEEDED TO RETURN A -1
         // - I NEED TO MAKE SURE TO NOT JUST ASSUME STUFF IN THE INTERVIEWS (WHERE THIS KIND OF STUFF ISN'T EVEN LISTED, BUT YOU'RE REQUIRED TO ASK OR STATE YOUR ASSUMPTIONS)
-        // - FORGOT ABOUT THE EDGE CASE WHERE THERE ARE ALREADY NO FRESH FRUITS UNTIL FAILED A TEST CASE!!! NEED TO HANDLE THAT (OR SHOULD JUST MOVE THE -2 FROM THE FINAL RETURN TO WHEN ASSIGNING maxSeconds EACH TIME)
+        // - FORGOT ABOUT THE EDGE CASE WHERE THERE ARE ALREADY NO FRESH FRUITS UNTIL FAILED A TEST CASE!!! NEED TO HANDLE THAT (OR SHOULD JUST MOVE THE -2 FROM THE FINAL RETURN TO WHEN ASSIGNING maxSeconds EACH TIME AND INITIALIZE maxSeconds TO 0)
+        // - TURNS OUT THE GRID DOESN'T NEED TO BE n*n IN SIZE (not neccessarily a square grid). (found this out after exception in a test case)
 
         int maxSeconds = 0;
         int freshFruitCount = 0;
@@ -32,7 +33,7 @@ public class Solution {
         //Add the starting points (sources)
         for(int r=0; r<grid.Length; r++) //TC: O(r*c)
         {
-            for(int c=0; c<grid.Length; c++)
+            for(int c=0; c<grid[0].Length; c++)
             {
                 if(grid[r][c]==rotten)
                     q.Enqueue((r,c));
@@ -40,6 +41,8 @@ public class Solution {
                     freshFruitCount++;
             }
         }
+        if(freshFruitCount==0)
+            return freshFruitCount;
 
         //BFS
         while(q.Count>0) //TC: O(r*c)
@@ -56,7 +59,7 @@ public class Solution {
     }
     public void handleCurrent1(int r, int c, int prevR, int prevC, ref int maxSeconds, ref int freshFruitCount, int[][] grid, Queue<(int r, int c)> q)
     {
-        if(r<0 || c<0 || r>=grid.Length || c>=grid.Length || grid[r][c]!=fresh)
+        if(r<0 || c<0 || r>=grid.Length || c>=grid[0].Length || grid[r][c]!=fresh)
             return;
         freshFruitCount--; //due to the condition, each fresh fruit will be processed only once and that too by its nearest rotten fruit (or whichever ends up in being first in the queue if there are multiple same distance away).
         grid[r][c] += grid[prevR][prevC]; //think about it. it works out to place number of minutes required for the rot to reach current place.
