@@ -9,6 +9,7 @@ namespace DSA.NeetCode150.Topics.T11_Graphs.P05_RottingOranges_LC994;
 public class Solution {
     public int OrangesRotting(int[][] grid) {
         //READ COMMENTS!!
+        //only if you want to, check the BFS (No Queue) solution BUT keep in mind its Time Complexity is HORRENDOUS (O((r*c)^2)) even though its space complexity is O(1) since it just uses the original array. //Given our constraints, it either doesn't matter or the normal queue based bfs might be a better, balanced approach.
         return msbfs1(grid);
     }
 
