@@ -26,7 +26,7 @@ public class Solution {
         // - (Edge Case:??) I FORGOT TO READ THE QUESTION AGAIN AND DIDN'T REALIZE I NEEDED TO RETURN A -1
         // - I NEED TO MAKE SURE TO NOT JUST ASSUME STUFF IN THE INTERVIEWS (WHERE THIS KIND OF STUFF ISN'T EVEN LISTED, BUT YOU'RE REQUIRED TO ASK OR STATE YOUR ASSUMPTIONS)
         // - EDGE CASE: FORGOT ABOUT THE EDGE CASE WHERE THERE ARE ALREADY NO FRESH FRUITS UNTIL FAILED A TEST CASE!!! NEED TO HANDLE THAT (OR SHOULD JUST MOVE THE -2 FROM THE FINAL RETURN TO WHEN ASSIGNING maxSeconds EACH TIME AND INITIALIZE maxSeconds TO 0)
-        // - TURNS OUT THE GRID DOESN'T NEED TO BE n*n IN SIZE (not neccessarily a square grid). (found this out after exception in a test case)
+        // - (EDGE CASE:??) TURNS OUT THE GRID DOESN'T NEED TO BE n*n IN SIZE (not neccessarily a square grid). (found this out after exception in a test case)
 
         int maxSeconds = 0;
         int freshFruitCount = 0;
