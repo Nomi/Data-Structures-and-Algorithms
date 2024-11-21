@@ -29,6 +29,8 @@ public class Dfs1 : ISurroundedRegionsSolver
     // * COULDN'T COME UP WITH THE SOLUTION ON MY OWN (did think about trying to invert the problem but I did not invert it correctly enough)
     // * HAD TO WATCH NEETCODE'S VIDEO TO WRITE THIS!!!!
 
+    // I had initially CONCIOUSLY assumed that ROWS==COLS but I did comment next to the loop that I was assuming this.
+
     const char O = 'O';
     const char X = 'X';
     const char NOT_SURROUNDED = '#';
