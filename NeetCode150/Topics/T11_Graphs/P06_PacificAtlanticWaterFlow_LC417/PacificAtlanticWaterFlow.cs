@@ -21,6 +21,7 @@ public class Solution {
         //      + [EXTRA IMPORTANT] We can't discard nodes we visit from current node but water can't flow from there because a path without current node/cell might also exist.
         // - Had to check soln on neetcodeio to see previous value was provided as an int from the argument
         // - Took me like 40 minutes even with all the above help (was my first time), so might need to practice? (or maybe I can already do it faster?)
+        // - Maybe you should watch the full neetcode video now?
         solver = new DfsAttempt1();
         return solver.Solve(heights);
     }
