@@ -57,7 +57,7 @@ public class Dfs1 : ISurroundedRegionsSolver
         for(int c=0; c<board[0].Length; c++)
         {
             if(board[0][c] == O) markNotSurroundedIfVistedDfs(0, c, board);//TOP EDGE
-            if(board[board.Length-1][c] == O) markNotSurroundedIfVistedDfs(board.Length-1, c, board);//BOTTOM EDGE
+            if(board[board.Length-1][c] == O) markNotSurroundedIfVistedDfs(board.Length-1, c, board);//BOTTOM EDGE      //I SPENT HOURS DEBUGGING THIS WHOLE PROGRAM WITH NO IDEA WHAT WAS WRONG BUT I WAS USING [0] IN THE INDEDX INSTEAD OF [c]!!
         }
 
 
