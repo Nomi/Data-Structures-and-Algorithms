@@ -11,6 +11,18 @@ public class Solution
     ICourseSchedule soln;
     public bool CanFinish(int numCourses, int[][] prerequisites) 
     {
+        //[!!!IMPORTANT!!!] 
+        //NEED TO PRACTICE!!! 
+        //I had done this approximately 3 months ago but forgot.
+        //I started by trying an overcomplicated method (using Nodes and building adjacency lists, etc.),
+        //but when it got too complicated I checked the solution on neetcodeio and remembered we could do it the way I finally ended up doing it in DfsAttempt1.
+        //I think I have heard of Kahn's algorithm but forgot.
+        
+        //[!!!IMPORTANT!!!] 
+        //CHECK THE [OPTIMIZATION] comment IN DfsAttempt1.dfsCycleDetector
+        //I DID NOT REALIZE UNTIL THE END WHEN I WAS CALCULATING TIMECOMPLEXITY THAT WE COULD OPTIMIZE THIS WAY!!!
+        //I did refer(sneak a peak at) to neetcodeio soln how they did it for inspiration.
+        
         soln = new DfsAttempt1();
         return soln.CanFinish(numCourses, prerequisites);
     }
@@ -32,7 +44,7 @@ public class DfsAttempt1 : ICourseSchedule
         visiting = new();
         
         //Fill prereqMap:
-        for(int i=0; i<prerequisites.Length;  i++)
+        for(int i=0; i<prerequisites.Length;  i++) //O(N) where N is numCourses
         {
             prereqMap.TryAdd(prerequisites[i][0], new());
             prereqMap[prerequisites[i][0]].Add(prerequisites[i][1]);
@@ -40,9 +52,10 @@ public class DfsAttempt1 : ICourseSchedule
         }
 
         //DFS to find cycles (meaning you can't take courses in that cycle):
+        //O(N*())
         for(int course=0; course<numCourses; course++) //Given that that the courses will be numbered 0 to numCourses-1, we can manually use a normal for loop to do that instead of looping over prereqMap keys.
         {
-            if(false == dfsCycleDetector(course))
+            if(false == dfsCycleDetector(course)) //CHECK THE [OPTIMIZATION] comment IN dfsCycleDetector
                 return false;
         }
 
@@ -66,7 +79,7 @@ public class DfsAttempt1 : ICourseSchedule
         }
         
         visiting.Remove(course);
-
+        prereqMap.Remove(course); //[OPTIMIZATION] DAMN! I WAS CALCULATING TIME COMPLEXITY AND ONLY THEN DID I REALIZE OF THIS IMPROVEMENT!!! (since we already found it doesn't need prerequisites), this way we will never go through it again, saving us time.
         return true;
     }
 }
