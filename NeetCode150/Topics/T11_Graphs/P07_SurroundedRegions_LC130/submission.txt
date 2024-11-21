@@ -1,0 +1,12 @@
+1, Wrong Answer
+{
+    "language": "csharp",
+    "code": "public class Solution {\n\n    ISurroundedRegionsSolver solver;\n    public void Solve(char[][] board) {\n        solver = new Dfs1();\n        solver.Solve(board);\n    }\n}\n\npublic interface ISurroundedRegionsSolver\n{\n    void Solve(char[][] board);\n}\n\npublic class Dfs1 : ISurroundedRegionsSolver\n{\n    //COULDN'T COME UP WITH THE SOLUTION ON MY OWN (did think about trying to invert the problem but I did not invert it correctly enough)\n\n    const char O = 'O';\n    const char X = 'X';\n    const char NOT_SURROUNDED = '#';\n\n    public void Solve(char[][] board) \n    {\n        //Clearly, for an edge to be NOT SURROUNDED, it needs to connect directly OR indirectly to the outer boundaries of the array.\n\n        //1. MARK SURROUNDED TILES\n        for(int rc=0; rc<board.Length; rc++) //Assumes NUM ROWS == NUM COLS\n        {\n            markNotSurroundedIfVistedDfs(rc, 0, board);//LEFT EDGE\n            markNotSurroundedIfVistedDfs(0, rc, board);//TOP EDGE\n            markNotSurroundedIfVistedDfs(rc, board.Length-1, board);//RIGHT EDGE\n            markNotSurroundedIfVistedDfs(board.Length-1, rc, board);//BOTTOM EDGE\n        }\n\n        //2. TURN NOT_SURROUNDED TILES BACK TO `O`s AND SURROUNDED TO `X`s.\n        for(int r=0; r<board.Length; r++)\n        {\n            for(int c=0; c<board[0].Length; c++) //assumes every row is of same length\n            {\n                if(board[r][c] == O)\n                    board[r][c] = X;\n                else if(board[r][c]==NOT_SURROUNDED)\n                    board[r][c] = O;\n            }\n        }\n    }\n\n    public void markNotSurroundedIfVistedDfs(int r, int c, char[][] board)\n    {\n        if(r<0 || c<0 || r>= board.Length || c>= board[0].Length || board[r][c] != O)\n            return;\n        \n        board[r][c] = NOT_SURROUNDED;\n\n        markNotSurroundedIfVistedDfs(r-1, c, board);//up\n        markNotSurroundedIfVistedDfs(r+1, c, board);//down\n        markNotSurroundedIfVistedDfs(r, c-1, board);//left\n        markNotSurroundedIfVistedDfs(r, c+1, board);//right\n    }\n}\n",
+    "problemId": "surrounded-regions",
+    "statusDescription": "Wrong Answer",
+    "time": "0.401",
+    "date": "2024-11-21T21:02:03.067Z",
+    "memory": 55832,
+    "stdout": "",
+    "stderr": ""
+}
