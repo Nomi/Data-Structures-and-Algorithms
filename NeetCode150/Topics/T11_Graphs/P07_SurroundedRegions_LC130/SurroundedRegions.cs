@@ -38,25 +38,27 @@ public class Dfs1 : ISurroundedRegionsSolver
         // [!!!IMPORTANT!!!] DOING IT ALL TOGETHER IN ONE LOOP BREAKS IT!!! //[ANSWER] TURNS OUT 
 
         //1. MARK SURROUNDED TILES
-        for(int rc=0; rc<board.Length; rc++) //Assumes NUM ROWS == NUM COLS ////technically we can ignore the top left, top right, bottom left, and bottom right cells because they can't encase or un-encase anything.
-        {
-            if(board[rc][0] == O) markNotSurroundedIfVistedDfs(rc, 0, board);//LEFT EDGE
-            markNotSurroundedIfVistedDfs(0, rc, board);//TOP EDGE
-            markNotSurroundedIfVistedDfs(rc, board.Length-1, board);//RIGHT EDGE
-            markNotSurroundedIfVistedDfs(board.Length-1, rc, board);//BOTTOM EDGE
-        }
+
+        //If NUM ROWS == NUM COLS
+        // for(int rc=0; rc<board.Length; rc++) //Assumes NUM ROWS == NUM COLS ////technically we can ignore the top left, top right, bottom left, and bottom right cells because they can't encase or un-encase anything.
+        // {
+        //     if(board[rc][0] == O) markNotSurroundedIfVistedDfs(rc, 0, board);//LEFT EDGE
+        //     markNotSurroundedIfVistedDfs(0, rc, board);//TOP EDGE
+        //     markNotSurroundedIfVistedDfs(rc, board.Length-1, board);//RIGHT EDGE
+        //     markNotSurroundedIfVistedDfs(board[0].Length-1, rc, board);//BOTTOM EDGE
+        // }
         
-        //If NUM ROWS != NUM COLS
-        // for(int r=0; r<board.Length; r++) //technically we can ignore the top left, top right, bottom left, and bottom right cells because they can't encase or un-encase anything.
-        // {
-        //     if(board[r][0] == O) markNotSurroundedIfVistedDfs(r, 0, board);//LEFT EDGE
-        //     if(board[r][board[0].Length-1] == O) markNotSurroundedIfVistedDfs(r, board.Length-1, board);//RIGHT EDGE
-        // }
-        // for(int c=0; c<board[0].Length; c++)
-        // {
-        //     if(board[0][c] == O) markNotSurroundedIfVistedDfs(0, c, board);//TOP EDGE
-        //     if(board[board[0].Length-1][c] == O) markNotSurroundedIfVistedDfs(board[0].Length-1, c, board);//BOTTOM EDGE
-        // }
+        // //If NUM ROWS != NUM COLS
+        for(int r=0; r<board.Length; r++) //technically we can ignore the top left, top right, bottom left, and bottom right cells because they can't encase or un-encase anything.
+        {
+            if(board[r][0] == O) markNotSurroundedIfVistedDfs(r, 0, board);//LEFT EDGE
+            if(board[r][board[0].Length-1] == O) markNotSurroundedIfVistedDfs(r, board[0].Length-1, board);//RIGHT EDGE
+        }
+        for(int c=0; c<board[0].Length; c++)
+        {
+            if(board[0][c] == O) markNotSurroundedIfVistedDfs(0, c, board);//TOP EDGE
+            if(board[board.Length-1][c] == O) markNotSurroundedIfVistedDfs(board.Length-1, c, board);//BOTTOM EDGE
+        }
 
 
         //2. TURN NOT_SURROUNDED TILES BACK TO `O`s AND SURROUNDED TO `X`s.
