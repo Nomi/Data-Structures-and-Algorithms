@@ -10,6 +10,10 @@ public class Solution {
 
     ISurroundedRegionsSolver solver;
     public void Solve(char[][] board) {
+        // # IMPORTANT NOTES:
+        // * COULDN'T COME UP WITH THE SOLUTION ON MY OWN (did think about trying to invert the problem but I did not invert it correctly enough)
+        // * HAD TO WATCH NEETCODE'S VIDEO TO WRITE THIS!!!!
+        // * READ THE COMMENTS FOR Dfs1
         solver = new Dfs1();
         solver.Solve(board);
     }
@@ -22,7 +26,8 @@ public interface ISurroundedRegionsSolver
 
 public class Dfs1 : ISurroundedRegionsSolver
 {
-    //COULDN'T COME UP WITH THE SOLUTION ON MY OWN (did think about trying to invert the problem but I did not invert it correctly enough)
+    // * COULDN'T COME UP WITH THE SOLUTION ON MY OWN (did think about trying to invert the problem but I did not invert it correctly enough)
+    // * HAD TO WATCH NEETCODE'S VIDEO TO WRITE THIS!!!!
 
     const char O = 'O';
     const char X = 'X';
@@ -48,7 +53,7 @@ public class Dfs1 : ISurroundedRegionsSolver
         //     markNotSurroundedIfVistedDfs(board[0].Length-1, rc, board);//BOTTOM EDGE
         // }
         
-        // //If NUM ROWS != NUM COLS
+        //If NUM ROWS != NUM COLS
         for(int r=0; r<board.Length; r++) //technically we can ignore the top left, top right, bottom left, and bottom right cells because they can't encase or un-encase anything.
         {
             if(board[r][0] == O) markNotSurroundedIfVistedDfs(r, 0, board);//LEFT EDGE
