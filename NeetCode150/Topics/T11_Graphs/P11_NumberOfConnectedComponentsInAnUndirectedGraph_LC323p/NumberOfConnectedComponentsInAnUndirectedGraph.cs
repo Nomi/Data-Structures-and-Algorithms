@@ -9,6 +9,7 @@ namespace DSA.NeetCode150.Topics.T11_Graphs.P11_NumberOfConnectedComponentsInAnU
 public class Solution {
     public int CountComponents(int n, int[][] edges) {
         //Did it by myself since I had done a similar problem Graph Valid Tree an hour or two ago. (though that one took me a long while, this one was done in ~20 minutes)
+        //Refer to Graph Valid Tree if needed.
         return Dfs1Wrapper(n, edges);
     }
 
