@@ -12,8 +12,12 @@ public class Solution
     public bool CanFinish(int numCourses, int[][] prerequisites) 
     {
         //I SHOULD HAVE REALIZED THAT numCourses was to get all the course names because there was no other relaible way to do it (AS ALWAYS, LEARN TO CAREFULLY READ THE FKIN PROBLEM!!!)
-        //WATCH NEETCODE VIDEO TO FIGURE OUT TIME COMPLEXITIES???
         
+        //[!!!IMPORTANT!!!]
+        //ACCORDING TO TakeUForward's video on Kahn (also applies to other graph algorithms with similar time complexities):
+        // SC: O(V+E), we store each vertex and its outgoing edges (and since it is a directed graph, any edge will only belong to/stored for the vertex it is going out from!)
+        // TC: O(V+E), similarly, each Vertex AND Edge is considered only ONCE.
+
         //[!!!IMPORTANT!!!] 
         //NEED TO PRACTICE!!! 
         //I had done this approximately 3 months ago but forgot.
