@@ -33,7 +33,7 @@ public class Solution {
         int numConnectedComponents = 0;
         HashSet<int> visited = new(n); //To track nodes already visited (helps with cycle detection and also checking if a node is a part of a connected component discovered before)
 
-        for(int node = 0; node<n; node++) //TC (including DFS): O(V+E) where V==n, because we only visit each node once and the number of other nodes we visit from each node sums up to the total number of edges (obvious / by definition).
+        for(int node = 0; node<n; node++) //TC (including DFS): O(V+E) where V==n, because we only visit each node once and the number of other nodes we visit from each node sums up to the total number of edges because we only traverse each edge only once using the hashset's power (obvious / by definition).
         {
             if(visited.Contains(node))
                 continue;
