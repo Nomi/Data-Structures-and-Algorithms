@@ -14,6 +14,12 @@ public class Solution {
         //Refer to Graph Valid Tree if needed.
         soln = new Dfs1();
 
+        // For Union Find using Disjoin Union Set, watch Union Find in 5 minutes by Potato Coders on YouTube
+        // According to a comment on the video: He does forget to mention that you have to union the shorter tree into the longer tree, otherwise the trees is in a set of n elements can be up to n elements long (just a straight chain, instead of branching) and you don't get log(n) complexity.
+        // Also, watch Neetcode's video on this problem to see how it applies here. I plan to watch it before solving.
+        // soln = new UnionFind_DisjointUnionSet_1();
+
+
         return soln.CountComponents(n, edges);
     }
 }
@@ -67,5 +73,16 @@ public class Dfs1 : IComponentsCounter
                 continue;
             dfsMarkThisAndConnectedNodesAsVisited(childNode, curNode, visited, nodeEdges);
         }
+    }
+}
+
+public class UnionFind_DisjointUnionSet_1 : IComponentsCounter
+{
+    public int CountComponents(int n, int[][] edges)
+    {
+    }
+    private class DSU
+    {
+        public 
     }
 }
