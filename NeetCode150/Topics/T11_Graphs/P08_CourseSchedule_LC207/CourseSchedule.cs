@@ -11,6 +11,8 @@ public class Solution
     ICourseSchedule soln;
     public bool CanFinish(int numCourses, int[][] prerequisites) 
     {
+        //I SHOULD HAVE REALIZED THAT numCourses was to get all the course names because there was no other relaible way to do it (AS ALWAYS, LEARN TO CAREFULLY READ THE FKIN PROBLEM!!!)
+        
         //[!!!IMPORTANT!!!] 
         //NEED TO PRACTICE!!! 
         //I had done this approximately 3 months ago but forgot.
@@ -27,6 +29,7 @@ public class Solution
         // I didn't know how to do it with Topological sort / Kahn's algorithm before. BUT:
         // Watched TakeUForward's YouTube video about Kahn's algorithm/Topological sort for it (Title: "G-22. Kahn's Algorithm | Topological Sort Algorithm | BFS")
         // It was extremely helpful and intuitive!!
+        // Read the [CAUTION!] message in the bfs function!
         
         /////// SOLUTION:
         // soln = new DfsAttempt1();
@@ -118,9 +121,9 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
         }
 
         //1. Add to queue all courses with indegree == 0
-        for(int i=0;i<prerequisites.Length; i++) //we set this up here to eventually basically multi-source bfs from these.
+        for(int i=0;i<numCourses ; i++)//[CAUTION!] I WAS USING `i<prerequisites.Length` for the loop condition WHEN IT SHOULD HAVE BEEN `i<numCourses` (spent ~10 mins debugging!)
         {
-            if(indegree[i]==0)
+            if(indegree[i]==0) //We set this up here to eventually basically multi-source bfs from these
                 q.Enqueue(i);
         }
 
