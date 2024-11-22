@@ -149,13 +149,13 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
         while(q.Count>0) //Each loop continues bfs over all nodes that have 0 indegree at that time (indegree == number of courses that depend on it)
         {
             var curCourse = q.Dequeue();
-            coursesFinished++;
             foreach(var prereq in adjList[curCourse])
             {
                 indegree[prereq]--;
                 if(indegree[prereq]==0)
                     q.Enqueue(prereq);
             }
+            coursesFinished++;
         }
         return coursesFinished;
     }
