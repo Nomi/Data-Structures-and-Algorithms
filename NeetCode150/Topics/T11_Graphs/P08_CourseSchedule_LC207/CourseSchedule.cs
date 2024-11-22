@@ -22,8 +22,15 @@ public class Solution
         //CHECK THE [OPTIMIZATION] comment IN DfsAttempt1.dfsCycleDetector
         //I DID NOT REALIZE UNTIL THE END WHEN I WAS CALCULATING TIMECOMPLEXITY THAT WE COULD OPTIMIZE THIS WAY!!!
         //I did refer(sneak a peak at) to neetcodeio soln how they did it for inspiration.
+
+        //[!!!IMPORTANT!!!] 
+        // I didn't know how to do it with Topological sort / Kahn's algorithm before. BUT:
+        // Watched TakeUForward's YouTube video about Kahn's algorithm/Topological sort for it (Title: "G-22. Kahn's Algorithm | Topological Sort Algorithm | BFS")
+        // It was extremely helpful and intuitive!!
         
-        soln = new DfsAttempt1();
+        /////// SOLUTION:
+        // soln = new DfsAttempt1();
+        soln = new TopologicalSortKahnsAlgorithmAttempt1();
         return soln.CanFinish(numCourses, prerequisites);
     }
 }
@@ -35,6 +42,7 @@ public interface ICourseSchedule
 
 public class DfsAttempt1 : ICourseSchedule
 {
+    //DEPRECATED_DfsAttempt1 to see how convoluted I was making this, even though I could do it so simply!
     Dictionary<int, List<int>> prereqMap;
     HashSet<int> visiting;
 
@@ -83,11 +91,72 @@ public class DfsAttempt1 : ICourseSchedule
         return true;
     }
 }
+
+public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
+{
+    //[IMPORTANT] 
+    // Watched TakeUForward's YouTube video about Kahn's algorithm/Topological sort for this (Title: "G-22. Kahn's Algorithm | Topological Sort Algorithm | BFS")
+    // It was extremely helpful and intuitive!!
+
+    Dictionary<int, List<int>> prereqMap;
+    //Number of incoming edges (here, indegree[i] number of courses that depend on the course `i`):
+    // List<int> indegree;
+    int[] indegree; 
+
+    public bool CanFinish(int numCourses, int[][] prerequisites) 
+    {
+        Queue<int> q = new();
+        prereqMap = new(numCourses);
+        // indegree = Enumerable.Repeat(0, numCourses).ToList();
+        indegree = new int[numCourses]; //For arrays, values are initialized to their default value (here 0) by default.
+        
+        //Fill prereqMap:
+        for(int i=0; i<prerequisites.Length;  i++) //O(N) where N is numCourses
+        {
+            prereqMap.TryAdd(prerequisites[i][0], new());
+            prereqMap[prerequisites[i][0]].Add(prerequisites[i][1]);
+            indegree[prerequisites[i][1]]++;
+        }
+
+        //1. Add to queue all courses with indegree == 0
+        for(int i=0;i<prerequisites.Length; i++) //we set this up here to eventually basically multi-source bfs from these.
+        {
+            if(indegree[i]==0)
+                q.Enqueue(i);
+        }
+
+        //2. bfs:
+        int coursesFinished = bfs(q);
+
+        return (coursesFinished == numCourses);
+    }
+
+    int bfs(Queue<int> q)
+    {
+        int coursesFinished = 0;
+        while(q.Count>0) //Each loop continues bfs over all nodes that have 0 indegree at that time (indegree == number of courses that depend on it)
+        {
+            var curCourse = q.Dequeue();
+            if(prereqMap.ContainsKey(curCourse))
+            {
+                foreach(var prereq in prereqMap[curCourse])
+                {
+                    indegree[prereq]--;
+                    if(indegree[prereq]==0)
+                        q.Enqueue(prereq);
+                }
+            }
+            coursesFinished++;
+        }
+        return coursesFinished;
+    }
+}
+
 // public class DEPRECATED_DfsAttempt1 : ICourseSchedule //I WAS OVERCOMPLICATING IT BECAUSE I DIDN'T EVEN NEED A NODE CLASS!! CHECK THE NEW `DfsAtt1emp1`!!!
 // {
 //     const UNVISITED = 1;
-//     const VISITING = 1;
-//     const VISITED = 2;
+//     const VISITING = 1; //If you encounter a node with this state again, there's a cycle.
+//     const VISITED = 2; //Confirmed no cycles.
 //     internal class Node
 //     {
 //         public int course;
