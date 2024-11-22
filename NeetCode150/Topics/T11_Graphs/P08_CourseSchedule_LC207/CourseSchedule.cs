@@ -98,7 +98,7 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
     // Watched TakeUForward's YouTube video about Kahn's algorithm/Topological sort for this (Title: "G-22. Kahn's Algorithm | Topological Sort Algorithm | BFS")
     // It was extremely helpful and intuitive!!
 
-    Dictionary<int, List<int>> prereqMap;
+    List<List<int>> adjList;
     //Number of incoming edges (here, indegree[i] number of courses that depend on the course `i`):
     // List<int> indegree;
     int[] indegree; 
@@ -106,15 +106,14 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
     public bool CanFinish(int numCourses, int[][] prerequisites) 
     {
         Queue<int> q = new();
-        prereqMap = new(numCourses);
+        adjList = Enumerable.Repeat(new List<int>(), numCourses).ToList();
         // indegree = Enumerable.Repeat(0, numCourses).ToList();
         indegree = new int[numCourses]; //For arrays, values are initialized to their default value (here 0) by default.
         
         //Fill prereqMap:
         for(int i=0; i<prerequisites.Length;  i++) //O(N) where N is numCourses
         {
-            prereqMap.TryAdd(prerequisites[i][0], new());
-            prereqMap[prerequisites[i][0]].Add(prerequisites[i][1]);
+            adjList[prerequisites[i][0]].Add(prerequisites[i][1]);
             indegree[prerequisites[i][1]]++;
         }
 
@@ -127,7 +126,6 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
 
         //2. bfs:
         int coursesFinished = bfs(q);
-        Console.WriteLine(coursesFinished);
         return (coursesFinished == numCourses);
     }
 
@@ -137,16 +135,13 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
         while(q.Count>0) //Each loop continues bfs over all nodes that have 0 indegree at that time (indegree == number of courses that depend on it)
         {
             var curCourse = q.Dequeue();
-            if(prereqMap.ContainsKey(curCourse))
-            {
-                foreach(var prereq in prereqMap[curCourse])
-                {
-                    indegree[prereq]--;
-                    if(indegree[prereq]==0)
-                        q.Enqueue(prereq);
-                }
-            }
             coursesFinished++;
+            foreach(var prereq in adjList[curCourse])
+            {
+                indegree[prereq]--;
+                if(indegree[prereq]==0)
+                    q.Enqueue(prereq);
+            }
         }
         return coursesFinished;
     }
