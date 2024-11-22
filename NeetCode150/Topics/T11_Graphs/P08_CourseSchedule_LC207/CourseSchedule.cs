@@ -127,7 +127,7 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
 
         //2. bfs:
         int coursesFinished = bfs(q);
-
+        Console.WriteLine(coursesFinished);
         return (coursesFinished == numCourses);
     }
 
