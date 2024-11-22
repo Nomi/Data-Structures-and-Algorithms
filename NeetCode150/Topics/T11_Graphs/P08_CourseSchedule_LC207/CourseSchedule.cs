@@ -13,7 +13,7 @@ public class Solution
     {
         //I SHOULD HAVE REALIZED THAT numCourses was to get all the course names because there was no other relaible way to do it (AS ALWAYS, LEARN TO CAREFULLY READ THE FKIN PROBLEM!!!)
         
-        //[!!!IMPORTANT!!!]
+        //[!!!IMPORTANT!!!] //About Time and Space Complexities
         //ACCORDING TO TakeUForward's video on Kahn (also applies to other graph algorithms with similar time complexities):
         // SC: O(V+E), we store each vertex and its outgoing edges (and since it is a directed graph, any edge will only belong to/stored for the vertex it is going out from!)
         // TC: O(V+E), similarly, each Vertex AND Edge is considered only ONCE.
@@ -28,7 +28,7 @@ public class Solution
         //[!!!IMPORTANT!!!] 
         //CHECK THE [OPTIMIZATION] comment IN DfsAttempt1.dfsCycleDetector
         //I DID NOT REALIZE UNTIL THE END WHEN I WAS CALCULATING TIMECOMPLEXITY THAT WE COULD OPTIMIZE THIS WAY!!!
-        //I did refer(sneak a peak at) to neetcodeio soln how they did it for inspiration.
+        //I did refer to (sneak a peak at) neetcodeio soln to see how they did it for inspiration.
 
         //[!!!IMPORTANT!!!] 
         // I didn't know how to do it with Topological sort / Kahn's algorithm before. BUT:
