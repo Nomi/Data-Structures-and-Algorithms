@@ -13,7 +13,7 @@ public class Solution {
         //Did it by myself since I had done a similar problem Graph Valid Tree an hour or two ago. (though that one took me a long while, this one was done in ~20 minutes)
         //Refer to Graph Valid Tree if needed.
         soln = new Dfs1();
-        
+
         return soln.CountComponents(n, edges);
     }
 }
@@ -24,7 +24,7 @@ public interface IComponentsCounter
     int CountComponents(int n, int[][] edges);
 }
 
-public class Dfs1
+public class Dfs1 : IComponentsCounter
 {
     public int CountComponents(int n, int[][] edges)
     {
