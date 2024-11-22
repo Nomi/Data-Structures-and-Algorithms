@@ -148,6 +148,7 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
         int coursesFinished = 0;
         while(q.Count>0) //Each loop continues bfs over all nodes that have 0 indegree at that time (indegree == number of courses that depend on it)
         {
+            //If there are 0 courses that depend on a course, there is NO chance of it being a part of a cycle (doesn't mean that there are no cycle outside of it).
             var curCourse = q.Dequeue();
             foreach(var prereq in adjList[curCourse])
             {
