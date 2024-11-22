@@ -1,0 +1,12 @@
+1, Accepted
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    ICourseScheduleIISolver solver;\n    public int[] FindOrder(int numCourses, int[][] prerequisites) {\n        solver = new KahnTopoSortSolver();\n        return solver.FindOrder(numCourses, prerequisites);\n    }\n}\n\npublic interface ICourseScheduleIISolver\n{\n    int[] FindOrder(int numCourses, int[][] prerequisites);\n}\n\npublic class KahnTopoSortSolver : ICourseScheduleIISolver\n{\n    //Check my solution to Course Schedule (the original) for explanations/comments.\n    List<int> indegree; //indegree[i] == number of courses that depend on i (number of incoming edges to i)\n    List<List<int>> adj;\n    public int[] FindOrder(int numCourses, int[][] prerequisites)\n    {\n        adj = new(numCourses);\n        indegree = new(numCourses);\n\n        //Readying our collections, just C# things (could've used int[] for indegree but chose not to)\n        for(int i=0; i<numCourses; i++)\n        {\n            adj.Add(new());\n            indegree.Add(0);\n        }\n\n        //Build up adjacency list:\n        foreach(var pre in prerequisites)\n        {\n            adj[pre[0]].Add(pre[1]);\n            indegree[pre[1]]++;\n        }\n\n        //BFS using Topological Sort / Kahn's Algorithm [using indegrees]\n        return bfs(numCourses);\n    }\n\n    public int[] bfs(int numCourses)\n    {\n        //BFS using Topological Sort / Kahn's Algorithm [using indegrees]\n        Queue<int> q = new(); //we always store courses we can finish right now here (i.e. indegree = 0)\n        int[] topoOrderedResult = new int[numCourses];\n        int finishedCourses=0;\n        \n        for(int crs=0; crs<numCourses; crs++)\n        {\n            if(indegree[crs]==0)\n                q.Enqueue(crs);\n        }\n\n        while(q.Count>0)\n        {\n            var cur = q.Dequeue();\n\n            topoOrderedResult[numCourses-1 - finishedCourses] = cur;\n            finishedCourses++;\n\n            foreach(var prereq in adj[cur])\n            {\n                indegree[prereq]--;\n                if(indegree[prereq] == 0)\n                    q.Enqueue(prereq);\n            }\n        }\n\n        return numCourses == finishedCourses ? topoOrderedResult : new int[0];\n    }\n}",
+    "problemId": "course-schedule-ii",
+    "statusDescription": "Accepted",
+    "time": "0.408",
+    "date": "2024-11-22T02:32:59.084Z",
+    "memory": 56160,
+    "stdout": "",
+    "stderr": ""
+}
