@@ -32,8 +32,8 @@ public class Solution
         // Read the [CAUTION!] message in the bfs function!
         
         /////// SOLUTION:
-        // soln = new DfsAttempt1();
-        soln = new TopologicalSortKahnsAlgorithmAttempt1();
+        // soln = new DfsAttempt1(); //TC: O(V+E) SC: O(V+E) [BUT WHY??? Rewatch GregHogg's video about graphs?? maybe that'll help??]
+        soln = new TopologicalSortKahnsAlgorithmAttempt1(); //TC: O(V+E) SC: O(V+E) [BUT WHY??? Rewatch GregHogg's video about graphs?? maybe that'll help??]
         return soln.CanFinish(numCourses, prerequisites);
     }
 }
@@ -109,11 +109,15 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
     public bool CanFinish(int numCourses, int[][] prerequisites) 
     {
         Queue<int> q = new();
-        adjList = Enumerable.Repeat(new List<int>(), numCourses).ToList();
+        //Enumerable.Repeat(new List<int>(), numCourses).ToList(); //WRONG! THIS BREAKS THE SOLUTION! (probably because for reference types, Enumerable.Repeat uses the same reference everywhere!)
+        adjList = new();
+        for (int i = 0; i < numCourses; i++) {
+            adjList.Add(new List<int>());
+        }
         // indegree = Enumerable.Repeat(0, numCourses).ToList();
         indegree = new int[numCourses]; //For arrays, values are initialized to their default value (here 0) by default.
         
-        //Fill prereqMap:
+        //Fill adjacencyList:
         for(int i=0; i<prerequisites.Length;  i++) //O(N) where N is numCourses
         {
             adjList[prerequisites[i][0]].Add(prerequisites[i][1]);
@@ -128,7 +132,7 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
         }
 
         //2. bfs:
-        int coursesFinished = bfs(q);
+        int coursesFinished = bfs(q); //O(V+E) (but why?)
         return (coursesFinished == numCourses);
     }
 
