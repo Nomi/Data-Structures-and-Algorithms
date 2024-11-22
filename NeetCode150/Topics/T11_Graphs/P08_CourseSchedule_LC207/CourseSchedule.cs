@@ -103,19 +103,21 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
 
     List<List<int>> adjList;
     //Number of incoming edges (here, indegree[i] number of courses that depend on the course `i`):
-    // List<int> indegree;
-    int[] indegree; 
+    List<int> indegree;
+    // int[] indegree; 
 
     public bool CanFinish(int numCourses, int[][] prerequisites) 
     {
         Queue<int> q = new();
         //Enumerable.Repeat(new List<int>(), numCourses).ToList(); //WRONG! THIS BREAKS THE SOLUTION! (probably because for reference types, Enumerable.Repeat uses the same reference everywhere!)
         adjList = new();
+        indegree = new List<int>(numCourses);
         for (int i = 0; i < numCourses; i++) {
             adjList.Add(new List<int>());
+            indegree.Add(0);
         }
         // indegree = Enumerable.Repeat(0, numCourses).ToList();
-        indegree = new int[numCourses]; //For arrays, values are initialized to their default value (here 0) by default.
+        // indegree = new int[numCourses]; //For arrays, values are initialized to their default value (here 0) by default.
         
         //Fill adjacencyList:
         for(int i=0; i<prerequisites.Length;  i++) //O(N) where N is numCourses
