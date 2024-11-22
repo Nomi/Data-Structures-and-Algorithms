@@ -1,0 +1,12 @@
+1, Compilation Error
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    IGraphValidTree solver;\n    public bool ValidTree(int n, int[][] edges) {\n        //Initial thoughts:\n        //Trees are simply Connected and Acyclic graphs.\n        \n        // CANNOT use Kahn's/Topological_Sort algorithm here, even though it might be deceptively similar to Course Scheduler in terms of how the input is given.\n\n\n        //WATCHED NEETCODE VIDEO!!!!\n        //Also, BFS seems impossible (or unneccessarily complex) for this due to the need to pass parent/previous node\n\n        \n        //SOLUTION:\n        solver = new Attempt1();\n        return solver.ValidTree(n, edges);\n    }\n}\n\n\npublic interface IGraphValidTree\n{\n    bool ValidTree(int n, int[][] edges);\n}\n\npublic class Attempt1 : IGraphValidTree\n{\n    public bool ValidTree(int n, int[][] edges)\n    {\n\n    }\n}",
+    "problemId": "valid-tree",
+    "statusDescription": "Compilation Error",
+    "time": "0.0",
+    "date": "2024-11-22T03:08:57.863Z",
+    "memory": "",
+    "stdout": "",
+    "stderr": ""
+}
