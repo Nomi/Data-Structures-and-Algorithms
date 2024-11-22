@@ -18,7 +18,7 @@ public class Solution {
         //WATCHED NEETCODE VIDEO!!!!
         //Also, BFS seems impossible (or unneccessarily complex) for this due to the need to pass parent/previous node
 
-        
+
         //SOLUTION:
         solver = new Attempt1();
         return solver.ValidTree(n, edges);
@@ -33,8 +33,52 @@ public interface IGraphValidTree
 
 public class Attempt1 : IGraphValidTree
 {
+    HashSet<int> visited;
+
     public bool ValidTree(int n, int[][] edges)
     {
+        //As commented previously, I just need to check if graph is CONNECTED AND ACYCLIC!
 
+        visited = new();
+
+        var nodeToNeighbor = new List<List<int>>(); //SC: O(V+E) where E is the edge count! (because we have a list edges for each vertex and each edge obviously appears only once (twice here because undirected but it doesn't really matter here))
+
+        for(int i=0; i<n;i++) //O(V)
+        {
+            nodeToNeighbor.Add(new());
+        }
+
+        for(int i=0; i<edges.Length; i++) //TC: O(V+E) where E is the edge count!
+        {
+            nodeToNeighbor[edges[i][0]].Add(edges[i][1]);
+            nodeToNeighbor[edges[i][1]].Add(edges[i][0]);
+        }
+
+        bool hasCycle = !checkCyclesAndBuildSetofNodesReachableFromCurDfs(0, -1, nodeToNeighbor);
+        // Console.WriteLine(hasCycle);
+        if(hasCycle)
+            return false;
+    
+        Console.WriteLine(visited.Count);
+
+        return visited.Count == n;
     }
+
+    public bool checkCyclesAndBuildSetofNodesReachableFromCurDfs(int cur, int parent, List<List<int>> nodeToNeighbor)
+    {
+
+        //keeping the visited set lines (checking and adding) inside the loop by mistake initially, but it broke the whole thing BECAUSE for nodes with no children, it would never get added to the visited set.
+        if(visited.Contains(cur))
+            return false;
+        visited.Add(cur);
+        foreach(var child in nodeToNeighbor[cur])
+        {
+            if(child==parent)
+                continue;
+            if(!checkCyclesAndBuildSetofNodesReachableFromCurDfs(child, cur, nodeToNeighbor))
+                return false;
+        }
+        return true;
+    }
+
 }
