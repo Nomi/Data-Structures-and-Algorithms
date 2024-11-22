@@ -8,12 +8,25 @@ namespace DSA.NeetCode150.Topics.T11_Graphs.P11_NumberOfConnectedComponentsInAnU
 
 public class Solution {
     public int CountComponents(int n, int[][] edges) {
+        IComponentsCounter soln;
+
         //Did it by myself since I had done a similar problem Graph Valid Tree an hour or two ago. (though that one took me a long while, this one was done in ~20 minutes)
         //Refer to Graph Valid Tree if needed.
-        return Dfs1Wrapper(n, edges);
+        soln = new Dfs1();
+        
+        return soln.CountComponents(n, edges);
     }
+}
 
-    int Dfs1Wrapper(int n, int[][] edges)
+
+public interface IComponentsCounter
+{
+    int CountComponents(int n, int[][] edges);
+}
+
+public class Dfs1
+{
+    public int CountComponents(int n, int[][] edges)
     {
         //1. Make adjacency list:
         List<List<int>> nodeEdges = new(n); //SC: O(V+E) [V==n]  because there are V List<ints>, and the sum of all the nodes in those lists is E (because the lists contain the vertex on the other end of the edges from the V indices)
