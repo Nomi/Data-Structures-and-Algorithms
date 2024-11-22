@@ -10,6 +10,8 @@ public class Solution {
     ICourseScheduleIISolver solver;
     public int[] FindOrder(int numCourses, int[][] prerequisites) {
         //DID IT MYSELF RIGHT AFTER DOING THE FIRST/ORIGINAL VERSION OF THIS PROBLEM (Course Scheduler)
+        //CHECK MY SOLUTIONS TO  THE ORIGINAL/FIRST_part Course Scheduler!!!
+        //Also, check how other solutions on neetcodeio work???
         solver = new KahnTopoSortSolver();
         return solver.FindOrder(numCourses, prerequisites);
     }
