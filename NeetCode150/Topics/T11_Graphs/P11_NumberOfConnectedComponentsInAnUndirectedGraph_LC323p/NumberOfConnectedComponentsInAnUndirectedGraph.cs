@@ -16,8 +16,8 @@ public class Solution {
     int Dfs1Wrapper(int n, int[][] edges)
     {
         //1. Make adjacency list:
-        List<List<int>> nodeEdges = new(n);
-        for(int i=0; i<n; i++)
+        List<List<int>> nodeEdges = new(n); //SC: O(V+E) [V==n]  because there are V List<ints>, and the sum of all the nodes in those lists is E (because the lists contain the vertex on the other end of the edges from the V indices)
+        for(int i=0; i<n; i++) //O(n)==O(V)
         {
             nodeEdges.Add(new());
         }
@@ -33,7 +33,7 @@ public class Solution {
         int numConnectedComponents = 0;
         HashSet<int> visited = new(n); //To track nodes already visited (helps with cycle detection and also checking if a node is a part of a connected component discovered before)
 
-        for(int node = 0; node<n; node++)
+        for(int node = 0; node<n; node++) //TC (including DFS): O(V+E) where V==n, because we only visit each node once and the number of other nodes we visit from each node sums up to the total number of edges (obvious / by definition).
         {
             if(visited.Contains(node))
                 continue;
