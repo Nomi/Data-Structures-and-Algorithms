@@ -20,7 +20,9 @@ public class Solution {
 
 
         //SOLUTION:
-        solver = new Attempt1();
+        solver = new Attempt1(); //HAD TO WATCH NEETCOOE VIDEO.
+
+
         return solver.ValidTree(n, edges);
     }
 }
@@ -67,13 +69,13 @@ public class Attempt1 : IGraphValidTree
     public bool checkCyclesAndBuildSetofNodesReachableFromCurDfs(int cur, int parent, List<List<int>> nodeToNeighbor)
     {
 
-        //keeping the visited set lines (checking and adding) inside the loop by mistake initially, but it broke the whole thing BECAUSE for nodes with no children, it would never get added to the visited set.
+        //CAUTION! keeping the visited set lines (checking and adding) inside the loop right after `if child==parent` condition by mistake initially, but it broke the whole thing BECAUSE for nodes with no other connection than its parent(because undirected), it would never get added to the visited set.
         if(visited.Contains(cur))
             return false;
         visited.Add(cur);
         foreach(var child in nodeToNeighbor[cur])
         {
-            if(child==parent)
+            if(child==parent) //since it is undirected, we use this to prevent using the edge we got here from again so that we don't get a false-positive cycle.
                 continue;
             if(!checkCyclesAndBuildSetofNodesReachableFromCurDfs(child, cur, nodeToNeighbor))
                 return false;
