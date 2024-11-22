@@ -114,10 +114,10 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
 
     public bool CanFinish(int numCourses, int[][] prerequisites) 
     {
-        Queue<int> q = new();
+        Queue<int> q = new(); //SC: O(V)/O(E)? (worst case when all nodes independent (?or when all nodes depend on 0)
         //Enumerable.Repeat(new List<int>(), numCourses).ToList(); //WRONG! THIS BREAKS THE SOLUTION! (probably because for reference types, Enumerable.Repeat uses the same reference everywhere!)
-        adjList = new();
-        indegree = new List<int>(numCourses);
+        adjList = new(); //SC: O(V+E)
+        indegree = new List<int>(numCourses); //O(V)
         for (int i = 0; i < numCourses; i++) {
             adjList.Add(new List<int>());
             indegree.Add(0);
@@ -126,7 +126,7 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
         // indegree = new int[numCourses]; //For arrays, values are initialized to their default value (here 0) by default.
         
         //Fill adjacencyList:
-        for(int i=0; i<prerequisites.Length;  i++) //O(N) where N is numCourses
+        for(int i=0; i<prerequisites.Length;  i++) //TC: O(E)
         {
             adjList[prerequisites[i][0]].Add(prerequisites[i][1]);
             indegree[prerequisites[i][1]]++;
@@ -144,7 +144,7 @@ public class TopologicalSortKahnsAlgorithmAttempt1 : ICourseSchedule //topoSort
         return (coursesFinished == numCourses);
     }
 
-    int bfs(Queue<int> q)
+    int bfs(Queue<int> q) //TC: O(V) since all edges are visited only once
     {
         int coursesFinished = 0;
         while(q.Count>0) //Each loop continues bfs over all nodes that have 0 indegree at that time (indegree == number of courses that depend on it)
