@@ -50,13 +50,13 @@ public class Attempt1 : IGraphValidTree
             nodeToNeighbor.Add(new());
         }
 
-        for(int i=0; i<edges.Length; i++) //TC: O(V+E) where E is the edge count!
+        for(int i=0; i<edges.Length; i++) //TC: O(E) where E is the edge count!
         {
             nodeToNeighbor[edges[i][0]].Add(edges[i][1]);
             nodeToNeighbor[edges[i][1]].Add(edges[i][0]);
         }
 
-        bool hasCycle = !checkCyclesAndBuildSetofNodesReachableFromCurDfs(0, -1, nodeToNeighbor);
+        bool hasCycle = !checkCyclesAndBuildSetofNodesReachableFromCurDfs(0, -1, nodeToNeighbor); //TC: O(V) because we go through every node once
         // Console.WriteLine(hasCycle);
         if(hasCycle)
             return false;
