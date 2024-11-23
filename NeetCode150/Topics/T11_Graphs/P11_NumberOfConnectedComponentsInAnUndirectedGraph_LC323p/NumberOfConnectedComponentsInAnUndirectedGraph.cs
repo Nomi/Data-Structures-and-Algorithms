@@ -133,11 +133,11 @@ public class UnionFind_DisjointUnionSet_UnionBySize_WithPathCompression_1 : ICom
             if( uRoot == vRoot )
                 return false; //already the same set/connected_component/Union
             
-            int parent = u, child = v;
-            if(numChildren[v]>numChildren[u])
+            int parent = uRoot, child = vRoot; //I WAS USING u and v HERE EARLIER AND THAT'S WRONG!! (and breaks tings!!)
+            if(numChildren[vRoot]>numChildren[uRoot])
             {
-                parent = v;
-                child = u;
+                parent = vRoot;
+                child = uRoot;
             }
             nodeToParent[child] = parent;
             numChildren[parent] += 1+numChildren[child];
