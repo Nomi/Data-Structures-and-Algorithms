@@ -9,13 +9,21 @@ namespace DSA.NeetCode150.Topics.T11_Graphs.P12_RedundantConnection_LC684;
 public class Solution {
     IRedundantConnectionFinder soln;
     public int[] FindRedundantConnection(int[][] edges) {
-        //My first thoughts: Naieve solution would be doing a loop starting from the end of the array and for each edge we see if removing it removes the cycle (by doing a DFS from 0). 
-        //Checked NeetCode's Naieve solution, and it basically checks if the graph //Note that the solution is not practically efficient since new int[n] used for `visited` is an O(n) operation since it sets all values to default value of the thing. But then again, we do another O(x) 
-        //Actually, the first edge that adds the cycle is the last edge that removes the cycle (because there were no cycles before it). //Adding one edge to a tree will always create exactly one cycle. Thus, the redundant edge is the one that closes this cycle.
-        //Watched the neetcode video (except the implementation part) and now I know the best solution would 
+        //[WRONG] My first thoughts: Naieve solution would be doing a loop starting from the end of the array and for each edge we see if removing it removes the cycle (by doing a DFS from 0). 
+        //Checked NeetCode's Naieve optimal DFS solution, and its very different from the above idea. //Note that the solution is not practically efficient since new int[n] used for `visited` is an O(n) operation since it sets all values to default value of the thing. But then again, we do another O(x) 
+        
+        //Actually, the first edge that adds the cycle is the last edge that removes the cycle (because there were no cycles before it).  [That's why my idea was not good]
+        //Adding one edge to a tree will always create exactly one cycle. Thus, the redundant edge is the one that closes this cycle.
+        //Watched the neetcode video (except the implementation part) and now I know the best solution would Union Findl
+
+        //READ THE QUESTION PROPERLY LMAO!! I DIDN'T READ n == numVertices == edges.Length, I kinda ended up doing it without understanding/paying_attention anyway though. 
 
         //Union Find by Size using Disjoint Union Sets:
+        // !!! [~~IMPORTANT~~] HAD TO WATCH NeetCode's VIDEO TO SEE HOW TO SOLVE THIS PROBLEM because I thought UnionFind wouldn't work here but the union operator can also help find cycles like we do here !!!
         soln = new UnionFind_BySize_WithPathCompression_1();
+
+        // [Note] Watch
+
 
         return soln.FindRedundantConnection(edges);
     }
@@ -32,9 +40,9 @@ public class UnionFind_BySize_WithPathCompression_1 : IRedundantConnectionFinder
 {
     public int[] FindRedundantConnection(int[][] edges) 
     {
-        DisjointUnionSets dsu = new(edges.Length);
+        DisjointUnionSets dsu = new(edges.Length); //TC: O(V), SC:O(V)
 
-        foreach(var edge in edges)
+        foreach(var edge in edges) //O(E*ackerman(V))~=O(E)
         {
             if(!dsu.Union(edge[0], edge[1]))
                 return edge;
