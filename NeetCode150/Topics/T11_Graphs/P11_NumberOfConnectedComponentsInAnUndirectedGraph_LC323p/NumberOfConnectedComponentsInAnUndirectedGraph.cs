@@ -12,12 +12,17 @@ public class Solution {
 
         //Did it by myself since I had done a similar problem Graph Valid Tree an hour or two ago. (though that one took me a long while, this one was done in ~20 minutes)
         //Refer to Graph Valid Tree if needed.
-        soln = new Dfs1();
+        // soln = new Dfs1();
 
-        // For Union Find using Disjoin Union Set, watch Union Find in 5 minutes by Potato Coders on YouTube
+        // DFS is actually perfectly fine for this, but if you wanted to, 
+        // for Union Find using Disjoin Union Set, watch Union Find in 5 minutes by Potato Coders on YouTube
         // According to a comment on the video: He does forget to mention that you have to union the shorter tree into the longer tree, otherwise the trees is in a set of n elements can be up to n elements long (just a straight chain, instead of branching) and you don't get log(n) complexity.
+        // To get O(log2(n)) complexity, you need to use union by rank or size.
+        // There's also Path Compression to further optimize if we don't need direct parents
+        // ALSO, MUST WATCH if you want to do Union Find: William Fisset's videos on Union Find `Union Find - Union and Find Operations` and `Union Find Path Compression`
+        // ULTRA MUST WATCH: TakeUForward's VIDEO ON UnionFind (G-46)
         // Also, watch Neetcode's video on this problem to see how it applies here. I plan to watch it before solving.
-        // soln = new UnionFind_DisjointUnionSet_1();
+        soln = new UnionFind_DisjointUnionSet_UnionBySize_WithPathCompression_1();
 
 
         return soln.CountComponents(n, edges);
@@ -76,13 +81,82 @@ public class Dfs1 : IComponentsCounter
     }
 }
 
-public class UnionFind_DisjointUnionSet_1 : IComponentsCounter
+public class UnionFind_DisjointUnionSet_UnionBySize_WithPathCompression_1 : IComponentsCounter
 {
-    public int CountComponents(int n, int[][] edges)
+    //Very useful when the graph is changing (e.g. executing Find somewhere in between of Union calls)
+    //TakeUForward helped a lot! And for some of how to code it (especially doing the find function iteratively instead of recursively, though now that I think about it, it wouldn't really affect the performance much in this case), I took a look at the soln on NeetCodeIo even though it is by rank.
+    public int CountComponents(int n, int[][] edges) //TC: O(V + E*α(n)) where α(n) is the inverse Ackerman function, which is less than 5 for any practical input size n. //See also: https://tarunjain07.medium.com/union-find-disjoint-set-union-dsu-notes-24f3e228858d#30a0 AND https://stackoverflow.com/questions/6342967/why-is-the-ackermann-function-related-to-the-amortized-complexity-of-union-find
     {
+        DSU dsu = new(n); //TC: O(V)
+        
+        int numRoots = n; //at the start of DSU, everything is a root.
+
+        foreach(var edge in edges) //O(E*α(V)) where α is <= 5 for any 'reasonable' input
+        {
+            if(dsu.Union(edge[0], edge[1]))
+                numRoots--;
+        }
+        return numRoots;
+        // I DIDN'T THINK OF THE ABOVE SOLUTION! WAS GOING TO DO THE FOLLOWING CONVOLUTED SOLUTION UNTIL I SAW THIS PART OF NEETCODEIO SOLN!!
+        //WELL, technically I did think of keeping count like the above approach, but in the DSU class itself and being the idiot I am, I decided against it somehow. 
+
+        // HashSet<int> connectedComponentRoots = new();
+
+        // for(int i=0; i<n; i++ )//~=O(V) where α is <= 5 for any 'reasonable' input)
+        // {
+                //I had planned to do find here lol
+        // }
+
+        // for(int )
     }
     private class DSU
     {
-        public 
+        //SC: O(V)
+        int[] nodeToParent;
+        int[] numChildren; //Usually called `Size` in DSU
+
+        public DSU(int numNodes)//TC: O(V) (in fact, it is amortized(exactly) v, so α(v))
+        {
+            numChildren = new int[numNodes]; //C# initializes them all to 0 and that's the value we want because all nodes are ROOT nodes (no parents) with no children before edges are added
+            nodeToParent = new int[numNodes];
+            for(int node=0; node<numNodes; node++)//TC: O(V) //The parent of each ROOT node is the node itself, and at the beginning everything is a root (no parents) since no union has been called
+            {
+                nodeToParent[node] = node;
+            }
+        }
+
+        //TC: α(V)
+        public bool Union(int u, int v) //returns false if already in same component, otherwise returns true after uniting them
+        {
+            int uRoot = Find(u); //usually labeled `pu` in DSU
+            int vRoot = Find(v); //usually labeled `pv` in DSU
+            if( uRoot == vRoot )
+                return false; //already the same set/connected_component/Union
+            
+            int parent = u, child = v;
+            if(numChildren[v]>numChildren[u])
+            {
+                parent = v;
+                child = u;
+            }
+            nodeToParent[child] = parent;
+            numChildren[parent] += 1+numChildren[child];
+
+            return true;
+        }
+
+        //TC: ~O(1)
+        public int Find(int curNode) //returns the root node, which acts as the representative for its current set/connected_component
+        {
+            //Notice that due to path compression, we will NEVER have a tree with depth bigger than 3 (because all nodes are attached to root making length 2, and if we union that with another node which has bigger `size` (numChildren), then the resulting graph/tree will have depth 3)
+            //Due to the above comment, I could've done it via recursion and it would be fine performance wise and from any other aspect. In fact, it would be easier to come up with the iterative approach (had to check neetcodeio soln to see how to do it, even though they were doing by rank, some parts (including this) remained same or similar)
+            while(curNode != nodeToParent[curNode]) //Parent of a node being itself means it is a root
+            {
+                nodeToParent[curNode] = nodeToParent[nodeToParent[curNode]]; //This doesn't break because the parent of the root is the root itself. //Also, works due to the depth being <= 3.
+                curNode = nodeToParent[curNode];
+            }
+
+            return curNode; //due to while loop condition, it is the root.
+        }
     }
 }
