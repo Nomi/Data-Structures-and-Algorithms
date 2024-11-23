@@ -53,7 +53,7 @@ public class KahnTopoSortSolver : ICourseScheduleIISolver
     public int[] bfs(int numCourses)
     {
         //BFS using Topological Sort / Kahn's Algorithm [using indegrees]
-        Queue<int> q = new(); //we always store courses we can finish right now here (i.e. indegree = 0)
+        Queue<int> q = new(); //we always store courses we can finish right now here (i.e. indegree = 0) as explained later on in the function
         int[] topoOrderedResult = new int[numCourses];
         int finishedCourses=0;
         
@@ -73,7 +73,7 @@ public class KahnTopoSortSolver : ICourseScheduleIISolver
             foreach(var prereq in adj[cur])
             {
                 indegree[prereq]--;
-                if(indegree[prereq] == 0)
+                if(indegree[prereq] == 0) //If there are 0 other courses that this depends on(has an edge to), it is impossible for this to be part of a cycle, so we can safely say that as long as the rest of the courses before can be taken (which we will figure out later since we're doing this in reverse), this one can also be taken.
                     q.Enqueue(prereq);
             }
         }
