@@ -12,7 +12,8 @@ public class Solution {
 
         //Did it by myself since I had done a similar problem Graph Valid Tree an hour or two ago. (though that one took me a long while, this one was done in ~20 minutes)
         //Refer to Graph Valid Tree if needed.
-        // soln = new Dfs1();
+        
+        soln = new Dfs1();
 
         // DFS is actually perfectly fine for this, but if you wanted to, 
         // for Union Find using Disjoin Union Set, watch Union Find in 5 minutes by Potato Coders on YouTube
@@ -22,7 +23,8 @@ public class Solution {
         // ALSO, MUST WATCH if you want to do Union Find: William Fisset's videos on Union Find `Union Find - Union and Find Operations` and `Union Find Path Compression`
         // ULTRA MUST WATCH: TakeUForward's VIDEO ON UnionFind (G-46)
         // Also, watch Neetcode's video on this problem to see how it applies here. I plan to watch it before solving.
-        soln = new UnionFind_DisjointUnionSet_UnionBySize_WithPathCompression_1();
+        
+        //soln = new UnionFind_DisjointUnionSet_UnionBySize_WithPathCompression_1();
 
 
         return soln.CountComponents(n, edges);
