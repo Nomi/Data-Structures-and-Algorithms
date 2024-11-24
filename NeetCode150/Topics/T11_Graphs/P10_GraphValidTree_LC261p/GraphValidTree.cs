@@ -20,7 +20,7 @@ public class Solution {
 
 
         //SOLUTION:
-        solver = new Attempt1(); //HAD TO WATCH NEETCOOE VIDEO.
+        solver = new DfsAttempt1(); //HAD TO WATCH NEETCOOE VIDEO.
 
 
         return solver.ValidTree(n, edges);
@@ -33,7 +33,7 @@ public interface IGraphValidTree
     bool ValidTree(int n, int[][] edges);
 }
 
-public class Attempt1 : IGraphValidTree
+public class DfsAttempt1 : IGraphValidTree
 {
     HashSet<int> visited;
 
