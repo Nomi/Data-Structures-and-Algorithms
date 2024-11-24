@@ -9,7 +9,7 @@ namespace DSA.NeetCode150.Topics.T11_Graphs.P13_WordLadder_LC127;
 public class Solution {
     //ASYMPTOTICALLY BOUND MEANS WE TAKE THE FASTEST GROWING COMPLEXITY AS THE ACTUAL REPRESENTATIVE BECAUSE THAT'S WHAT MATTERS
     public int LadderLength(string beginWord, string endWord, IList<string> wordList) {
-        // EASY BUT A LITTLE TRICKY
+        // EASY BUT A VERY TRICKY (Complexity calculations confused me for a while because I was taking m as constant (deservedly) but others weren't)
 
         // I just noticed: 1<= word length <= 10 means that loops over words and methods like string.Substring() method can be treated as a constant time as it is at most O(10)
         //NOT hard, just a little tricky to think how to do it (e.g. using the hashset, how to treat/traverse it as a graph, etc.) In fact, it MIGHT be hard to notice that this is a graph problem, here it was just given due to it being in the Graphs section.
