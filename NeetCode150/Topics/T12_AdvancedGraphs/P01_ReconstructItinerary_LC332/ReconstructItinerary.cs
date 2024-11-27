@@ -11,7 +11,7 @@ public class Solution {
         //[IMPORTANT!!] PLEASE WATCH THE FOLLOWING FOR BETTER UNDESTANDING:
         //  [William Fisset (YouTube Channel): "Eulerian Path/Circuit algorithm (Hierholzer's algorithm) | Graph Theory"](https://www.youtube.com/watch?v=8MpoO2zA2l4)
         
-        //Also, read my comments.
+        //[IMPORTANT!!] Also, read my comments for dfsHierholzersAlgorithmWrapper_1 and its dfs helper.
 
 
         //My first thought is topological sort.
