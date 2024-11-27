@@ -75,7 +75,7 @@ public class Solution {
         while(graph.ContainsKey(src) && graph[src].Count > 0) //We run this loop until all edges OUTGOING edges are used up, meaning we haven't missed ANY path OUTGOING FROM here (and due to recursion, the same is true for ALL of the nodes that we visited after it). //DEPRECATED(Maybe?) : also skips this and returns in case of base case (no tickets from here / Final destination? (case 1: there never were any(containskey) case 2: already used up in current branch(graph[cur].Count==0)))
         {
             var dest = graph[src][^1]; //the last element is the next lexicographically smallest destination from this airport
-            graph[src].RemoveLast(); //Remove `dest` of this iteration from the adjacecny list
+            graph[src].RemoveAt(graph[src].Count-1); //Remove `dest` of this iteration from the adjacecny list
             dfsHierholzersAlgorithm_1(dest);
             //We don't add back dest to the adjacency list because of how Hierholzer's algorithm works (explained above). Might have been easier or better to just use an adjacency queue :P.
         }
