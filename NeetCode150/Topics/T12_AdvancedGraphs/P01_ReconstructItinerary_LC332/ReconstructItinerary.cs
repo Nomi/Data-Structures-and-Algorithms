@@ -21,17 +21,17 @@ public class Solution {
         //and found out that we CAN visit the same node twice, BUT NOT THE SAME EDGE (ticket), so we remove from adjacencyList when done.
         
         //READ COMMENTS IN ACTUAL SOLUTION (dfsHierholzersAlgorithm_1)!!
-        return INTENTIONALLY_BREAKING_SO_I_CAN_REWRITE_WITHOUT_KNOWING_IF_CURRENT_ANSWER_IS_CORRECT_dfsHierholzersAlgorithm_1(tickets);
+        return dfsHierholzersAlgorithmWrapper_1(tickets);
     }
 
-    Dictionary<string, List<string>> graph; //adjacency list
+    Dictionary<string, List<string>> graph; //adjacency list //SC: O(V+E)
     List<string> itnry;
     const string startingPoint = "JFK";
     
-    List<string> dfsHierholzersAlgorithm_1(List<List<string>> tickets)
+    List<string> dfsHierholzersAlgorithmWrapper_1(List<List<string>> tickets)
     {
         //[EXTRA IMPORTANT NOTE] Hierholzer's algorithm basically asks for any nodes with unused edges
-        //after first branch of DFS, what path should we have taken before to include those edges. Whenever all edges have been visited for a node, it means that we haven't left out anything, and as such it can be safely added to the result at the correct position (there's nothing left to visit before it)
+        //after first branch of DFS, what path should we have taken before to include those edges before going to the next node. Whenever all edges have been visited for a node, it means that we haven't left out anything, and as such it can be safely added to the result at the correct position (there's nothing left to visit before it)
         // - Here, we are guaranteed an itenerary [here, Eulerian path but also works for cycles/circuits (Eulerian circuits/cycles)]
         //  exists, so we do NOT need to check using `indegree-outdegree <= 1` ONLY AT 1 NODE
         //  && `outdegree-indegree <= 1` ONLY AT 1 NODE (different from the previous one, obviously).
@@ -56,32 +56,30 @@ public class Solution {
             graph[ticket[0]].Add(ticket[1]);
         }
         
-        dfs1(startingPoint); //O(E) because we go through all the edges once (and can visit a vertex multiple times)
+        dfsHierholzersAlgorithm_1(startingPoint); //O(E) because we go through all the edges once (and can visit a vertex multiple times)
 
         itnry.Reverse(); //O(E) //Since we append airports post-recursion (post-order), the itinerary is built in reverse. Reverse the itinerary list before returning it.
 
         return itnry;
     }
 
-    void dfs1(string src) //DFS with Backtracking.
+    void dfsHierholzersAlgorithm_1(string src) //DFS with Backtracking.
     {
+        //[IMPORTANT NOTE] CHECK MY NOTES ABOUT Hierholzer's algorithm AT THE BEGINNING OF THE `dfsHierholzersAlgorithm_1` FUNCTION
+        // THIS SOLUTION USES THAT AND IT CAN ALSO BE CONFUSING TO JUST GET BY SEEING THE CODE
+        // IT IS THEREFORE CRITICAL TO ACTUALLY CHECK WHAT'S HAPPENING!
+
         //Due to the sorted neighbor lists in adjList, the itinerary we get the 
         //first time we exhaust all tickets(edges) is the lexicographically smallest and 
         //as such can be returned without needing to compare it with others.
-        while(graph.ContainsKey(src) && graph[src].Count > 0) //also skips this and returns in case of base case (no tickets from here / Final destination? (case 1: there never were any(containskey) case 2: already used up in current branch(graph[cur].Count==0)))
+        while(graph.ContainsKey(src) && graph[src].Count > 0) //We run this loop until all edges OUTGOING edges are used up, meaning we haven't missed ANY path OUTGOING FROM here (and due to recursion, the same is true for ALL of the nodes that we visited after it). //DEPRECATED(Maybe?) : also skips this and returns in case of base case (no tickets from here / Final destination? (case 1: there never were any(containskey) case 2: already used up in current branch(graph[cur].Count==0)))
         {
             var dest = graph[src][graph[src].Count-1]; //the next lexicographically smallest destination
             graph[src].RemoveAt(graph[src].Count-1); //Remove `dest` of this iteration from the adjacecny list
             dfs1(dest);
-            //We don't add back dest to the adjacency list because:
-            //As soon as we can't go back from any branch, we add it to the result 
+            //We don't add back dest to the adjacency list because of how Hierholzer's algorithm works (explained above). Might have been easier or better to just use an adjacency queue :P.
         }
         itnry.Add(src);
-
-        //IMPORTANT NOTE: Since we don't care about where we end up after all the flights,
-        // at each airport we are at, we can simply always pick the next to be the
-        // lexicographically smallest one that exists in the list of available destinations
-        // from that airport (using the Adjacency List).
     }
     
 }
