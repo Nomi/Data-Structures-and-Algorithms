@@ -19,7 +19,7 @@ public class Solution {
         
         // What is an MST?
         //      - Recall that Trees are Acyclical, Connected, & Undirected graphs (well, technically they are directed from parent to child, but that's besides the point).
-        //      - Recall that since a tree are connected and acyclical, for a tree of N nodes, there are N-1 edges (because for each of the N-1 children (the -1 is for the root), there are N-1 edges going into them).
+        //      - Recall that since a tree are connected and acyclical, for a tree of N nodes, there are N-1 edges (because for each of the N-1 nodes below the root, there are N-1 edges going into them).
         //      - MST is the smallest subset of edges from a graph that still connects all of its nodes but also forms a Tree (Acyclical, Connected, & Undirected Graph as discussed in the point above).
         //          If the edges are weighted, then we minimize the total cost by taking a subset of the edges such that the cost is minimized while still satisfying the other conditions of the MST.
         //      - For some Trees (like binary trees) we usually ignore the fact that they're directed (only parent has pointers to its children), but here it is more strict than that. 
