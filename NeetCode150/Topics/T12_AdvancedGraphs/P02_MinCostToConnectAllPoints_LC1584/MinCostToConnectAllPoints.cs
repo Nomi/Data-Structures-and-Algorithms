@@ -12,16 +12,18 @@ public class Solution {
         //Basically shortest path in an undirected AND weighted graph problem, so I'm thinking Djikstra's algorithm (I remember a little bit about it from a video I watched a long time ago)
         //OKAY, IT MIGHT NOT BE THE CORRECT APPROACH. AT LEAST Neetcodeio solns don't use it.
         
-        //OKAY, I WAS DUMB, DJIKSTRA IS LOWEST_COST PATH TO A NODE (or all nodes) IN DIRECTED and WEIGHTED GRAPHS 
+        //OKAY, I WAS DUMB, DJIKSTRA IS LOWEST_COST PATH FROM A NODE TO ANOTHER NODE (or all nodes) IN DIRECTED and WEIGHTED GRAPHS 
         //BUT IT DOESN'T ACCOUNT FOR HAVING TO GO THROUGH ALL NODES!!
         
         // This problem is ACTUALLY more like finding the Minimum Spanning Tree (MST), 
         
         // What is an MST?
         //      - Recall that Trees are Acyclical, Connected, & Undirected graphs (well, technically they are directed from parent to child, but that's besides the point).
-        //      - Recall that since a tree are connected and acyclical, for a tree of N nodes, there are N-1 edges (because for each of the N-1 nodes below the root, there are N-1 edges going into them).
+        //      - Recall that since a tree are connected and acyclical, for a tree of N nodes, there are N-1 edges (because to connect N points, you need N-1 lines. If you use N lines, you end up with a cycle (e.g. a square has 4 vertices and 4 edges, or two points with two edges between them, or one point with one edge to itself, etc.)).
         //      - MST is the smallest subset of edges from a graph that still connects all of its nodes but also forms a Tree (Acyclical, Connected, & Undirected Graph as discussed in the point above).
-        //          If the edges are weighted, then we minimize the total cost by taking a subset of the edges such that the cost is minimized while still satisfying the other conditions of the MST.
+        //      - If the edges are weighted, then we minimize the total cost by taking a subset of the edges such that the cost is minimized while still satisfying the other conditions of the MST.
+        //          For unweighted, we just assume the weights to be 1 for all edges.
+        //      - There CAN be multiple valid solutions/MSTs. We just return 1 of them, like in shortest path algorithms. 
         //      - For some Trees (like binary trees) we usually ignore the fact that they're directed (only parent has pointers to its children), but here it is more strict than that. 
         //          Meaning the edges really will not have any direction.
 
