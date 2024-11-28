@@ -1,12 +1,12 @@
-1, Accepted
+2, Accepted
 {
-    "date": "2024-09-03T17:21:34.772Z",
-    "statusDescription": "Accepted",
-    "code": "public class Solution {\n    public bool hasDuplicate(int[] nums) {\n        HashSet<int> seen = new();\n        for(int i=0;i<nums.Count();i++)\n        {\n            if(seen.Contains(nums[i]))\n                return true;\n            seen.Add(nums[i]);\n        }\n        return false;\n    }\n}\n",
-    "memory": 59676,
-    "stdout": "",
     "language": "csharp",
-    "time": "1.064",
+    "code": "public class Solution {\n    public bool hasDuplicate(int[] nums) {\n        HashSet<int> seen = new();\n        for(int i=0;i<nums.Count();i++)\n        {\n            if(!seen.Add(nums[i]))\n                return true;\n        }\n        return false;\n    }\n}\n",
     "problemId": "duplicate-integer",
+    "statusDescription": "Accepted",
+    "time": "0.435",
+    "date": "2024-11-28T23:56:38.186Z",
+    "memory": 57232,
+    "stdout": "",
     "stderr": ""
 }

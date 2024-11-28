@@ -11,9 +11,8 @@ public class Solution {
         HashSet<int> seen = new();
         for(int i=0;i<nums.Count();i++)
         {
-            if(seen.Contains(nums[i]))
+            if(!seen.Add(nums[i]))
                 return true;
-            seen.Add(nums[i]);
         }
         return false;
     }
