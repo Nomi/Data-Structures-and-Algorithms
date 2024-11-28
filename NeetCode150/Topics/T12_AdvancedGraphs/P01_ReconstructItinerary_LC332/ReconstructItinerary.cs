@@ -78,7 +78,7 @@ public class Solution {
             graph[src].RemoveAt(graph[src].Count-1); //Remove `dest` of this iteration from the adjacecny list
             dfsHierholzersAlgorithm_1(dest);
             //We don't add back dest to the adjacency list because of how Hierholzer's algorithm works (explained above). Might have been easier or better to just use an adjacency queue :P.
-        }
+        } //Sometimes the rest of the adjacency list will be cleared out (fully or partially) in a another/deeper level of the recursion because we'll get through this node from a different path while clearing out the remaining outgoing edges.
         itnry.Add(src);
     }
     
