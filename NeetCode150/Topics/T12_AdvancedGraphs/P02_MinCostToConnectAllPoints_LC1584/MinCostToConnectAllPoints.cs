@@ -21,7 +21,7 @@ public class Solution {
         //      - Recall that Trees are Acyclical, Connected, & Undirected graphs (well, technically they are directed from parent to child, but that's besides the point).
         //      - MST is the smallest set of edges from a graph that still connects all of its nodes but also forms a Tree (Acyclical, Connected, & Undirected Graph as discussed in the point above)
         //      - For some Trees (like binary trees) we usually ignore the fact that they're directed (only parent has pointers to its children), but here it is more strict than that. 
-        //          The edges really will be connected on both sides.
+        //          Meaning the edges really will not have any direction.
 
         // Since we want the MST, we can use the following algorithms:
         //  * Prim's Algorithm: [for Undirected Graphs] 
