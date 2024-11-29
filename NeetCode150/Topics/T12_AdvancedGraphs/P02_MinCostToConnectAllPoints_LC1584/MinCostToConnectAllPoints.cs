@@ -28,7 +28,8 @@ namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P02_MinCostToConnectAllPoint
 
 public class Solution {
     IMinCostToConnectPointsCalculator soln;
-    public int MinCostConnectPoints(int[][] points) {
+    public int MinCostConnectPoints(int[][] points) { //Easy once you know how to do it.
+
         //Basically shortest path in an undirected AND weighted graph problem, so I'm thinking Djikstra's algorithm (I remember a little bit about it from a video I watched a long time ago)
         //OKAY, IT MIGHT NOT BE THE CORRECT APPROACH. AT LEAST Neetcodeio solns don't use it.
         
@@ -113,7 +114,7 @@ public class PrimsAlgo_1 : IMinCostToConnectPointsCalculator
     int Abs(int num) => (int) Math.Abs(num);
     int Cost(int x1, int y1, int x2, int y2) => Abs(x1-x2) + Abs(y1-y2); //returns ManhattanCost
 
-    public int MinCostConnectPoints(int[][] points)
+    public int MinCostConnectPoints(int[][] points) //Note: Watched NC video for this and somehow I ended up doing this while sneaking peeks at the NC150 solution.
     {
         //[IMPORTANT OBSERVATION!] Since any point can be conneccted to any other point, we can consider it as a FULLY CONNECTED graph. 
         //      => We will have N^2 edges in total
@@ -155,7 +156,7 @@ public class PrimsAlgo_1 : IMinCostToConnectPointsCalculator
 
             minCost += cur.cost;
             //
-            foreach(var neighbor in neighbors[cur.ptIdx])
+            foreach(var neighbor in neighbors[cur.ptIdx])  //If it were not a fully connected graph, it might have helped to have this loop inside an `if (adj.ContainsKey(i))` condition to avoid sorting and going through empty nodes.
             {
                 pq.Enqueue(neighbor, neighbor.cost);
             }
