@@ -38,6 +38,8 @@ public class Solution {
 
         // Watched the NeetCode Advanced Algorithms course's video about Prim's and Kruskal's (only a little for this one, for now) algorithms for finding MST (without the code examples)
         
+        // NOTE: Djikstra's, Kruskal's, and Prim's algorithms are greedy algorithms. (I somehow hadn't made the connection yet)
+
         // What is an MST?
         //      - Recall that Trees are Acyclical, Connected, & Undirected graphs (well, technically they are directed from parent to child, but that's besides the point).
         //      - Recall that since a tree are connected and acyclical, for a tree of N nodes, there are N-1 edges (because to connect N points, you need N-1 lines. If you use N lines, you end up with a cycle (e.g. a square has 4 vertices and 4 edges, or two points with two edges between them, or one point with one edge to itself, etc.)).
@@ -88,7 +90,7 @@ public class Solution {
         //      - In fact, in NeetCode's opinion, it is conceptually it is a much easier algorithm to understand.
         //      - BUT, coding it might actually be more difficult/complicated because it uses the Union Find datastructure (which you might also need to implement yourself) and the implementation even if Union Find were to be given might be at least somewhat difficult/complicated.
         //      - Due to above reason, I stopped learning this, at least for now, because I have limited time and clearly this doesn't seem to be worth it given the tight schedule for my upcoming interview.
-        //      - Before fully stopping, I did watch the video at least upto the point where the basic logic is and why it works is explained and makes sense [~6min mark] (e.g. how to avoid introducing cycles by using Find to check if the edge we're using connects nodes in the same component), but not worth typing it out if I am not fully commited to practicing/using it yet.
+        //      - Before fully stopping, I did watch the video at least upto the point where the basic logic is and why it works is explained and makes sense (without code) [~6:45 mark] (e.g. how to avoid introducing cycles by using Find to check if the edge we're using connects nodes in the same component), but not worth typing it out if I am not fully commited to practicing/using it yet.
 
         soln = new PrimsAlgo_1();
 
