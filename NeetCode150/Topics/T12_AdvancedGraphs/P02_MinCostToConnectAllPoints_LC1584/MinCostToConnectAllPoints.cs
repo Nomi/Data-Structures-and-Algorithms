@@ -161,7 +161,7 @@ public class PrimsAlgo_1 : IMinCostToConnectPointsCalculator
             //
             foreach(var neighbor in neighbors[cur.ptIdx])  //If it were not a fully connected graph, it might have helped to have this loop inside an `if (adj.ContainsKey(i))` condition to avoid sorting and going through empty nodes.
             {
-                pq.Enqueue(neighbor, neighbor.cost);
+                pq.Enqueue(neighbor, neighbor.cost); //if this were djikstra, we would add total cost added to get to here (except last edge) and then current cost (last edge).
             }
         }
 
