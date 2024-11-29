@@ -58,6 +58,7 @@ public class Solution {
         // NOTE: Djikstra and Prim's are both based on BFS but use PriorityQueue/MinHeap instead of Queue.
         // NOTE2: Read the note about Djikstra vs Prim in my solution for the 'Network Delay Time' problem.
         //  * Prim's Algorithm: [for Undirected & Connected Graphs] 
+        //      - Prim's algorithm fails for directed graphs.
         //      - We use a `visited` HashSet because we don't want to visit a node more than once,
         //          because that would lead to a cycle.
         //      - We also use a MinHeap<weight, n1, n2>, which sorts based on weight/cost of the edges
