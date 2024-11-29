@@ -18,6 +18,7 @@ namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P02_MinCostToConnectAllPoint
 //FACTS: 
 //  - cost == |x1 - x2| + |y1 - y2| (maybe this would need to be asked as a clarification in an interview?)
 //CLARIFICATIONS:
+// - Should've asked if it is guaranteed there will be a solution, but as from what I can see, there must be a solution (since all nodes are connected to every other node)
 //CONSTRAINTS:
 // * 1 <= points.length <= 1000
 // * -1000 <= xi, yi <= 1000
@@ -58,7 +59,7 @@ public class Solution {
         //          because that would lead to a cycle.
         //      - We also use a MinHeap<weight, n1, n2>, which sorts based on weight/cost of the edges
         //          because we want to pop/dequeue the minimum weight/cost edges first. (where n1 and n2 are the nodes for the edges)
-        //      - We start at any node and add its edges to the MinHeap AND add the node to the Visited set.
+        //      - We start at ANY node and add its edges to the MinHeap AND add the node to the Visited set.
         //      - Then keep iterating and for the current edge for each iteration, use the n2 as the node
         //          and take all neighbors of the current node and add its edges them to the MinHeap (alongside their total weights (combined with how much it took get there))
         //      - { At this point, the algorithm works almost exactly like Djikstra's algorithm. (Side note: I watched the video about the algorithm from NeetCode's Advanced Graphs course but the problem for it on NC150 comes after this one (without the code example).) }
@@ -75,13 +76,14 @@ public class Solution {
         //      - If there are equal weights at some point, we can pop any of those and still get a valid MST (no cycle and minimum cost) 
         //          because as discussed earlier, there can be many valid solution, and this will be one of them.
         //      - Since the algorithm is so similar to Dikstra's alogirthm, the complexities are the same:
-        //          * TC: O(E*log2(E)) where E <= V^2 (E==V^2 when every node is connected to every other node and itself)
+        //          * TC: O(E*log2(E)) where E <= V^2 (E==V^2 when every node is connected to every other node)
         //              [Also, O(E*log2(v^2)) == O(E*2*log2(v)) == O(E*log2(v))]
         //              (Note: E*log2(E) comes from adding AT MOST E edges to the MinHeap)
-        //          * SC: O(E) where E<=V^2 (E==V^2 when every node is connected to every other node and itself)
+        //          * SC: O(E) where E<=V^2 (E==V^2 when every node is connected to every other node)
         //              [because we only store Edges]
         //      - Watch the video about this algorithm from the NeetCode Advanced Algorithms 
         //          course to find WHY this algorithm works and get more details about it.
+        //      - Note, MinHeap is also called `Frontier`? Also, in some rare cases, due to our input's properties (and further processing), we might not end up needing the MinHeap.
         //
         //              
         //  * Kruskal's Algorithm:
@@ -91,6 +93,7 @@ public class Solution {
         //      - BUT, coding it might actually be more difficult/complicated because it uses the Union Find datastructure (which you might also need to implement yourself) and the implementation even if Union Find were to be given might be at least somewhat difficult/complicated.
         //      - Due to above reason, I stopped learning this, at least for now, because I have limited time and clearly this doesn't seem to be worth it given the tight schedule for my upcoming interview.
         //      - Before fully stopping, I did watch the video at least upto the point where the basic logic is and why it works is explained and makes sense (without code) [~6:45 mark] (e.g. how to avoid introducing cycles by using Find to check if the edge we're using connects nodes in the same component), but not worth typing it out if I am not fully commited to practicing/using it yet.
+        //      - Oh, and Neecode's video about this problem also mentions that Prim's algo is also usualy more efficient.
 
         soln = new PrimsAlgo_1();
 
@@ -112,6 +115,52 @@ public class PrimsAlgo_1 : IMinCostToConnectPointsCalculator
 
     public int MinCostConnectPoints(int[][] points)
     {
+        //[IMPORTANT OBSERVATION!] Since any point can be conneccted to any other point, we can consider it as a FULLY CONNECTED graph. 
+        //      => We will have N^2 edges in total
+        //We want to find a MST of this graph because that will be (one of) our solution.
 
+        //Step 1- Build Adjacency List        
+        var neighbors = new Dictionary<int, List<(int cost, int ptIdx)>>(points.Length);
+
+        for(int i=0; i<points.Length; i++)
+        {
+            int x1 = points[i][0], y1 = points[i][1];
+            neighbors.TryAdd(i, new());
+            for(int j = i+1 ; j < points.Length; j++) //[IMPORTANT!!] [ALMOST_FORGOT!!] `j=i+1` because we would have paired the current i with all the nodes before it (and we don't pair it with itself). Obviously!
+            {
+                int cost = Cost(x1, y1, points[j][0], points[j][1]);
+                neighbors[i].Add((cost, j));
+
+                neighbors.TryAdd(j, new());
+                neighbors[j].Add((cost, i));
+            }
+
+        }
+
+        
+        //Step 2- Use Prim's algorithm (standard) to get MST (apparently there's an optimal version which is more efficient. Check Neetcodeio solns. I'm skipping them for now.)
+        int minCost = 0;
+        HashSet<int> visited = new(points.Length); //For avoiding nodes we already visited..
+
+        PriorityQueue<(int cost, int ptIdx), int> pq = new(); //For Prim's algo.
+        pq.Enqueue((0, 0), 0); //since we can start at any node in Prim's algo, let's start at the first point.
+
+        while(visited.Count < points.Length && pq.Count>0)
+        {
+            var cur = pq.Dequeue();
+
+            if(visited.Contains(cur.ptIdx))
+                continue; //skip
+            visited.Add(cur.ptIdx);
+
+            minCost += cur.cost;
+            //
+            foreach(var neighbor in neighbors[cur.ptIdx])
+            {
+                pq.Enqueue(neighbor, neighbor.cost);
+            }
+        }
+
+        return visited.Count == points.Length ? minCost : -1;
     }
 }
