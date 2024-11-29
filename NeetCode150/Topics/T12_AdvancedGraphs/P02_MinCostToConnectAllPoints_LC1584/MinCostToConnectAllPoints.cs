@@ -55,6 +55,8 @@ public class Solution {
         //          Meaning the edges really will not have any direction.
 
         // Since we want the MST, we can use the following algorithms (read the MST section above first):
+        // NOTE: Djikstra and Prim's are both based on BFS but use PriorityQueue/MinHeap instead of Queue.
+        // NOTE2: Read the note about Djikstra vs Prim in my solution for the 'Network Delay Time' problem.
         //  * Prim's Algorithm: [for Undirected & Connected Graphs] 
         //      - We use a `visited` HashSet because we don't want to visit a node more than once,
         //          because that would lead to a cycle.
