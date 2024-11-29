@@ -29,7 +29,7 @@ namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P03_NetworkDelayTime_LC743;
 public class Solution {
     
     public int NetworkDelayTime(int[][] times, int n, int k) {
-        return primsAlgo1(times, n, )
+        return primsAlgo1(times, n, k)
     }
 
     int primsAlgo1(int[][] times, int n, int k)
