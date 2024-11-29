@@ -131,9 +131,10 @@ public class PrimsAlgo_1 : IMinCostToConnectPointsCalculator
             {
                 int cost = Cost(x1, y1, points[j][0], points[j][1]);
                 neighbors[i].Add((cost, j));
-
+                
                 neighbors.TryAdd(j, new());
                 neighbors[j].Add((cost, i));
+                //We add both because it is undirected (or technically one undirected edge is two directed edges just in opposite direction)
             }
 
         }
