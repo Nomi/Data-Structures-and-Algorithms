@@ -35,6 +35,8 @@ public class Solution {
         //BUT IT DOESN'T ACCOUNT FOR HAVING TO GO THROUGH ALL NODES!!
         
         // This problem is ACTUALLY more like finding the Minimum Spanning Tree (MST), 
+
+        // Watched the NeetCode Advanced Algorithms course's video about Prim's and Kruskal's algorithms for finding MST (without the code examples)
         
         // What is an MST?
         //      - Recall that Trees are Acyclical, Connected, & Undirected graphs (well, technically they are directed from parent to child, but that's besides the point).
@@ -42,7 +44,7 @@ public class Solution {
         //      - MST is the smallest subset of edges from a graph that still connects all of its nodes but also forms a Tree (Acyclical, Connected, & Undirected Graph as discussed in the point above).
         //      - If the edges are weighted, then we minimize the total cost by taking a subset of the edges such that the cost is minimized while still satisfying the other conditions of the MST.
         //          For unweighted, we just assume the weights to be 1 for all edges.
-        //      - There CAN be multiple valid solutions/MSTs. We just return 1 of them, like in shortest path algorithms.
+        //      - There CAN be multiple valid solutions/MSTs (with same cost). We just return 1 of them, like in shortest path algorithms.
         //      - The result will be one of the valid MSTs but in the form of an edge list.
         //      - Unlike for Shortest path (where we start from source node), for MST it doesn't matter which node we start from (because all node need to be included anyway).
         //      - For some Trees (like binary trees) we usually ignore the fact that they're directed (only parent has pointers to its children), but here it is more strict than that. 
@@ -50,7 +52,34 @@ public class Solution {
 
         // Since we want the MST, we can use the following algorithms (read the MST section above first):
         //  * Prim's Algorithm: [for Undirected & Connected Graphs] 
-        //      - We start at any edge.
+        //      - We use a `visited` HashSet because we don't want to visit a node more than once,
+        //          because that would lead to a cycle.
+        //      - We also use a MinHeap<weight, n1, n2>, which sorts based on weight/cost of the edges
+        //          because we want to pop/dequeue the minimum weight/cost edges first. (where n1 and n2 are the nodes for the edges)
+        //      - We start at any node and add its edges to the MinHeap AND add the node to the Visited set.
+        //      - Then keep iterating and for the current edge for each iteration, use the n2 as the node
+        //          and take all neighbors of the current node and add its edges them to the MinHeap (alongside their total weights (combined with how much it took get there))
+        //      - { At this point, the algorithm works almost exactly like Djikstra's algorithm. (Side note: I watched the video about the algorithm from NeetCode's Advanced Graphs course but the problem for it on NC150 comes after this one (without the code example).) }
+        //      - { Also, we could run the algorithm to keep the loop running until the MinHeap is empty, but we could also add a different condition to continue the algorithm
+        //          to avoid extra processing once we're done finding it. For example:
+        //              1. Run until MinHeap empty (as we discussed above, this is a little inefficient but it works)
+        //              2. Run while Visited.Count < numOfNodes (if we know what the numOfNodes is),
+        //              3. While number/count of edges in list of edges in our results is < n-1 (as we discussed above, it being n-1 means we're done).
+        //          Just remember that visited.Count is number of nodes processed thus far, and result.Count is number of edges thus far.
+        //          To keep it simple, we will run until MinHeap is empty. }
+        //      - By the way, while the edges are undirected, the order we put n1 and n2 in the MinHeap
+        //          matters because that's the direction of our traversal (not the edge) [where n1 is where we are at, and n2 is where we will go] 
+        //          and reversing it suddenly would just lead to going back to previous nodes.
+        //      - If there are equal weights at some point, we can pop any of those and still get a valid MST (no cycle and minimum cost) 
+        //          because as discussed earlier, there can be many valid solution, and this will be one of them.
+        //      - Since the algorithm is so similar to Dikstra's alogirthm, the complexities are the same:
+        //          * TC: O(E*log2(E)) where E <= V^2 (E==V^2 when every node is connected to every other node and itself)
+        //              [Also, O(E*log2(v^2)) == O(E*2*log2(v)) == O(E*log2(v))]
+        //              (Note: E*log2(E) comes from adding AT MOST E edges to the MinHeap)
+        //          * SC: O(E) where E<=V^2 (E==V^2 when every node is connected to every other node and itself)
+        //              [because we only store Edges]
+        //      - Watch the video about this algorithm from the NeetCode Advanced Algorithms 
+        //          course to find WHY this algorithm works and get more details about it.
         //
         //              
         //  * Kruskal's Algorithm:
