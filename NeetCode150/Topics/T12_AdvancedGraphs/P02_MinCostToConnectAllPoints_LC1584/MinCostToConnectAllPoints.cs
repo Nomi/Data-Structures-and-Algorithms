@@ -36,7 +36,7 @@ public class Solution {
         
         // This problem is ACTUALLY more like finding the Minimum Spanning Tree (MST), 
 
-        // Watched the NeetCode Advanced Algorithms course's video about Prim's and Kruskal's algorithms for finding MST (without the code examples)
+        // Watched the NeetCode Advanced Algorithms course's video about Prim's and Kruskal's (only a little for this one, for now) algorithms for finding MST (without the code examples)
         
         // What is an MST?
         //      - Recall that Trees are Acyclical, Connected, & Undirected graphs (well, technically they are directed from parent to child, but that's besides the point).
@@ -83,7 +83,11 @@ public class Solution {
         //
         //              
         //  * Kruskal's Algorithm:
-        //          .
+        //      - Just another way to find the MST of a connected graph.
+        //      - Maybe if Prim's algorithm is too confusing for you, you might prefer Kruskal's algorithm.
+        //      - In fact, in NeetCode's opinion, it is conceptually it is a much easier algorithm to understand.
+        //      - BUT, coding it might actually be more difficult/complicated because it uses the Union Find datastructure (which you might also need to implement yourself) and the implementation even if Union Find were to be given might be at least somewhat difficult/complicated.
+        //      - Due to above reason, I stopped learning this, at least for now, because I have limited time and clearly this doesn't seem to be worth it given the tight schedule for my upcoming interview.
 
         soln = new PrimsAlgo_1();
 
