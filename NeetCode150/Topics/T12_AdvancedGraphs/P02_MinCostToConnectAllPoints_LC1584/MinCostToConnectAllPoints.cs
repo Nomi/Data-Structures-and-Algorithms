@@ -116,7 +116,7 @@ public class PrimsAlgo_1 : IMinCostToConnectPointsCalculator
 
     public int MinCostConnectPoints(int[][] points) //Note: Watched NC video for this and somehow I ended up doing this while sneaking peeks at the NC150 solution.
     {
-        //[IMPORTANT OBSERVATION!] Since any point can be conneccted to any other point, we can consider it as a FULLY CONNECTED graph. 
+        //[IMPORTANT OBSERVATION!] Since any point can be conneccted to any other point, we can consider it as a FULLY CONNECTED graph.  //ALSO IT IS UNDIRECTED!!!
         //      => We will have N^2 edges in total
         //We want to find a MST of this graph because that will be (one of) our solution.
 
