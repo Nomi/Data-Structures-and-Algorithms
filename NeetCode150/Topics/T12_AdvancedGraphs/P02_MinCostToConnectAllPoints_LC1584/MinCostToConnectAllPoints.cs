@@ -88,6 +88,7 @@ public class Solution {
         //      - In fact, in NeetCode's opinion, it is conceptually it is a much easier algorithm to understand.
         //      - BUT, coding it might actually be more difficult/complicated because it uses the Union Find datastructure (which you might also need to implement yourself) and the implementation even if Union Find were to be given might be at least somewhat difficult/complicated.
         //      - Due to above reason, I stopped learning this, at least for now, because I have limited time and clearly this doesn't seem to be worth it given the tight schedule for my upcoming interview.
+        //      - Before fully stopping, I did watch the video at least upto the point where the basic logic is and why it works is explained and makes sense [~6min mark] (e.g. how to avoid introducing cycles by using Find to check if the edge we're using connects nodes in the same component), but not worth typing it out if I am not fully commited to practicing/using it yet.
 
         soln = new PrimsAlgo_1();
 
