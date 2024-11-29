@@ -6,6 +6,25 @@ using System.Text;
 
 namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P02_MinCostToConnectAllPoints_LC1584;
 
+//## Problem statement Breakdown:
+//GIVEN: An array of DISTINCT points on a 2D graph
+//RESULT: Minimum cost to connect points
+//INPUT: int[][] points, representing the graph, where points[i] == [x,y]
+//OUTPUT: int
+//TO DO: 
+//  - Calculate ways to connect all the points such that:
+//      - There's EXACTLY 1 path between 2 points.
+//      - While keeping the manhattan distance (cost) minimum.
+//FACTS: 
+//  - cost == |x1 - x2| + |y1 - y2| (maybe this would need to be asked as a clarification in an interview?)
+//CLARIFICATIONS:
+//CONSTRAINTS:
+// * 1 <= points.length <= 1000
+// * -1000 <= xi, yi <= 1000
+//EXAMPLES:
+// - Input: points = [[0,0],[2,2],[3,3],[2,4],[4,2]]
+// - Output: 10
+
 public class Solution {
     IMinCostToConnectPointsCalculator soln;
     public int MinCostConnectPoints(int[][] points) {
@@ -23,13 +42,16 @@ public class Solution {
         //      - MST is the smallest subset of edges from a graph that still connects all of its nodes but also forms a Tree (Acyclical, Connected, & Undirected Graph as discussed in the point above).
         //      - If the edges are weighted, then we minimize the total cost by taking a subset of the edges such that the cost is minimized while still satisfying the other conditions of the MST.
         //          For unweighted, we just assume the weights to be 1 for all edges.
-        //      - There CAN be multiple valid solutions/MSTs. We just return 1 of them, like in shortest path algorithms. 
+        //      - There CAN be multiple valid solutions/MSTs. We just return 1 of them, like in shortest path algorithms.
+        //      - The result will be one of the valid MSTs but in the form of an edge list.
+        //      - Unlike for Shortest path (where we start from source node), for MST it doesn't matter which node we start from (because all node need to be included anyway).
         //      - For some Trees (like binary trees) we usually ignore the fact that they're directed (only parent has pointers to its children), but here it is more strict than that. 
         //          Meaning the edges really will not have any direction.
 
-        // Since we want the MST, we can use the following algorithms:
+        // Since we want the MST, we can use the following algorithms (read the MST section above first):
         //  * Prim's Algorithm: [for Undirected & Connected Graphs] 
-        //          
+        //      - We start at any edge.
+        //
         //              
         //  * Kruskal's Algorithm:
         //          .
