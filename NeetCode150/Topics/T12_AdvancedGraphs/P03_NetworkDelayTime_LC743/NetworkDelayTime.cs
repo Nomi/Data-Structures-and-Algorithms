@@ -29,19 +29,19 @@ namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P03_NetworkDelayTime_LC743;
 public class Solution {
     
     public int NetworkDelayTime(int[][] times, int n, int k) {
-        return primsAlgo1(times, n, k)
+        return primsAlgo1(times, n, k);
     }
 
     int primsAlgo1(int[][] times, int n, int k)
     {
         HashSet<int> visited =  new(n);
-        Dictionary<int, List<(int time, int node)> neighbors;
+        Dictionary<int, List<(int time, int node)>> neighbors = new();
         buildNeighborsDict1(neighbors, times);
         
         int time = 0;
         PriorityQueue<(int time, int node), int> pq = new();
         //k is the source:
-        pq.Enqueue((0, k));
+        pq.Enqueue((0, k), 0);
         while(visited.Count!=n && pq.Count>0)
         {
             var cur = pq.Dequeue();
@@ -56,14 +56,14 @@ public class Solution {
 
             foreach(var nei in neighbors[cur.node])
             {
-                pq.Enqueue(nei);
+                pq.Enqueue(nei, nei.time);
             }
         }
 
-        return visit.Count == n ? time : -1; 
+        return visited.Count == n ? time : -1; 
     }
 
-    void buildNeighborsDict1(Dictionary<int, List<(int time, int node)> neighbors, int[][] times)
+    void buildNeighborsDict1(Dictionary<int, List<(int time, int node)>> neighbors, int[][] times)
     {
         foreach(var time in times)
         {
