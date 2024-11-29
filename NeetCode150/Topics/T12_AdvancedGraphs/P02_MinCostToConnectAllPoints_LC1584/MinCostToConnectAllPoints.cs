@@ -30,7 +30,7 @@ public class Solution {
     IMinCostToConnectPointsCalculator soln;
     public int MinCostConnectPoints(int[][] points) { //Easy once you know how to do it.
 
-        //Basically shortest path in an undirected AND weighted graph problem, so I'm thinking Djikstra's algorithm (I remember a little bit about it from a video I watched a long time ago)
+        //[DEPRECATED] Basically shortest path in an undirected AND weighted graph problem, so I'm thinking Djikstra's algorithm (I remember a little bit about it from a video I watched a long time ago)
         //OKAY, IT MIGHT NOT BE THE CORRECT APPROACH. AT LEAST Neetcodeio solns don't use it.
         
         //OKAY, I WAS DUMB, DJIKSTRA IS LOWEST_COST PATH FROM A NODE TO ANOTHER NODE (or all nodes) IN DIRECTED and WEIGHTED GRAPHS 
