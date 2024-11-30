@@ -37,12 +37,48 @@ public class Solution {
         //  (We use SPT/Dijkstra because: 1. WE GO FROM SRC TO DEST AND 2. DON'T NEED TO COVER ALL THE NODES) //NOTE THAT 1. OR 2. BY THEMSELVES ARE ENOUGH TO KNOW WE DON'T NEED MST. //1. IS ENOUGH TO KNOW WE NEED SPT.
         //  FROM [FACT_0], HERE WE WON'T USE ADJACENCY LIST LIKE WE USUALLY DO. IT IS EASY TO JUST GO THROUGH ALL THE EDGES FOR EACH NODE BECAUSE IT IS JUST 1 NODE UP OR DOWN OR LEFT OR RIGHT
         
-        return int Dijkstra1(grid);
+        //  From NeetCode video: we will put in maxheap the following: (MAX_HEIGHT_OF_ANY_OF_NODES_ON_PATH_TO_THIS_NODE, NODE_ROW_IDX, NODE_COLUMN_IDX)
+        
+        return Dijkstra1(grid);
     }
 
     int Dijkstra1(int[][] grid)
     {
-        //Remember for Dijkstra we usuall use an adjacency list?
+        int N = grid.Length; // we know grid is NxN from question
+        HashSet<(int r, int c)> visited = new();
 
+        PriorityQueue<(int maxTimeNeededOnPath, int r, int c), int> pq = new();
+
+        pq.Enqueue((0, 0, 0), grid[0][0]); //First node we'll go to is the source node before which the max elevation is 0.
+        while(pq.Count>0) //IN WORST CASE: Goes over all possible edges => TC: O(4*V*log2(V)) == OC(Vlog2(V))
+        {
+            var cur = pq.Dequeue(); //O(1)
+            
+            if(cur.r==N-1 && cur.c==N-1)
+                return cur.maxTimeNeededOnPath;
+            
+            visited.Add((cur.r, cur.c));
+            
+            AddToPq(pq, cur, cur.r-1, cur.c, grid, visited);
+            AddToPq(pq, cur, cur.r+1, cur.c, grid, visited);
+            AddToPq(pq, cur, cur.r, cur.c-1, grid, visited);
+            AddToPq(pq, cur, cur.r, cur.c+1, grid, visited);
+        }
+        
+        throw new Exception("Couldn't find a solution, but should always have a solution by definition.");
     }
+
+    void AddToPq(PriorityQueue<(int maxTimeNeededOnPath, int r, int c), int> pq, (int maxTimeNeededOnPath, int r, int c) cur, int nR, int nC, int[][] grid, HashSet<(int r, int c)> visited)
+    {
+        if(visited.Contains((nR, nC)) || nR <  0 || nR >= grid.Length || nC <  0 || nC >= grid.Length) //[Read full comment] ONLY THOUGHT ABOUT PUTTING THIS HERE INSTEAD OF ABOVE AND PASSING THE ACTUAL CURRENT MAX WEIGHT AT ALL NODES ONLY AFTER PEEKING AT NEETCODEIO SOLN ONCE AFTER MINE DIDN'T WORK
+                return;
+        int maxTimeHere = cur.maxTimeNeededOnPath > grid[nR][nC] ? cur.maxTimeNeededOnPath : grid[nR][nC];
+        pq.Enqueue((maxTimeHere, nR, nC), maxTimeHere);
+    }
+
+    // void AddToPq(PriorityQueue<(int maxTimeNeededOnPath, int r, int c), int> pq, (int maxTimeNeededOnPath, int r, int c) cur, int nR, int nC, int[][] grid)
+    // {
+    //     int maxTimeHere = cur.maxTimeNeededOnPath > grid[cur.r][cur.c] ? cur.maxTimeNeededOnPath : grid[cur.r][cur.c];
+    //     pq.Enqueue((maxTimeHere, nR, nC), cur.maxTimeNeededOnPath);
+    // }
 }
