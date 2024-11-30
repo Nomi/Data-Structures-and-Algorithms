@@ -27,8 +27,17 @@ public class Solution {
         //  - For more, read up on my Dijkstra vs MST related comments in `Network Delay Time`
         //  - ACTUALLY, about [ALPHA_2], it might not be fully relevant here because we of the modification made in [FACT_3] AND only needing the path from SRC to DST without needing every node ([FACT_1] & [ALPHA_1]). For [ALPHA_2] I seemed to have been thinking more about using Dijkstra to find cost to go to every node from src.
 
-        // TLDR:
-        //  WE ARE FINDING A PATH WITH MAX HEIGHT (=>HEIGHT AS COST) (We use SPT/Dijkstra because: 1. WE GO FROM SRC TO DEST AND 2. DON'T NEED TO COVER ALL THE NODES) //NOTE THAT 1. OR 2. BY THEMSELVES ARE ENOUGH TO KNOW WE DON'T NEED MST. //1. IS ENOUGH TO KNOW WE NEED SPT.
+        //  Quick Summary (not comprehensive):
+        //  WE ARE FINDING A PATH WITH MINIMIZED MAX_HEIGHT_OF_ANY_OF_ITS_NODES 
+        //  (=>HEIGHT AS COST) 
+        //  (We use SPT/Dijkstra because: 1. WE GO FROM SRC TO DEST AND 2. DON'T NEED TO COVER ALL THE NODES) //NOTE THAT 1. OR 2. BY THEMSELVES ARE ENOUGH TO KNOW WE DON'T NEED MST. //1. IS ENOUGH TO KNOW WE NEED SPT.
 
+
+        return int Dijkstra1(grid);
+    }
+
+    int Dijkstra1(int[][] grid)
+    {
+        
     }
 }
