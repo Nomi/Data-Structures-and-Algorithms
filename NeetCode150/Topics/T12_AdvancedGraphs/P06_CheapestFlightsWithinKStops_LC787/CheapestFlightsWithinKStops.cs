@@ -58,15 +58,17 @@ public class Solution {
         Array.Fill(costAtCurLevel, int.MaxValue); //When level is 0 (chain of 0 edges allowed between any two nodes), we cannot reach any node except staying at the source node.
         costAtCurLevel[src] = 0; //Cost of staying where we are == 0
         
+        //TC: O(K*(V+E))
         // Now, let's find cost at each i-th level. Note that we go upto k+1-th level because we k is number of stops between (src, dst). So, k+1th edge would enable reaching dst and src is the 0th level. 
-        for(int i = 1; i<k+2; i++) //I assume we start from 1. Because we already manually filled the cost array for 0-th level (only src node visited with 0 edges used between src node and itself)
+        for(int i = 0; i<k+1; i++) //I assume we start from 1. Because we already manually filled the cost array for 0-th level (only src node visited with 0 edges used between src node and itself)
         {   
-            int[] ithLevelCost = costAtCurLevel.ToArray(); //Clones array
-            foreach(var flt in flights)
+            int[] ithLevelCost = costAtCurLevel.ToArray(); //Clones array //O(V) //Neetcodeio soln does: (int[])prices.Clone();
+            foreach(var flt in flights) //O(E)
             {
                 var fltSrc = flt[0];
                 if(costAtCurLevel[fltSrc] == int.MaxValue) //Skip nodes we don't know the cost of getting to from the i-1'th level. This is partially how we limit our level. For the other part, check the assignment logic of the new calculated min cost.
                     continue;
+
                 var fltDst = flt[1];
                 var totalCst = costAtCurLevel[fltSrc]+flt[2];
                 
