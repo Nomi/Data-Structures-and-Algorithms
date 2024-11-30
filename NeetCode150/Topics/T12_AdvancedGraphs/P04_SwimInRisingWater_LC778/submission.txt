@@ -1,0 +1,12 @@
+1, Compilation Error
+{
+    "language": "csharp",
+    "code": "public class Solution {\n    public int SwimInWater(int[][] grid) {\n        //[IMPORTANT!!!] JUST WATCHED THE NEETCODE VIDEO AND:\n        //  - We can ignore the t in the question from the perspective of using it to calculate anything, it is just something used to explain the question.\n        //  - INSTEAD, WE WILL SOLVE `WHAT IS THE MINIMUM AMOUNT OF TIME TO IT WOULD TAKE TO GET FROM START TO END`\n        //  - ALLOWED TRAVEL: UP DOWN LEFT RIGHT (each of these could be considered edges with the weight being the elevation of the destination node)\n        //  - WE WANT TO GO FROM GIVEN SOURCE (0,0) TO GIVEN DESTINATION (n-1, n-1) [FACT_1]\n        //  - IN ORDER TO SWIM/TRAVEL FROM ONE NODE TO ANOTHER, WE NEED TO WAIT UNTIL t IS >= THAN ELEVATION/VALUE AT BOTH NODES (so there's water to swim),\n        //  - SINCE WE CAN SWIM THROUGH ANY PATH IN 0 SECONDS, AS LONG AS ALL THE NODES IN THE PATH ARE <=t, WE CAN TRAVEL THROUGH IT IN 0 SECONDS\n        //  - AS SUCH, THE BOTTLENECK IS THE MAXIMUM ELEVATION/VALUE OF ANY NODE IN THE PATH RATHER THAN THE SUM_OF_VALUES/DISTANCE OF WHOLE PATH. [FACT_2] \n        //      (This is because we can just wait at starting node for t = Elevation/Value of maximum node in the path, and then you can swim through the whole path in 0 seconds.)\n        //  - From [FACT_1] IT FOLLOWS THAT WE DON'T WANT TO A MST (specific src and dest, and it doesn't matter if we travel all nodes (which could in fact only hurt)).\n        //      IT SEEMS *LIKELY* TO BE SPT FROM THIS.\n        //  - From [FACT_2] WE CAN CONFRIM WE WANT SHORTEST PATH BECAUSE: Since we want to minimize waiting time, we want to minimize the largest elevation in the path locally. \n        //          We don't care about the globally smallest sum of values/elevations (like we would in MST), but we care about minimizng the (local) elevation FOR EVERY \n        //          node in the path. Even if the sum of their elevations ends up being bigger (because we only wait for the time of the maximum elevation, then swim through that path in 0 seconds).\n        //  - For more, read up on my Dijkstra vs MST related comments in `Network Delay Time`\n\n                \n    }\n}\n",
+    "problemId": "swim-in-rising-water",
+    "statusDescription": "Compilation Error",
+    "time": "0.0",
+    "date": "2024-11-30T15:59:37.130Z",
+    "memory": "",
+    "stdout": "",
+    "stderr": ""
+}
