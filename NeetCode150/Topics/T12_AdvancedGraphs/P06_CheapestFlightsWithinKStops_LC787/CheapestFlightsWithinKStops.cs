@@ -54,6 +54,8 @@ public class Solution {
 
     int BellmanFordAlgo1(int n, int[][] flights, int src, int dst, int k) //TC: O(n+(m∗k)) //SC: O(n) Where n n is the number of flights, m m is the number of edges and k k is the number of stops.
     {
+        //Could probably make it a little bit more efficient using hashmaps and stuff, but for interviews this is fine.
+
         //SC: O(V)
         //Should've named it `costAtPrevLevel` maybe????
         int[] costAtCurLevel = new int[n]; //Minimum Cost to get to the index node at current level. Level is the length of the chain of nodes/edges we traverse (=> level = number of nodes we can cover travel from source ).
@@ -66,7 +68,7 @@ public class Solution {
         {   
             //costAtCurLevel is the (i-1)thLevelCost here.
             int[] ithLevelCost = costAtCurLevel.ToArray(); //O(V) //Clones array //Neetcodeio soln does: (int[])prices.Clone(); // In short: Used to ensure the updates do not affect the decision-making for the current iteration.
-            int changes = 0;
+            int changes = 0; //Could also break out earlier than i==k+2 keeping track of if there were no changes.
             foreach(var flt in flights) //O(E)
             {
                 var fltSrc = flt[0];
