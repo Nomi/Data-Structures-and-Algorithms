@@ -54,29 +54,33 @@ public class Solution {
 
     int BellmanFordAlgo1(int n, int[][] flights, int src, int dst, int k) //TC: O(n+(m∗k)) //SC: O(n) Where n n is the number of flights, m m is the number of edges and k k is the number of stops.
     {
-        int[] costAtCurLevel = new int[n]; //Minimum Cost to get to the index node at current level. Level is the length of the chain of edges we traverse (=> level = number of edges from source to that node).
+        //SC: O(V)
+        //Should've named it `costAtPrevLevel` maybe????
+        int[] costAtCurLevel = new int[n]; //Minimum Cost to get to the index node at current level. Level is the length of the chain of nodes/edges we traverse (=> level = number of nodes we can cover travel from source ).
         Array.Fill(costAtCurLevel, int.MaxValue); //When level is 0 (chain of 0 edges allowed between any two nodes), we cannot reach any node except staying at the source node.
         costAtCurLevel[src] = 0; //Cost of staying where we are == 0
         
         //TC: O(K*(V+E))
-        // Now, let's find cost at each i-th level. Note that we go upto k+1-th level because we k is number of stops between (src, dst). So, k+1th edge would enable reaching dst and src is the 0th level. 
-        for(int i = 0; i<k+1; i++) //I assume we start from 1. Because we already manually filled the cost array for 0-th level (only src node visited with 0 edges used between src node and itself)
+        // Now, let's find cost at each i-th level. Note that we go upto k+1-th level because we k is number of stops/nodes between (src, dst). So, k+1th node would be dst and src is the 0th level/node. 
+        for(int i = 1; i<k+2; i++) //I assume we start from 1 (turns out can also do [0,k+1)). Because we already manually filled the cost array for 0-th level (only src node visited with 0 nodes used between getting from src node to itself)
         {   
-            int[] ithLevelCost = costAtCurLevel.ToArray(); //Clones array //O(V) //Neetcodeio soln does: (int[])prices.Clone();
+            //costAtCurLevel is the (i-1)thLevelCost here.
+            int[] ithLevelCost = costAtCurLevel.ToArray(); //O(V) //Clones array //Neetcodeio soln does: (int[])prices.Clone(); // In short: Used to ensure the updates do not affect the decision-making for the current iteration.
             foreach(var flt in flights) //O(E)
             {
                 var fltSrc = flt[0];
-                if(costAtCurLevel[fltSrc] == int.MaxValue) //Skip nodes we don't know the cost of getting to from the i-1'th level. This is partially how we limit our level. For the other part, check the assignment logic of the new calculated min cost.
+                if(costAtCurLevel[fltSrc] == int.MaxValue) //Skip nodes we don't know the cost of getting to from the i-1'th level. This is how we limit our level, because we want to only i+1th level nodes, which would mean nodes that are connected to nodes we reached on the (i-1)-th level.
                     continue;
-
+                    
                 var fltDst = flt[1];
-                var totalCst = costAtCurLevel[fltSrc]+flt[2];
+                var fltCst = flt[2];
+                var totalCst = costAtCurLevel[fltSrc] + fltCst;
                 
-                if(totalCst < costAtCurLevel[fltDst]) //This is how we limit our level.
-                    ithLevelCost[fltDst] = totalCst;    //This is (the rest of) how we limit our level to the i-th level. If we modify the costAtCurLevel for a node we encounter in the future (of the outer loop) as a source, then setting it would break the logic we use to skip if the we never visited the fltSrc at the (i-1)th level. Because then the array we use to check that would have the cost from i-th level, and the calculation then would give us the i+1th level instead of the i-th level.
+                if(totalCst < ithLevelCost[fltDst]) //IMPORTANT!! : I HAD `if(totalCst < costAtCurLevel[fltDst])` earlier, but that's wrong because if we had found a smaller solution than the current totalCst in via a prior flt, we would end up overwriting it! 
+                    ithLevelCost[fltDst] = totalCst;    // The following comment is what I was thinking when I made the above mistake. I was dumb : //[DEPRECATED / INCORRECT] This is (the rest of) how we limit our level to the i-th level. If we modify the costAtCurLevel for a node we encounter in the future (of the outer loop) as a source, then setting it would break the logic we use to skip if the we never visited the fltSrc at the (i-1)th level. Because then the array we use to check that would have the cost from i-th level, and the calculation then would give us the i+1th level instead of the i-th level.
             }
 
-            costAtCurLevel = ithLevelCost;
+            costAtCurLevel = ithLevelCost; //Now costAtCurLevel has the cost at the K-th level. Keep in mind we need cost at K+1-th level because we need to get to dst which would be k+1th node/stop if there were k stops between it and src (and src would be 0th stop)
         }
 
         return costAtCurLevel[dst] != int.MaxValue ? costAtCurLevel[dst] : -1; //-1 => Not found
