@@ -1,12 +1,12 @@
-1, Wrong Answer
+2, Wrong Answer
 {
     "language": "csharp",
-    "code": "public class Solution {\n    public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int k) {\n        //Since it says AT MOST k steps, it means we want the Shortest Path (by weight), and not an MST.\n        return Dijkstra1(n, flights, src, dst, k);\n    }\n\n    int Dijkstra1(int n, int[][] flights, int src, int dst, int k)\n    {\n        //Conditions imply no cycles.\n        // The fact that we have another constraint here\n        Dictionary<int, List<(int cost, int dst)>> neighbors = new(n);\n        foreach(var flight in flights)\n        {\n            neighbors.TryAdd(flight[0], new());\n            neighbors[flight[0]].Add((flight[2], flight[1]));\n        }\n\n        HashSet<int> visited = new();\n        PriorityQueue<(int cost, int dst, int stops), int> pq = new();\n        pq.Enqueue((0, src, 0), 0);\n        while(pq.Count>0)\n        {\n            var cur = pq.Dequeue();\n            if(visited.Contains(cur.dst))\n                continue;\n            visited.Add(cur.dst);\n            \n            if(cur.dst == dst)\n                return cur.cost;\n            \n            if(cur.stops==k+1) //order of this matters because dst is allowed to be k+1th because technically only the stops inbetween src and dst count.\n                continue;\n            \n            foreach(var nei in neighbors[cur.dst])\n            {\n                pq.Enqueue((cur.cost+nei.cost, nei.dst, cur.stops+1), cur.cost+nei.cost);\n            }\n        }\n\n        return -1;\n    }\n}\n",
+    "code": "public class Solution {\n    public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int k) {\n        //Since it says AT MOST k steps, it means we want the Shortest Path (by weight), and not an MST.\n        return Dijkstra1(n, flights, src, dst, k);\n    }\n\n    int Dijkstra1(int n, int[][] flights, int src, int dst, int k)\n    {\n        //Conditions imply no cycles.\n        // The fact that we have another constraint here\n        Dictionary<int, List<(int cost, int dst)>> neighbors = new(n);\n        foreach(var flight in flights)\n        {\n            neighbors.TryAdd(flight[0], new());\n            neighbors[flight[0]].Add((flight[2], flight[1]));\n        }\n\n        HashSet<int> visited = new();\n        PriorityQueue<(int cost, int dst, int stops), int> pq = new();\n        pq.Enqueue((0, src, 0), 0);\n        while(pq.Count>0)\n        {\n            var cur = pq.Dequeue();\n            if(visited.Contains(cur.dst))\n                continue;\n            visited.Add(cur.dst);\n            \n            if(cur.dst == dst)\n                return cur.cost;\n            \n            if(cur.stops==k+1) //order of this matters because dst is allowed to be k+1th because technically only the stops inbetween src and dst count.\n                continue;\n\n            if(!neighbors.ContainsKey(cur.dst)) \n                continue;\n\n            foreach(var nei in neighbors[cur.dst])\n            {\n                pq.Enqueue((cur.cost+nei.cost, nei.dst, cur.stops+1), cur.cost+nei.cost);\n            }\n        }\n\n        return -1;\n    }\n}\n",
     "problemId": "cheapest-flight-path",
     "statusDescription": "Wrong Answer",
-    "time": "0.424",
-    "date": "2024-11-30T01:23:53.319Z",
-    "memory": 56180,
+    "time": "0.408",
+    "date": "2024-11-30T01:24:48.617Z",
+    "memory": 57096,
     "stdout": "",
     "stderr": ""
 }

@@ -38,7 +38,10 @@ public class Solution {
             
             if(cur.stops==k+1) //order of this matters because dst is allowed to be k+1th because technically only the stops inbetween src and dst count.
                 continue;
-            
+
+            if(!neighbors.ContainsKey(cur.dst)) 
+                continue;
+
             foreach(var nei in neighbors[cur.dst])
             {
                 pq.Enqueue((cur.cost+nei.cost, nei.dst, cur.stops+1), cur.cost+nei.cost);
