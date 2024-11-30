@@ -8,10 +8,12 @@ namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P04_SwimInRisingWater_LC778;
 
 public class Solution {
     public int SwimInWater(int[][] grid) {
+
         //[IMPORTANT!!!] JUST WATCHED THE NEETCODE VIDEO AND:
         //  - We can ignore the t in the question from the perspective of using it to calculate anything, it is just something used to explain the question.
         //  - INSTEAD, WE WILL SOLVE `WHAT IS THE MINIMUM AMOUNT OF TIME TO IT WOULD TAKE TO GET FROM START TO END`
-        //  - ALLOWED TRAVEL: UP DOWN LEFT RIGHT (each of these could be considered edges with the weight being the elevation of the destination node)
+        //  - ALLOWED TRAVEL: UP DOWN LEFT RIGHT (each of these could be considered edges with the weight being the elevation of the destination node) [FACT_0]
+        //  - FROM [FACT_0], HERE WE WON'T USE ADJACENCY LIST LIKE WE USUALLY DO. IT IS EASY TO JUST GO THROUGH ALL THE EDGES FOR EACH NODE BECAUSE IT IS JUST 1 NODE UP OR DOWN OR LEFT OR RIGHT
         //  - WE WANT TO GO FROM GIVEN SOURCE (0,0) TO GIVEN DESTINATION (n-1, n-1). [FACT_1]
         //  - IN ORDER TO SWIM/TRAVEL FROM ONE NODE TO ANOTHER, WE NEED TO WAIT UNTIL t IS >= THAN ELEVATION/VALUE AT BOTH NODES (so there's water to swim),
         //  - SINCE WE CAN SWIM THROUGH ANY PATH IN 0 SECONDS, AS LONG AS ALL THE NODES IN THE PATH ARE <=t, WE CAN TRAVEL THROUGH IT IN 0 SECONDS
@@ -27,17 +29,20 @@ public class Solution {
         //  - For more, read up on my Dijkstra vs MST related comments in `Network Delay Time`
         //  - ACTUALLY, about [ALPHA_2], it might not be fully relevant here because we of the modification made in [FACT_3] AND only needing the path from SRC to DST without needing every node ([FACT_1] & [ALPHA_1]). For [ALPHA_2] I seemed to have been thinking more about using Dijkstra to find cost to go to every node from src.
 
+
+
         //  Quick Summary (not comprehensive):
         //  WE ARE FINDING A PATH WITH MINIMIZED MAX_HEIGHT_OF_ANY_OF_ITS_NODES 
-        //  (=>HEIGHT AS COST) 
+        //  (=>MAX_HEIGHT_OF_ANY_OF_NODES_ON_PATH_TO_THIS_NODE AS COST) 
         //  (We use SPT/Dijkstra because: 1. WE GO FROM SRC TO DEST AND 2. DON'T NEED TO COVER ALL THE NODES) //NOTE THAT 1. OR 2. BY THEMSELVES ARE ENOUGH TO KNOW WE DON'T NEED MST. //1. IS ENOUGH TO KNOW WE NEED SPT.
-
-
+        //  FROM [FACT_0], HERE WE WON'T USE ADJACENCY LIST LIKE WE USUALLY DO. IT IS EASY TO JUST GO THROUGH ALL THE EDGES FOR EACH NODE BECAUSE IT IS JUST 1 NODE UP OR DOWN OR LEFT OR RIGHT
+        
         return int Dijkstra1(grid);
     }
 
     int Dijkstra1(int[][] grid)
     {
-        
+        //Remember for Dijkstra we usuall use an adjacency list?
+
     }
 }
