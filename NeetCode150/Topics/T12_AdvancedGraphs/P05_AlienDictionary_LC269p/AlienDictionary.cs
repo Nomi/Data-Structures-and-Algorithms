@@ -7,9 +7,9 @@ using System.Text;
 namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P05_AlienDictionary_LC269p;
 
 public class Solution {
-    public string foreignDictionary(string[] words) {//Tricky but not really that hard.
+    public string foreignDictionary(string[] words) {//Tricky but not really that hard???.
 
-        //Did it pretty much while watching NC video :P (don't have enough time till interview)
+        //Did it pretty much while watching NC video :P (don't have enough time till interview) //Still took a while TBH.
 
         //[IMPORTANT] ALL OF THE FOLLIWING COMMENTS ARE IMPORTANT:
 
@@ -119,7 +119,7 @@ public class Solution {
         inCurrentPath[cur] = false;
 
         res.Add(cur);
-        
+
         return false;
     }
 }
