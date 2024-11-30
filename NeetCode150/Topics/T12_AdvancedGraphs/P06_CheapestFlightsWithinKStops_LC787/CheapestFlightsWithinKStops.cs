@@ -7,9 +7,27 @@ using System.Text;
 namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P06_CheapestFlightsWithinKStops_LC787;
 
 public class Solution {
+
+    //[IMPORTANT] THIS IS A SPECIAL CASE BECAUSE WE HAVE TO CONSTRAINTS: 
+    //  - CHEAPEST FLIGHTS (meaning dijkstra shortest path over this as weight)
+    //  - LESS THAN K STOPS (meaning you have to check more than one / just the 
+    //      lowest cost path)
+    //  - We can't use `visited` HashSet to avoid infinite loop here because
+    //      we might want to visit a node multiple times through different paths.
+    //  - We still want to keep it greedy via dijkstra, so minheap over cost stays.
+    //  - We can use a cost[{dstNode}][{numberOfStops}] array where for each node
+    //      we keep track of if we have been there with this number of stops before,
+    //      if not, we do as if it wasn't in visited. BUT if it isn't, we check if 
+    //      the current cost we reached it with was lesser than the one we reached 
+    //      it with previously (compare cur.cost to value of the cost array with appropriate indexes),
+    //      and if it is lesser, then we do as if it wasn't in visited. But, if it
+    //      is greater, we continue as if it was in visited and skip adding any of 
+    //      its neighbors to the priority queue.
+    //[NOTE] I WROTE THIS STUFF JUST BASED ON NEETCODEIO SOLN. PLEASE WATCH HIS VIDEO
+    //too. I know I will right now.
     public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
         //Since it says AT MOST k steps, it means we want the Shortest Path (by weight), and not an MST.
-
+        
         //I DID THIS WRONG AT FIRST BECAUSE I JUST USED THE NORMAL DIJKSTRA WITH JUST THE STOPS BEING PASSED.
         //FOR THIS APPROACH, I READ THROUGH THE NEETCODEIO SOLN, BUT I FELT PRETTY SLEEPY TOWARDS THE END SO I'M NOT SURE I FULLY UNDERSTAND.
         //I WILL WATCH THE NEETCODE VIDEO NOW, JUST TO MAKE SURE I UNDERSTAND.
