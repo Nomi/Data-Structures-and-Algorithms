@@ -62,7 +62,7 @@ public class Solution {
         
         //TC: O(K*(V+E))
         // Now, let's find cost at each i-th level. Note that we go upto k+1-th level because we k is number of stops/nodes between (src, dst). So, k+1th node would be dst and src is the 0th level/node. 
-        for(int i = 1; i<k+2; i++) //I assume we start from 1 (turns out can also do [0,k+1)). Because we already manually filled the cost array for 0-th level (only src node visited with 0 nodes used between getting from src node to itself)
+        for(int i = 1; i<k+2; i++) //I assume we start from 1 (turns out can also do [0,k+1), we only really need to ensure the loop runs K+1 times. We don't even use i.). Because we already manually filled the cost array for 0-th level (only src node visited with 0 nodes used between getting from src node to itself)
         {   
             //costAtCurLevel is the (i-1)thLevelCost here.
             int[] ithLevelCost = costAtCurLevel.ToArray(); //O(V) //Clones array //Neetcodeio soln does: (int[])prices.Clone(); // In short: Used to ensure the updates do not affect the decision-making for the current iteration.
