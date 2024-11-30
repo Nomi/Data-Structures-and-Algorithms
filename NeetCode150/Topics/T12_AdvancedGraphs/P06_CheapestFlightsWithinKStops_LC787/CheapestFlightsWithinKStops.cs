@@ -60,12 +60,13 @@ public class Solution {
         Array.Fill(costAtCurLevel, int.MaxValue); //When level is 0 (chain of 0 edges allowed between any two nodes), we cannot reach any node except staying at the source node.
         costAtCurLevel[src] = 0; //Cost of staying where we are == 0
         
-        //TC: O(K*(V+E))
+        //TC: O(K*(V+E)) where K can be at most n-2.
         // Now, let's find cost at each i-th level. Note that we go upto k+1-th level because we k is number of stops/nodes between (src, dst). So, k+1th node would be dst and src is the 0th level/node. 
         for(int i = 1; i<k+2; i++) //I assume we start from 1 (turns out can also do [0,k+1), we only really need to ensure the loop runs K+1 times. We don't even use i.). Because we already manually filled the cost array for 0-th level (only src node visited with 0 nodes used between getting from src node to itself)
         {   
             //costAtCurLevel is the (i-1)thLevelCost here.
             int[] ithLevelCost = costAtCurLevel.ToArray(); //O(V) //Clones array //Neetcodeio soln does: (int[])prices.Clone(); // In short: Used to ensure the updates do not affect the decision-making for the current iteration.
+            int changes = 0;
             foreach(var flt in flights) //O(E)
             {
                 var fltSrc = flt[0];
@@ -77,9 +78,14 @@ public class Solution {
                 var totalCst = costAtCurLevel[fltSrc] + fltCst;
                 
                 if(totalCst < ithLevelCost[fltDst]) //IMPORTANT!! : I HAD `if(totalCst < costAtCurLevel[fltDst])` earlier, but that's wrong because if we had found a smaller solution than the current totalCst in via a prior flt, we would end up overwriting it! 
+                {
                     ithLevelCost[fltDst] = totalCst;    // The following comment is what I was thinking when I made the above mistake. I was dumb : //[DEPRECATED / INCORRECT] This is (the rest of) how we limit our level to the i-th level. If we modify the costAtCurLevel for a node we encounter in the future (of the outer loop) as a source, then setting it would break the logic we use to skip if the we never visited the fltSrc at the (i-1)th level. Because then the array we use to check that would have the cost from i-th level, and the calculation then would give us the i+1th level instead of the i-th level.
+                    changes++;
+                }
             }
 
+            //Could also break out earlier than i==k+2 keeping track of if there were no changes.
+            if(changes==0) break;
             costAtCurLevel = ithLevelCost; //Now costAtCurLevel has the cost at the K-th level. Keep in mind we need cost at K+1-th level because we need to get to dst which would be k+1th node/stop if there were k stops between it and src (and src would be 0th stop)
         }
 
