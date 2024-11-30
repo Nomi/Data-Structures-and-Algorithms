@@ -49,7 +49,7 @@ public class Solution {
 
         PriorityQueue<(int maxTimeNeededOnPath, int r, int c), int> pq = new();
 
-        pq.Enqueue((grid[0][0], 0, 0), grid[0][0]); //First node we'll go to is the source node before which the max elevation is 0.
+        pq.Enqueue((grid[0][0], 0, 0), grid[0][0]); //Deprecated (because I switched my approach a little to match neetcodeio soln.): //First node we'll go to is the source node before which the max elevation is 0.
         while(pq.Count>0) //IN WORST CASE: Goes over all possible edges => TC: O(4*V*log2(V)) == OC(Vlog2(V))
         {
             var cur = pq.Dequeue(); //O(1)
