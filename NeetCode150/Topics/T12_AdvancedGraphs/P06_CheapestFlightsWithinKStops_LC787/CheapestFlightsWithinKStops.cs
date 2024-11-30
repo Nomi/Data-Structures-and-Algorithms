@@ -8,8 +8,8 @@ namespace DSA.NeetCode150.Topics.T12_AdvancedGraphs.P06_CheapestFlightsWithinKSt
 
 public class Solution {
     //[VERY IMPORTANT] USE THE FOLLOWING RESOURCES:
-    // - [IMP!!] WATCH NEETCODE VIDEO FOR THIS PROBLEM
     // - [V. IMP!!] READ MY SOLUTION FOR THIS PROBLEM
+    // - [IMP!!] WATCH NEETCODE VIDEO FOR THIS PROBLEM
     // - ["Bellman Ford Algorithm | Shortest path & Negative cycles | Graph Theory" by "WilliamFiset"](https://www.youtube.com/watch?v=lyw4FaxrwHg)
     //      * Comment on the video : We need to run V-1 times because we run edges in random order so we could run from the vertex has positive infinity cost to another vertex also has positive infinity cost. So we could reduce time complexity if we run edges in an order that assures unvisited vertex will be visited from visited vertex, right?
     //          + Author's reply: Only in the worst case does it take V-1 iterations for the Bellman-Ford algorithm to complete. Another stopping condition is when we're unable to relax an edge, this means we have reached the optimal solution early. In practice, this optimization works very well from tests I've conducted in the past. See here for an example: https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/williamfiset/algorithms/graphtheory/BellmanFordEdgeList.java#L42
