@@ -18,7 +18,7 @@ public class Solution {
     // - ['Bellman-Ford in 5 minutes — Step by step example' by 'Michael Sambol'](https://www.youtube.com/watch?v=obWXjtg0L64)
     // - ['Bellman-Ford in 4 minutes — Theory' by 'Michael Sambol'](https://www.youtube.com/watch?v=9PHkk0UavIM)
     // - ['Graph Algorithms' article on University of Washington website](https://courses.cs.washington.edu/courses/cse373/23au/lessons/graph-algorithms/) Good for general cases.
-    // - Time complexity of BF is generally O(V*E), but since here we only go from any node at most k times t
+    // - Time complexity of BF is generally O(V*E), but since here we only go from any node at most k+1 nodes farther away, it is O(K*E) in an ideal world where copying arrays doesn't take O(V). Also, since the graph could technically be fully connected, E<N^2 => O(K*E) == O(K*V^2)
     // - While Dijkstra is more efficient generally, we should use Bellman Ford's algorithm when: 
     //      * It is more efficient and easier for problems like this (where you need at most k steps). 
     //      * When there are NEGATIVE WEIGHTS
