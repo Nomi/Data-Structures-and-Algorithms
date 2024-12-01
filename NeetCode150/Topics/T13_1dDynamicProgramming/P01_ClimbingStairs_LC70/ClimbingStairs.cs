@@ -33,6 +33,7 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //      Constant space you realize you only really need as many as last k values (the number of base cases) (e.g. k==2 in actual fibonacci), so you use an array to store them.
 //:::::::::::::::::::::::::::::
 //### 0/1 Knapsack (take / not take) [Optimitze cost-to-value] [More explanation: to maximize (or minimize?) cost/weight_or_count/population/profit within budget/storage/space/capacity limits]: {WROTE THIS MOSTLY, if not fully, ON MY OWN!!!}
+//  TC: O(2^N) where N is number of items [from combinatrics]
 //  - Memoization (top-down):
 //      Uses recursive backtracking where for each item we consider adding it or not adding it (then moving onto the next one).
 //          Our conditions to stop are 1. going over the weight limit or 2. running out of items.
@@ -78,6 +79,7 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //:::::::::::::::::::::::::::::
 //### Unbounded Knapsack [Optimized cost-to-value, but can pick same item unlimited times (unlimited quantities of items)] {wrote all of this on my own LET'S GOOO!!! Will watch neetcode video anyway, but won't edit notes unless something new comes up,}
 //  {Like 0/1 Knapsack. Seems to be more common in interviews (according to NeetCode).}
+//  TC: O(2^C) where C is capacity [from combinatrics]
 //  - Memoization (top-down):
 //      Uses Post-Order Recursive Backtracking to decide whether to add current item or not, BUT
 //          there are more than n+2 branches in each recursion where n is the number of times this item can be kept with the current capacity: 
@@ -120,7 +122,24 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //      Notice we only need first two rows. The rest is like Bounded KnapSack.
 //:::::::::::::::::::::::::::::
 //### Longest Common Sequence:
-//
+//  {NC: TC=2^(s1Len+s2Len), SC: O(N+M) recursion/call_stack max depth}
+// {FOR NOW JUST WATCHED THE NEETCODE VIDEO}
+// {NC: APPARENTLY QUIRE EASY TO OPTIMIZE AFTER FINISHING BRUTEFORCE DFS}
+// {NC: Apparently, THERE ARE MULTIPLE VARIATIONS OF THIS e.g. LONGEST INCRESING SUBSEQUENCE, array input LCS, string input LCS, and maybe even other factors, etc.}
+// {Recursion/Sub problems on mismatch: 1. skip(++) current index for first string (other remains as is), 2. skip(++) current index for second string (other remains as is).}
+// {Recursion/Sub problems on equality: skip current index for both strings (++)}
+// {SELF NOTE: 
+//      THERE'S A **GREEDY** ASPECT HERE:
+//      WE DON'T NEED CASES WHERE WE PICK NEITHER OR ONLY ONE OF THEM EACH BECAUSE FOR A SUBSEQUENCE: 
+//      Assume "A" MATCHES, THEN EVEN IF THERE'S ANOTHER A LATER, IT DOESN'T MATTER BECAUSE there's two possible cases:
+//          1. "AAB" "AB" then even if we only consider first A and skip the second one OR skip the first a pick the second one, we still get the subsequence. But 
+//                  But as you can see, for this case, it doesn't matter.
+//          2. BUT if it was "ABA" ONLY picking the first A would work.
+//      From 1 and 2, we can see it is better to be GREEDY and pick the first matching element.
+//           (cuz this is a subsequence not a substring, we don't need to check the case where both match yet we skip 1 (once for each) or skip both to cover all cases).
+//}
+//  {Finish condition: the smaller string was finished being traversed}
+//  {for equality: result from call., for inequality: MAX of result from the two calls}
 //  - Memoization (top-down):
 //
 //  - Tabulation (Bottom-Up):
