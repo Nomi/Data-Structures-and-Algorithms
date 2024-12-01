@@ -18,6 +18,7 @@ public class Solution {
         //As such, in interest of time, I'll just take another good look at them and move to the next problem!  [ my interview is in 2 days :'( ]
 
         //DO MAKE SURE TO DO THEM WHEN DONE WITH THE INTERVIEW (and practice the memoized solution!)!!
+        //ALSO THIS IS CLEARLY A 0/1 KNAPSACK PROBLEM (bounded)
     }
     int dfsWrapper1(int[] nums)
     {
