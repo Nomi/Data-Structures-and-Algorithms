@@ -121,9 +121,9 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //  - Optimized Tabulation (Bottom-Up):
 //      Notice we only need first two rows. The rest is like Bounded KnapSack.
 //:::::::::::::::::::::::::::::
-//### Longest Common Sequence:
+//### Longest Common Sequence: (sometimes Longest Subsequence Following A Property)
 //  {NC: TC=2^(s1Len+s2Len), SC: O(N+M) recursion/call_stack max depth}
-// {FOR NOW JUST WATCHED THE NEETCODE VIDEO}
+// {FOR NOW JUST WATCHED THE NEETCODE VIDEO (only the recursive part and a little of memoization)}
 // {NC: APPARENTLY QUIRE EASY TO OPTIMIZE AFTER FINISHING BRUTEFORCE DFS}
 // {NC: Apparently, THERE ARE MULTIPLE VARIATIONS OF THIS e.g. LONGEST INCRESING SUBSEQUENCE, array input LCS, string input LCS, and maybe even other factors, etc.}
 // {Recursion/Sub problems on mismatch: 1. skip(++) current index for first string (other remains as is), 2. skip(++) current index for second string (other remains as is).}
@@ -137,23 +137,35 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //          2. BUT if it was "ABA" ONLY picking the first A would work.
 //      From 1 and 2, we can see it is better to be GREEDY and pick the first matching element.
 //           (cuz this is a subsequence not a substring, we don't need to check the case where both match yet we skip 1 (once for each) or skip both to cover all cases).
-//}
+//  }
+//    {Obviously, better to pass start indices than substrings due to time complexity / performance.)
 //  {Finish condition: the smaller string was finished being traversed}
-//  {for equality: result from call., for inequality: MAX of result from the two calls}
+//  {for equality: 1+result from call, for inequality: MAX of results from the two calls}
 //  - Memoization (top-down):
 //
 //  - Tabulation (Bottom-Up):
 //
 //  - Optimized Tabulation (Bottom-Up):
+//(finish this later??)
 //
 //:::::::::::::::::::::::::::::
-//### Palindromes:
-//  - Memoization (top-down):
+//### Palindromes: [NOT **TYPICAL** DP (memoization, or tabulation, etc. doesn't apply), BUT A DIFFERENT FORM OF DP] (DP in layman's terms really only cares about reusing what we already found out to solve any problems that would require that same knowledge)
+// [ALL PALINDROMIC SUBSTRINGS]
+//{FOR NOW JUST WATCHED THE NEETCODE VIDEO (only the recursive part and a little of memoization)}
+//  Uses the fact that a{nonPalindromicSubstring}a is NOT a palindormic substring (for search space culling, kinda like backtracking)
+//  NEED TO CHECK FOR TWO SEPARATE CASES:
+//  Case 1: Longest odd length palindrommic substring:
+//      We start by checking all palindromic substrings where current character is middle character, 
+//          assuming it is palindromic (because it is a single character) and keep expanding outwards until first time the new left and right characters don't match/are_unequal (or go out of array/string bounds).
+//          (we stop due to above condition(l!=r) or if we go out of array/string bounds)
+//  Case 2: Longest even length palindromic substring:
+//      For each pair of 2 consecutive characters in the string, we check if they're both equal. If they are:
+//          We keep expanding both sides by 1 until we get unequal characters (l!=r) or we hit array/string bounds.
+// Return: Maximum of both cases.
+//(finish this later??)
 //
-//  - Tabulation (Bottom-Up):
-//
-//  - Optimized Tabulation (Bottom-Up):
-//
+//:::::::::::::::::::::::::::::
+//### READ MY SOLUTION ON RACECAR LEETCODE PROBLEM??
 //:::::::::::::::::::::::::::::
 //### DP on strings, bitmask, and digits???
 //:::::::::::::::::::::::::::::
