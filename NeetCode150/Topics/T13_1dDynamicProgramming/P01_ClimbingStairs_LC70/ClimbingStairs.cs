@@ -19,6 +19,9 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 // My observation: Non-optimized tabulation ends up with a similar array to the memo we would have otherwise built for memoization (even what's inside / how to build it). 
 //      (I think this can make solving tabulation based DP easier because now you know exactly what kind of array you want to build, and you have a general idea of how to build it.)
 //
+// My observation: Generally, in tabulation DP (bottom up) the order of the table (like where we start or end) doesn't matter (so you can disregard any confused comments I made about this initially),
+//                      we only chose a specific order for the table if we find a case where doing so could be useful or inuitive (e.g. mirroring original martix, etc.)
+//
 //:::::::::::::::::::::::::::::
 //### Fibonacci [to calculate a value]: {wrote this one on my own, so there might be some incorrect stuff}
 //  - Memoization (Top-down):
@@ -37,8 +40,8 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //      Uses a 2D memo array that stores the result of the function call for each input pairing of indexOfElementConsidered and spaceLeft
 //      Since it is memoization, it is still based on a recursive backtracking take-or-not approach.
 //  - Tabulation (Bottom-Up): 
-//      (??? [IMP!] Since in bruteforce or memoization we only calculate (and return) the final number of ways for each item with given capacity in POST ORDER RECURSIVE BACKTRACKING, our memo's bottom rows are filled first. ???)
-//      (???    As such we use a similar approach when creating the table here. The first row ???)
+//      (Notice how the last level of post-order recursive calls in the backtracking solution will basically (since it has no context of total profit in the above recursive level) calculate max profit we can get if we only consider adding the current level 1 or 0 times given the current capacity)
+//      (Our tabulation based approach uses the above idea, but since the order of items (rows) doesn't really matter, order of the table based on items doesn't matter either and there is no specific benefit of choosing any order, so we choose to start from any item(row), so we start from the first row to keep things simpler)
 //      Note that order of picking doesn't matter, but we will manually enforce one to make it work/efficient.
 //      As usual, you use a similar array to the memoization soln where memo[itemIdx][capacity] stores the maximum profit possible only considering items from 0 to itemIdx (whether we take it or not) when `capacity` is the capacity left.
 //      We start by manually filling the whole first row(its base case) (maximum profit possible when only considering item at idx 0 for capacities 0 through maximum capacity (starting/original capacity of bag (empty bag)))
@@ -58,8 +61,16 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //:::::::::::::::::::::::::::::
 //### [2D] For Number of Unique Paths type problems [num unique paths from (0,0) to (ROWS-1,COLS-1) of matrix]: {WROTE THIS ON MY OWN!}
 //  - It is kinda similar to 0/1 Knapsack (BOUNDED) because you can only choose 1 out of 2 nodes (down or right) for each unique path.
+//  - The recursive call would start POSTORDER from (0,0) and recursively figure out how to get there from nodes above and below it. (and same for each of them) [Base cases: 1. out of bounds => 0, 2. Reached Destination=> 1]
+//  - This is like Knapsack, but we reverse the order of items to basically mirror how our graph/matrix would be originally to keep things simpler/easier (to do and a lot more to be readable/understandable)
 //  - However, the differences are that:
-//      * We start from computing the only the last row first (each node from there has only one way to go, which is right, so everything == 1) [Because 1. We sort of inverted the problem to: How many ways from each node can we get to the ending, because that makes it easier/possible to calculate what we want 2. The recursive backtracking solution was post-order ??]
+//      * We start from computing the only the last row first (base case) (each node from there has only one way to go, which is right, so everything == 1) 
+//              [Because (not sure!?)
+//                  1. We sort of inverted the problem to: How many ways from each node can we get to the ending, because that makes it easier/possible to calculate what we want 
+//                  2. While order matters unlike in knapsack (because we need the last index of the last row first and the ones directly connected to it first), 
+//                          we can flip the matrix and still keep the same order as long as we also 'flip' our logic.
+//                  3. This mirrors the original matrix that was provided (or should exist if only given dimensions) and this makes things simpler  (e.g. directions are consistently up and down). 
+//                          So, even if we could flip this whole matrix (which would require changing the logic a LITTLE), we won't do it because this way we get to keep things consistent with orignal matrix.
 //      * Then for each node, number of ways to get from there to original node is the number of ways to get to the destination is the 
 //          sum of number of ways to get to destination from the node to the right and node to the left (this is where DP saves us).
 //      * Recursion based solution also uses similar approach just using recursion to do it and memoization just memoizes these results.
@@ -76,32 +87,37 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //                  LIKE WE STUDIED IN BACKTRACKING SECTION: 
 //                      HERE, CLEARLY THE ORDER WE PICK ITEMS IN DOESN'T MATTER (so it's fine to pick all of this item we will be taking at once)
 //                      THIS LOOP WILL COVER ALL POSSIBLE NUMBER OF TIMES WE CAN PICK THIS ITEM.
+//              4. Note that we only really need to store the max profit at given capacity, so number of repetitions don't need to be tracked, just all repetions should be considered and then the max one of those is stored in the memo for a node/function_call.
 //      Here, an interesting observation would be, if we have already computed MAX PROFIT FOR EACH (curItemIdx, capacity), we can just cache that and return everytime this question is asked.
 //          This is where the memo/cache comes in.
 //  - Tabulation (Bottom-Up):
 //      As always, non-optimized tabulation ends up with a similar array to memoization, therefore, let's think of how we can build it iteratively.
 //      (Notice how the last level of post-order recursive calls in the backtracking solution will basically (since it has no context of total profit in the above recursive level) calculate max profit we can get if we only consider adding the current level any number of times given the current capacity)
 //      (Our tabulation based approach uses the above idea, but since the order of items doesn't really matter, we can start from any item, so we start from the first row)
-//      Since memoization used a solution, we start from the first sub array and generate it as:
+//      Due to the above 2 lines, we start from the generating the first sub array of what would have been the memo:
 //          First, foreach capacity in [0, COLS): table[0][capacity] = max profit if we can only include first item unlimited times for given capacity. (should be easy)
 //          Then, foreach i-th row(1 row for each item), starting from i = 1:
 //                      table[i][1] = table[i]
-//                      foreach capacity in [1, COLS): //we start form 1 because 0 capacity is invalid.
-//                          table[i][capacity] = MAX_PROFIT_AT_CURRENT_CAPACITY_IF_WE_ONLY_CONSIDER_CURRENT_ITEMS_OR_ONES_BEFORE_IT
-//                          Here, MAX_PROFIT_AT_CURRENT_CAPACITY_IF_WE_ONLY_CONSIDER_CURRENT_ITEMS_OR_ONES_BEFORE_IT =
-//                          MAX
-//                          (
-//                              table[i-1][capacity], //MAX CAPACITY IF WE DON'T INCLUDE CURRENT ITEM
-//                              profit[i] + table[i][capacity-weight[i]] 
-//                              //The above line is Different from Bounded Knapsack 
+//                      foreach capacity in [1, COLS): //we start form 1 because 0 capacity => 0 profit.
+//                          noTakeProfit = table[i-1][capacity]; //MAX CAPACITY IF WE DON'T INCLUDE CURRENT ITEM
+//                          takeProfit = int.MinValue;
+//                          if(capacity-weight[i] >= 0)
+//                          {
+//                              takeProfit = profit[i] + table[i][capacity-weight[i]];
+//                              //The above line is Different from Bounded Knapsack (to handle repeatability of same item)
 //                              //It is == profit of including current item once + table[i][capacity-weight[i]]
-//                              //Where table[i][capacity-weight[i]] == Max Profit if we could include any items from [0, i] with the remaining capacity after including i-th item once.
-//                                  (notice i can be used again here, unlike in Bounded Knapsack)
-//                          )
-//          Then the result is in the final column of the final row of the table, because it STORES MAXIMUM PROFIT IF WE CAN CONSIDER ALL COMBINATION OF
-//              ITEMS ([0,numAllItems]), FOR THE FULL CAPACITY (capacity of empty knapsack).
-//  - Optimized Tabulation (Bottom-Up):
+//                              //Where table[i][capacity-weight[i]] == Max Profit if we could include any items from [0, i] with the remaining capacity after including 1st item once.
+//                              //    (notice i can be used again here, unlike in Bounded Knapsack).
+//                          }
+//                          table[i][capacity] = Math.Max(takeProfit, noTakeProfit); // MAX_PROFIT_AT_CURRENT_CAPACITY_IF_WE_ONLY_CONSIDER_CURRENT_ITEMS_OR_ONES_BEFORE_IT
+//                      NOTICE THAT THIS WORKS BECAUSE IN ANY row table[i], table[i][1] gets filled by `noTake`, and the rest use it directly or indirectly for their take (repeating same item), while comparing with the row above for noTake.
+//                      Then at table[i][2], if weight limit allows, we set it to MAXIMUM_OF profit[i] + max of repeating at i most 1 times just OR not taking it at all.
+//                      Here, we don't really care HOW (repetition or not (take/noTake chain)), we just want the maximum profit if we have this much capacity.
 //
+//          Then the result is in the final column of the final row of the table, because it STORES MAXIMUM PROFIT IF WE CAN CONSIDER ALL COMBINATION OF
+//              ITEMS ([0,numAllItems]), FOR THE FULL CAPACITY (capacity of EMPTY KNAPSACK).
+//  - Optimized Tabulation (Bottom-Up):
+//      Notice we only need first two rows. The rest is like Bounded KnapSack.
 //:::::::::::::::::::::::::::::
 //### Longest Common Sequence:
 //
