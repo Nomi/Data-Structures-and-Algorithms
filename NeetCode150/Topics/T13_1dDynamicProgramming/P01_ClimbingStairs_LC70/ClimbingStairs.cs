@@ -8,22 +8,22 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 
 //[IMPORTANT!] NOT REALLY HARD! STARRED FOR BRINGING ATTENTION TO THESE NOTES ABOUT DP:
 
-//## DP PATTERNS: {Get Grokking DP patterns course??}
-//
+// ## DP PATTERNS: {Get Grokking DP patterns course??}
+
 // For the interview just do memoization first then explain how you might create tabulation?
-//
-// DP GENERALLY ONLY USED TO GET NUMERIC RESULTS? (like number of ways to do something than the ways themselves (which would generally require recursive backtracking))
-//
+
+// DP GENERALLY ONLY USED TO GET NUMERIC RESULTS (ALSO some small values like the LONGEST STRING BUT not a list of strings)? (like number of ways to do something than the ways themselves (which would generally require recursive backtracking))
+
 // Got these (except Fibonacci) from Neetcode's Advanced Algorithms course videos about them.
-//
+
 // My observation: Non-optimized tabulation ends up with a similar array to the memo we would have otherwise built for memoization (even what's inside / how to build it). 
 //      (I think this can make solving tabulation based DP easier because now you know exactly what kind of array you want to build, and you have a general idea of how to build it.)
-//
+
 // My observation: Generally, in tabulation DP (bottom up) the order of the table (like where we start or end) doesn't matter (so you can disregard any confused comments I made about this initially),
 //                      we only chose a specific order for the table if we find a case where doing so could be useful or inuitive (e.g. mirroring original martix, etc.)
-//
-//:::::::::::::::::::::::::::::
-//### Fibonacci [to calculate a value]: {wrote this one on my own, so there might be some incorrect stuff}
+
+// :::::::::::::::::::::::::::::
+// ### Fibonacci [to calculate a value]: {wrote this one on my own, so there might be some incorrect stuff}
 //  - Memoization (Top-down):
 //      Really just stores the result for each input (as 1D array).
 //  - Tabulation (Bottom-Up):
@@ -31,8 +31,8 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //      fills the array starting from before (the first k e.g. k==2 in actual fibonacci) are manually set (to values of base cases in memoization's recursion)
 //  - Optimized Tabulation (Bottom-Up): 
 //      Constant space you realize you only really need as many as last k values (the number of base cases) (e.g. k==2 in actual fibonacci), so you use an array to store them.
-//:::::::::::::::::::::::::::::
-//### 0/1 Knapsack (take / not take) [Optimitze cost-to-value] [More explanation: to maximize (or minimize?) cost/weight_or_count/population/profit within budget/storage/space/capacity limits]: {WROTE THIS MOSTLY, if not fully, ON MY OWN!!!}
+// :::::::::::::::::::::::::::::
+// ### 0/1 Knapsack (take / not take) [Optimitze cost-to-value] [More explanation: to maximize (or minimize?) cost/weight_or_count/population/profit within budget/storage/space/capacity limits]: {WROTE THIS MOSTLY, if not fully, ON MY OWN!!!}
 //  TC: O(2^N) where N is number of items [from combinatrics]
 //  - Memoization (top-down):
 //      Uses recursive backtracking where for each item we consider adding it or not adding it (then moving onto the next one).
@@ -58,9 +58,9 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //      and we only set values to the current row. 
 //      Therefore, we can only use a two row array to get optimize SC from O(N*C) to O(2*C)==O(N)
 //  - QUESTION: Does choosing the order of the indices of memo matter?
-//
-//:::::::::::::::::::::::::::::
-//### [2D] For Number of Unique Paths type problems [num unique paths from (0,0) to (ROWS-1,COLS-1) of matrix]: {WROTE THIS ON MY OWN!}
+
+// :::::::::::::::::::::::::::::
+// ### [2D] For Number of Unique Paths type problems [num unique paths from (0,0) to (ROWS-1,COLS-1) of matrix]: {WROTE THIS ON MY OWN!}
 //  - It is kinda similar to 0/1 Knapsack (BOUNDED) because you can only choose 1 out of 2 nodes (down or right) for each unique path.
 //  - The recursive call would start POSTORDER from (0,0) and recursively figure out how to get there from nodes above and below it. (and same for each of them) [Base cases: 1. out of bounds => 0, 2. Reached Destination=> 1]
 //  - This is like Knapsack, but we reverse the order of items to basically mirror how our graph/matrix would be originally to keep things simpler/easier (to do and a lot more to be readable/understandable)
@@ -75,9 +75,9 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //      * Then for each node, number of ways to get from there to original node is the number of ways to get to the destination is the 
 //          sum of number of ways to get to destination from the node to the right and node to the left (this is where DP saves us).
 //      * Recursion based solution also uses similar approach just using recursion to do it and memoization just memoizes these results.
-//
-//:::::::::::::::::::::::::::::
-//### Unbounded Knapsack [Optimized cost-to-value, but can pick same item unlimited times (unlimited quantities of items)] {wrote all of this on my own LET'S GOOO!!! Will watch neetcode video anyway, but won't edit notes unless something new comes up,}
+
+// :::::::::::::::::::::::::::::
+// ### Unbounded Knapsack [Optimized cost-to-value, but can pick same item unlimited times (unlimited quantities of items)] {wrote all of this on my own LET'S GOOO!!! Will watch neetcode video anyway, but won't edit notes unless something new comes up,}
 //  {Like 0/1 Knapsack. Seems to be more common in interviews (according to NeetCode).}
 //  TC: O(2^C) where C is capacity [from combinatrics]
 //  - Memoization (top-down):
@@ -115,13 +115,13 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //                      NOTICE THAT THIS WORKS BECAUSE IN ANY row table[i], table[i][1] gets filled by `noTake`, and the rest use it directly or indirectly for their take (repeating same item), while comparing with the row above for noTake.
 //                      Then at table[i][2], if weight limit allows, we set it to MAXIMUM_OF profit[i] + max of repeating at i most 1 times just OR not taking it at all.
 //                      Here, we don't really care HOW (repetition or not (take/noTake chain)), we just want the maximum profit if we have this much capacity.
-//
+
 //          Then the result is in the final column of the final row of the table, because it STORES MAXIMUM PROFIT IF WE CAN CONSIDER ALL COMBINATION OF
 //              ITEMS ([0,numAllItems]), FOR THE FULL CAPACITY (capacity of EMPTY KNAPSACK).
 //  - Optimized Tabulation (Bottom-Up):
 //      Notice we only need first two rows. The rest is like Bounded KnapSack.
-//:::::::::::::::::::::::::::::
-//### Longest Common Sequence: (sometimes Longest Subsequence Following A Property)
+// :::::::::::::::::::::::::::::
+// ### Longest Common Sequence: (sometimes Longest Subsequence Following A Property)
 //  {NC: TC=2^(s1Len+s2Len), SC: O(N+M) recursion/call_stack max depth}
 // {FOR NOW JUST WATCHED THE NEETCODE VIDEO (only the recursive part and a little of memoization)}
 // {NC: APPARENTLY QUIRE EASY TO OPTIMIZE AFTER FINISHING BRUTEFORCE DFS}
@@ -142,16 +142,16 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //  {Finish condition: the smaller string was finished being traversed}
 //  {for equality: 1+result from call, for inequality: MAX of results from the two calls}
 //  - Memoization (top-down):
-//
+
 //  - Tabulation (Bottom-Up):
-//
+
 //  - Optimized Tabulation (Bottom-Up):
-//(finish this later??)
-//
-//:::::::::::::::::::::::::::::
-//### Palindromes: [NOT **TYPICAL** DP (memoization, or tabulation, etc. doesn't apply), BUT A DIFFERENT FORM OF DP] (DP in layman's terms really only cares about reusing what we already found out to solve any problems that would require that same knowledge)
+// (finish this later??)
+
+// :::::::::::::::::::::::::::::
+// ### Palindromes: [NOT **TYPICAL** DP (memoization, or tabulation, etc. doesn't apply), BUT A DIFFERENT FORM OF DP] (DP in layman's terms really only cares about reusing what we already found out to solve any problems that would require that same knowledge)
 // [ALL PALINDROMIC SUBSTRINGS]
-//{FOR NOW JUST WATCHED THE NEETCODE VIDEO (only the recursive part and a little of memoization)}
+// {FOR NOW JUST WATCHED THE NEETCODE VIDEO (only the recursive part and a little of memoization)}
 //  Uses the fact that a{nonPalindromicSubstring}a is NOT a palindormic substring (for search space culling, kinda like backtracking)
 //  NEED TO CHECK FOR TWO SEPARATE CASES:
 //  Case 1: Longest odd length palindrommic substring:
@@ -162,13 +162,13 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //      For each pair of 2 consecutive characters in the string, we check if they're both equal. If they are:
 //          We keep expanding both sides by 1 until we get unequal characters (l!=r) or we hit array/string bounds.
 // Return: Maximum of both cases.
-//(finish this later??)
-//
-//:::::::::::::::::::::::::::::
-//### READ MY SOLUTION ON RACECAR LEETCODE PROBLEM??
-//:::::::::::::::::::::::::::::
-//### DP on strings, bitmask, and digits???
-//:::::::::::::::::::::::::::::
+// (finish this later??)
+
+// :::::::::::::::::::::::::::::
+// ### READ MY SOLUTION ON RACECAR LEETCODE PROBLEM??
+// :::::::::::::::::::::::::::::
+// ### DP on strings, bitmask, and digits???
+// :::::::::::::::::::::::::::::
 
 public class Solution {
     public int ClimbStairs(int n) {     
