@@ -6,6 +6,8 @@ using System.Text;
 
 namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC70;
 
+//[IMPORTANT!] NOT REALLY HARD! MARKED/STARRED FOR BRINGING ATTENTION TO THESE NOTES:
+
 //## DP PATTERNS: {Get Grokking DP patterns course??}
 //
 // DP GENERALLY ONLY USED TO GET NUMERIC RESULTS? (like number of ways to do something than the ways themselves (which would generally require recursive backtracking))
