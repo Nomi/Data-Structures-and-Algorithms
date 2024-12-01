@@ -70,6 +70,8 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //  - Optimized Tabulation (Bottom-Up):
 //
 //:::::::::::::::::::::::::::::
+//### DP on strings, bitmask, and digits???
+//:::::::::::::::::::::::::::::
 
 public class Solution {
     public int ClimbStairs(int n) {     
