@@ -8,7 +8,8 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P03_HouseRobber_LC198;
 
 public class Solution {
     public int Rob(int[] nums) {
-        return dfsWrapper1(nums);
+        // return dfsWrapper1(nums);
+        return optimizedBottomUp(nums);
     }
 
     int dfsWrapper1(int[] nums)
@@ -18,7 +19,7 @@ public class Solution {
         return dfs(0, nums, maxProfit);
     }
 
-    int dfs(int house, int[] nums, int[] maxProfit)
+    int dfs(int house, int[] nums, int[] maxProfit) // MEMOIZED TC: O(HOUSES) (each house computed only once) MEMOIZED SC: O(HOUSES) (because max stored for each house) //BRUTEFORCE (no memo) TC: O(2^HOUSES)
     {
         if(house >= nums.Length) //HAD > earlier
             return 0;
@@ -33,5 +34,20 @@ public class Solution {
         }
 
         return maxProfit[house];
+    }
+
+    int optimizedBottomUp(int[] nums) //TC: O(HOUSES), SC: O(1) 
+    {
+        int maxProfitAt_hPlus2 = nums[nums.Length-1];
+        int maxProfitAt_hPlus1 = nums[nums.Length-2];
+
+        for(int h=nums.Length-3; h>=0; h--)
+        {
+            int curMaxProfit = (int) Math.Max(nums[h]+maxProfitAt_hPlus2, maxProfitAt_hPlus1);
+            maxProfitAt_hPlus2 = maxProfitAt_hPlus1;
+            maxProfitAt_hPlus1 = curMaxProfit;
+        }
+
+        return (int) Math.Max(maxProfitAt_hPlus1, maxProfitAt_hPlus2); //h==-1 after last loop
     }
 }

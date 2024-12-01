@@ -1,12 +1,12 @@
-1, Accepted
+2, Wrong Answer
 {
     "language": "csharp",
-    "code": "public class Solution {\n    public int Rob(int[] nums) {\n        return dfsWrapper1(nums);\n    }\n\n    int dfsWrapper1(int[] nums)\n    {\n        var maxProfit = new int[nums.Length];\n        Array.Fill(maxProfit, -1);\n        return dfs(0, nums, maxProfit);\n    }\n\n    int dfs(int house, int[] nums, int[] maxProfit)\n    {\n        if(house >= nums.Length) //HAD > earlier\n            return 0;\n        \n        if(maxProfit[house] == -1)\n        {\n            int dontRobCur = dfs(house+1, nums, maxProfit);\n\n            int robCur = nums[house] + dfs(house+2, nums, maxProfit);//cant rob next house\n            \n            maxProfit[house] = robCur > dontRobCur ? robCur : dontRobCur;\n        }\n\n        return maxProfit[house];\n    }\n}\n",
+    "code": "public class Solution {\n    public int Rob(int[] nums) {\n        // return dfsWrapper1(nums);\n        return optimizedBottomUp(nums);\n    }\n\n    int dfsWrapper1(int[] nums)\n    {\n        var maxProfit = new int[nums.Length];\n        Array.Fill(maxProfit, -1);\n        return dfs(0, nums, maxProfit);\n    }\n\n    int dfs(int house, int[] nums, int[] maxProfit) // MEMOIZED TC: O(HOUSES) (each house computed only once) MEMOIZED SC: O(HOUSES) (because max stored for each house) //BRUTEFORCE (no memo) TC: O(2^HOUSES)\n    {\n        if(house >= nums.Length) //HAD > earlier\n            return 0;\n        \n        if(maxProfit[house] == -1)\n        {\n            int dontRobCur = dfs(house+1, nums, maxProfit);\n\n            int robCur = nums[house] + dfs(house+2, nums, maxProfit);//cant rob next house\n            \n            maxProfit[house] = robCur > dontRobCur ? robCur : dontRobCur;\n        }\n\n        return maxProfit[house];\n    }\n\n    int optimizedBottomUp(int[] nums) //TC: O(HOUSES), SC: O(1) \n    {\n        int maxProfitAt_hPlus2 = nums[nums.Length-1];\n        int maxProfitAt_hPlus1 = nums[nums.Length-2];\n\n        for(int h=nums.Length-3; h>=0; h--)\n        {\n            int curMaxProfit = (int) Math.Max(nums[h]+maxProfitAt_hPlus2, maxProfitAt_hPlus1);\n            maxProfitAt_hPlus2 = maxProfitAt_hPlus1;\n            maxProfitAt_hPlus1 = curMaxProfit;\n        }\n\n        return (int) Math.Max(maxProfitAt_hPlus1, maxProfitAt_hPlus2); //h==-1 after last loop\n    }\n}\n",
     "problemId": "house-robber",
-    "statusDescription": "Accepted",
-    "time": "0.409",
-    "date": "2024-12-01T21:53:59.131Z",
-    "memory": 56332,
+    "statusDescription": "Wrong Answer",
+    "time": "0.423",
+    "date": "2024-12-01T22:02:49.531Z",
+    "memory": 56400,
     "stdout": "",
     "stderr": ""
 }
