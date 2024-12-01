@@ -17,7 +17,7 @@ public class Solution {
         //I checked the neetcodeio solutions and it's basically the same thing. Though, they did do them in a smarter way I guess. (creating a helper and calculate for each robbing first house and not robbing and then return the max among them) 
         //As such, in interest of time, I'll just take another good look at them and move to the next problem!  [ my interview is in 2 days :'( ]
 
-        //DO MAKE SURE TO DO THEM WHEN DONE WITH THE INTERVIEW!!
+        //DO MAKE SURE TO DO THEM WHEN DONE WITH THE INTERVIEW (and practice the memoized solution!)!!
     }
     int dfsWrapper1(int[] nums)
     {
