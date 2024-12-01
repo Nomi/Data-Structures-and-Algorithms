@@ -44,6 +44,16 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 //      and we only set values to the current row. 
 //      Therefore, we can only use a two row array to get optimize SC from O(N*C) to O(2*C)==O(N)
 //  - QUESTION: Does choosing the order of the indices of memo matter?
+//
+//:::::::::::::::::::::::::::::
+//### [2D] For Number of Unique Paths type problems [num unique paths from (0,0) to (ROWS-1,COLS-1) of matrix]:
+//  - It is kinda similar to 0/1 Knapsack (BOUNDED) because you can only choose 1 out of 2 nodes (down or right) for each unique path.
+//  - However, the differences are that:
+//      * We start from computing the only the last row first (each node from there has only one way to go, which is right, so everything == 1)
+//      * Then for each node, number of ways to get from there to original node is the number of ways to get to the destination is the 
+//          sum of number of ways to get to destination from the node to the right and node to the left (this is where DP saves us).
+//      * Recursion based solution also uses similar approach just using recursion to do it and memoization just memoizes these results.
+//
 //:::::::::::::::::::::::::::::
 //### Unbounded Knapsack [Optimized cost-to-value, but can pick same item unlimited times]
 //  - Memoization (top-down):
