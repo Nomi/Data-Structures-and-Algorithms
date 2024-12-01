@@ -38,6 +38,13 @@ public class Solution {
 
     int optimizedBottomUp(int[] nums) //TC: O(HOUSES), SC: O(1) 
     {
+        //DIDN'T EVEN THINK OF THESE EDGE CASES UNTIIL ENCOUNTERING THEM!!!
+        if(nums.Length==1)
+            return nums[0];
+        else if (nums.Length == 0)
+            return 0;
+
+
         int maxProfitAt_hPlus2 = nums[nums.Length-1];
         int maxProfitAt_hPlus1 = nums[nums.Length-2];
 
