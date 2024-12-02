@@ -10,6 +10,8 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 
 // ## DP PATTERNS: {Get Grokking DP patterns course??}
 
+// JUST NOTICED THE PALINDROME PATTERN CAN BE USED FOR SOMETHING LIKE `MAXIMUM SYMMETRIC SUBSEQUENCE` FROM ARRAYS (I made that phrase!) (e.g. treating array as a picture or a skyline, etc.)
+
 // For the interview just do memoization first then explain how you might create tabulation?
 
 // DP GENERALLY ONLY USED TO GET NUMERIC RESULTS (like number of ways to do something than the ways themselves (which would generally require recursive backtracking))
@@ -153,6 +155,9 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 // ### Palindromes: [NOT **TYPICAL** DP (memoization, or tabulation, etc. doesn't apply), BUT A DIFFERENT FORM OF DP] (DP in layman's terms really only cares about reusing what we already found out to solve any problems that would require that same knowledge)
 // [ALL PALINDROMIC SUBSTRINGS]
 // {FOR NOW JUST WATCHED THE NEETCODE VIDEO (only the recursive part and a little of memoization)}
+//
+// JUST NOTICED THE PALINDROME PATTERN CAN BE USED FOR SOMETHING LIKE `MAXIMUM SYMMETRIC SUBSEQUENCE` FROM ARRAYS (I made that phrase!) (e.g. treating array as a picture or a skyline, etc.)
+//
 //  Uses the fact that a{nonPalindromicSubstring}a is NOT a palindormic substring (for search space culling, kinda like backtracking)
 //  NEED TO CHECK FOR TWO SEPARATE CASES:
 //  Case 1: Longest odd length palindrommic substring:
