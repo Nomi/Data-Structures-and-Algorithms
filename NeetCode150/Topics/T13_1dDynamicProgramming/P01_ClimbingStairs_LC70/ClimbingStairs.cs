@@ -6,6 +6,23 @@ using System.Text;
 
 namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC70;
 
+//--------------
+// COIN CHANGE IS SUBSET SUM PATTERN DP:
+//1. Objective Differences
+// Coin Change Problem: The objective is to find the minimum number of coins needed to make a given amount. Alternatively, some variations may ask for the number of ways to form the amount using the coins.
+// Unbounded Knapsack Problem: The objective is to maximize the value of items you can include in the knapsack, given an unlimited supply of each item and a maximum capacity.
+// The difference lies in:
+// - Coin change minimizes the number of coins or counts combinations.
+// - Unbounded knapsack maximizes a value.
+// 2. Nature of Constraints
+// Coin Change Problem:
+//  - The coins have a fixed denomination but no inherent "value" apart from their use in forming the target amount.
+//  - The weight (coin denomination) must sum up exactly to the target amount.
+// Unbounded Knapsack Problem:
+//  - Each item has a weight and value, and the goal is to maximize the total value without exceeding the weight limit.
+//  - In coin change, there’s no "value" associated with coins—only their denominations are used. This makes the problem conceptually simpler but distinct.
+//---------------
+
 //[IMPORTANT!] NOT REALLY HARD! STARRED FOR BRINGING ATTENTION TO THESE NOTES ABOUT DP:
 
 // ## DP PATTERNS: {Get Grokking DP patterns course??}
