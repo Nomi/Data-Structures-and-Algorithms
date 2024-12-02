@@ -11,7 +11,7 @@ public class Solution {
         //Read more in my DP notes (were created in `Climbing Stairs` but might move them later to a Markdown file.)
         //WATCH NEETCODE VIDEO!! (I haven't yet, but I will.)
         //  There might be better way to do this than two loops there.
-        //Check my soln. (but neetcodeio soln does some things smarter/simpler!)
+        //Check my soln. //DEPRECATED(My solution has Constant space complexity): (but neetcodeio soln does some things smarter/simpler!)
         //Check neetcodeio soln to see how to do it with minor changes (e.g. array instead of dict).
 
         return dpLongestPalindrome(s);
@@ -33,7 +33,7 @@ public class Solution {
             int l = i;
             for(int r=l; r<s.Length && l>=0; r++, l--) //r=l(=i) because we start from the case of only 1 character
             {
-                Console.WriteLine($"ODD: {s[l .. (r+1)]} : {l},{r}");
+                // Console.WriteLine($"ODD: {s[l .. (r+1)]} : {l},{r}");
 
                 if(s[l]!=s[r]) //Can't be a palindrome ever if the last and first of the string aren't the same.
                 {
