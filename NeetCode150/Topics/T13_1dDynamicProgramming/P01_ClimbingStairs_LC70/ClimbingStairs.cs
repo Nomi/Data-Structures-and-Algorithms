@@ -6,8 +6,10 @@ using System.Text;
 
 namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC70;
 
+//CHECK COIN CHANGE SOLUTION AND EVERY SOLUTION IN DP SECTION (at least ones that are starred)
+
 //--------------
-// COIN CHANGE IS SUBSET SUM PATTERN DP: //CHECK COIN CHANGE SOLUTION AND EVERY SOLUTION IN DP SECTION (at least ones that are starred)
+// COIN CHANGE IS SUBSET SUM PATTERN DP: 
 //1. Objective Differences
 // Coin Change Problem: The objective is to find the minimum number of coins needed to make a given amount. Alternatively, some variations may ask for the number of ways to form the amount using the coins.
 // Unbounded Knapsack Problem: The objective is to maximize the value of items you can include in the knapsack, given an unlimited supply of each item and a maximum capacity.
