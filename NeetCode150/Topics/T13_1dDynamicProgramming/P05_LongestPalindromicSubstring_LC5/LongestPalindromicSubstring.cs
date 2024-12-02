@@ -29,7 +29,7 @@ public class Solution {
         {
             //LONGEST ODD LENGTH PALINDROMIC SUBSTRING: (because we expand equally with one char at center, the windows only calculate the odd palindromes)
             int l = i;
-            for(int r=l; r<s.Length && l>0; r++, l--) //r=l(=i) because we start from the case of only 1 character
+            for(int r=l; r<s.Length && l>=0; r++, l--) //r=l(=i) because we start from the case of only 1 character
             {
                 // Console.WriteLine($"{s[max.l .. max.r]} : {l},{r}");
 
@@ -54,7 +54,7 @@ public class Solution {
 
             //LONGEST EVEN LENGTH PALINDROMIC SUBSTRING:
             l = i;
-            for(int r=l+1; r<s.Length && l>0; r++, l--) //r=l(=i) because we start from the case of only 1 character
+            for(int r=l+1; r<s.Length && l>=0; r++, l--) //r=l(=i) because we start from the case of only 1 character
             {
                 //!!! ONLY DIFFERENCE IS `r=l+1` instead of `r=l` 
                 //(previously we had 1 char in middle all the time because we started from 1 char (so we were stuck to only calculating for odd lengths), but this time we expand from a 2char window and since we expand both sides by 1 each time, this remains even length window and as such we only cover all the even length windows with it)
