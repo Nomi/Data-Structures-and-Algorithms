@@ -12,7 +12,8 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 
 // For the interview just do memoization first then explain how you might create tabulation?
 
-// DP GENERALLY ONLY USED TO GET NUMERIC RESULTS (ALSO some small strings(or type) like the LONGEST STRING BUT (like in Longest Palindromic Substring) not a collection/list of strings)? (like number of ways to do something than the ways themselves (which would generally require recursive backtracking))
+// DP GENERALLY ONLY USED TO GET NUMERIC RESULTS (like number of ways to do something than the ways themselves (which would generally require recursive backtracking))
+// MAYBE (at least for Palindrome problems like Longest Palindromic Substring where we can return indices which we can use to get longest str, maybe we can also return some small strings(or type) like the LONGEST STRING BUT (like in Longest Palindromic Substring) not a collection/list of strings)?
 
 // Got these (except Fibonacci) from Neetcode's Advanced Algorithms course videos about them.
 
