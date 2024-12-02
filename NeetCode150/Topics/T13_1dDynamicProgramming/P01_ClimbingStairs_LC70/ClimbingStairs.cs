@@ -10,6 +10,8 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P01_ClimbingStairs_LC7
 
 // ## DP PATTERNS: {Get Grokking DP patterns course??}
 
+// JUST NOTICED: FOR DP, TC IS USUALLY == SC (for topdown/memo/cache) BECAUSE THE ACTUAL HEAVY LIFTING IS NEEDED ONLY TO PUT IN THEN VALUES IN THE MEMO!!!
+
 // JUST NOTICED THE PALINDROME PATTERN CAN BE USED FOR SOMETHING LIKE `MAXIMUM SYMMETRIC SUBSEQUENCE` FROM ARRAYS (I made that phrase!) (e.g. treating array as a picture or a skyline, etc.)
 
 // For the interview just do memoization first then explain how you might create tabulation?
