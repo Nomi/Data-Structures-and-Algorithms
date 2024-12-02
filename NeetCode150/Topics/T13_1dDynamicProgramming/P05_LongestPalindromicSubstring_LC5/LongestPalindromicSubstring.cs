@@ -41,6 +41,7 @@ public class Solution {
                 }                
                 
                 //Now, we need to check if the string between these equal characters is a palindrome (only then will the final string be a palindrome)
+                //AHHH I WAS DOING l,r FOR MEMO STUFF WHICH IS DUMB!
                 if(r-l+1<=3 || (isPalindrome.ContainsKey((l+1,r-1)) && isPalindrome[(l+1,r-1)]))
                 {
                     //j-i<=3 == means we only have 3, 2 or 1 characters in the substring/interval.
@@ -67,7 +68,7 @@ public class Solution {
                     continue;
                 }                
                 
-                
+                //AHHH I WAS DOING l,r FOR MEMO STUFF WHICH IS DUMB!
                 if(r-l+1<=3 || (isPalindrome.ContainsKey((l+1,r-1)) && isPalindrome[(l+1,r-1)]))
                 {
                     
