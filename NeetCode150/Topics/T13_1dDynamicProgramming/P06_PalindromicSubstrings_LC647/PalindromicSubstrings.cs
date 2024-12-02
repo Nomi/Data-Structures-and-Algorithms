@@ -13,6 +13,8 @@ public class Solution {
 
     int attempt1(string s)
     {
+        //I had forgot the problem (I read it a day ago so not 100% my fault this time except should've read again)
+        //This was pretty easy, actually.
         int count = 0;
         for(int i = 0; i<s.Length; i++)
         {
@@ -26,7 +28,7 @@ public class Solution {
                 //Since `a{palindrome}a` and `a` are palindromic this loop will break only when the first non palindromic string is found.
                 count++;
             }
-            
+
             //EVEN LENGTH PALINDROMES:
             l = i;
             r = i+1;
