@@ -9,14 +9,15 @@ namespace DSA.NeetCode150.Topics.T13_1dDynamicProgramming.P05_LongestPalindromic
 public class Solution {
     public string LongestPalindrome(string s) {
         //Read more in my DP notes (were created in `Climbing Stairs` but might move them later to a Markdown file.)
-        //WATCH NEETCODE VIDEO!! (I haven't yet, but I might.)
-        //Check my soln.
+        //WATCH NEETCODE VIDEO!! (I haven't yet, but I will.)
+        //  There might be better way to do this than two loops there.
+        //Check my soln. (but neetcodeio soln does some things smarter/simpler!)
         //Check neetcodeio soln to see how to do it with minor changes (e.g. array instead of dict).
 
         return dpLongestPalindrome(s);
     }
 
-    string dpLongestPalindrome(string s)
+    string dpLongestPalindrome(string s) //TC: O(n^2) //SC: O(n^2) //[there are n^2 possible substrings in a string where n is length of string e.g. "ab" => "", "a", "b", "ab".]
     {
         (int l, int r) max = (0,0); //Thought of setting to 0, 0 from neetcodeio soln.
         //Read more in my DP notes (the section for Palindromes) (notes were created in `Climbing Stairs` but might move them later to a Markdown file.)
