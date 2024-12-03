@@ -48,6 +48,15 @@ public class Attempt1
     Node left;
     Node right;
 
+    public Attempt1(int capacity) {
+        cap = capacity;
+        cache = new(cap);
+        left = new(-1,-1);
+        right = new(-1,-1);
+        left.next = right;
+        right.prev = left;
+    }
+
     public void RemoveNode(Node node)
     {
         var nodePrev = node.prev;
@@ -55,6 +64,7 @@ public class Attempt1
         nodePrev.next = nodeNext;
         nodeNext.prev = nodePrev;
     }
+    
     public void InsertNodeAtEnd(Node node)
     {
         var rightPrev = right.prev;
@@ -65,14 +75,6 @@ public class Attempt1
     }
 
 
-    public Attempt1(int capacity) {
-        cap = capacity;
-        cache = new(cap);
-        left = new(-1,-1);
-        right = new(-1,-1);
-        left.next = right;
-        right.prev = left;
-    }
     
     public int Get(int key) {
         if(cache.TryGetValue(key, out var node))
