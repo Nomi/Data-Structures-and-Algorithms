@@ -19,8 +19,10 @@ public class Solution {
 
         //DO MAKE SURE TO DO THEM WHEN DONE WITH THE INTERVIEW (and practice the memoized solution!)!!
         //ALSO THIS IS CLEARLY A 0/1 KNAPSACK PROBLEM (bounded)
+        
+        //BOTTOM UP WOULD BE JUST RUNNING THE NORMAL HOUSE ROBBER BUT 1 THAT INCLUDES START BUT EXCLUDES END AND ONE THAT EXCLUDES START BUT INCLUDES END (My own idea.)
     }
-    int dfsWrapper1(int[] nums)
+    int dfsWrapper1(int[] nums) // private int[][] memo;
     {
         var maxProfit = new int[nums.Length][]; //2 for bool;
         for (int i = 0; i < nums.Length; i++) 
