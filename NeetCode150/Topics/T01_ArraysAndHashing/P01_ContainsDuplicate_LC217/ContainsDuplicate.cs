@@ -6,8 +6,8 @@ using System.Text;
 
 namespace DSA.NeetCode150.Topics.T01_ArraysAndHashing.P01_ContainsDuplicate_LC217;
 
-public class Solution {
-    public bool hasDuplicate(int[] nums) {
+public class ContainsDuplicate {
+    public bool HasDuplicate(int[] nums) {
         HashSet<int> seen = new();
         for(int i=0;i<nums.Count();i++)
         {
